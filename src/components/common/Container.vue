@@ -1,6 +1,5 @@
 <template>
   <div id="container">
-    <TopBar></TopBar>
     <transition name="slide-fade">
       <router-view class="content"></router-view>
     </transition>
@@ -8,11 +7,8 @@
 </template>
 
 <script>
-import TopBar from './TopBar.vue'
-
 export default {
   components: {
-    TopBar
   }
 }
 </script>

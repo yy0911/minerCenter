@@ -15,7 +15,7 @@ import _ from 'lodash'
 import axios from 'axios'
 
 export default {
-  props: ['msg'],
+  // props: ['msg'],
   data: function () {
     return {
       yesno: {

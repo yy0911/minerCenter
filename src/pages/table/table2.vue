@@ -1,25 +1,29 @@
 <template>
-    <div>
-  <el-table
-    :data="tableData3"
-    style="width: 100%">
-    <el-table-column type="expand">
-      <template scope="props">
-        <p>省: {{ props.row.province }}</p>
-        <p>市: {{ props.row.city }}</p>
-        <p>住址: {{ props.row.detailAddress }}</p>
-        <p>邮编: {{ props.row.zip }}</p>
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="日期"
-      prop="date">
-    </el-table-column>
-    <el-table-column
-      label="姓名"
+  <div>
+    <el-table
+      :data="tableData3"
+      style="width:100%">
+      <el-table-column
+        label="日期"
+        prop="date">
+      </el-table-column>
+      <el-table-column
+      label="收币地址"
       prop="name">
-    </el-table-column>
-  </el-table></div>
+      </el-table-column>
+      <el-table-column
+        label="提币数 (个)"
+        prop="name">
+      </el-table-column>
+      <el-table-column
+        label="状态"
+        prop="name"
+      >
+        <template slot-scope="scope">
+          <p class="theme-fontColor">{{ scope.row.city }}</p>
+        </template>
+      </el-table-column>
+    </el-table></div>
 </template>
 
 <script>
@@ -28,7 +32,7 @@
       return {
         tableData3: [{
           date: '2016-05-03',
-          name: '王小虎',
+          name: 1,
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
@@ -36,7 +40,7 @@
           zip: 200333
         }, {
           date: '2016-05-02',
-          name: '王小虎',
+          name: 2,
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
@@ -44,7 +48,7 @@
           zip: 200333
         }, {
           date: '2016-05-04',
-          name: '王小虎',
+          name: 3,
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
@@ -52,7 +56,7 @@
           zip: 200333
         }, {
           date: '2016-05-01',
-          name: '王小虎',
+          name: 4,
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
@@ -87,3 +91,6 @@
     }
   }
 </script>
+<style scoped>
+
+</style>

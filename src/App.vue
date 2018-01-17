@@ -7,6 +7,7 @@
 
 <script>
 import './components/common/style.scss'
+import './components/common/common.css'
 import NavMenu from './components/common/NavMenu.vue'
 import Container from './components/common/Container.vue'
 

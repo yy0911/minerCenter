@@ -17,8 +17,8 @@
 #app {
   display: flex;
   min-width: 800px;
-  background-color: #1A191F;
-  color: #dbdbdb;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 // 顶栏样式
@@ -80,7 +80,7 @@
     display: inline-block;
     position: relative;
     &:hover {
-      background-color: #20202A;
+      background-color: rgba(240,136,2,0.10);
       .drop-menu {
         display: block;
       }
@@ -139,9 +139,10 @@
 #nav-menu {
   width: 200px;
   min-width: 200px;
-  height: calc(100%-72px);
+  //height: calc(100% - 72px);
   border-radius: 0;
-  background-color: #20202A;
+
+  background-color: #ffffff;
   box-shadow: 5px 0 20px rgba(0,0,0,.3);
   .logo {
     width: 200px;
@@ -159,19 +160,21 @@
     display: block;
   }
   .el-menu {
-    background-color: #1A191F;
+    background-color: #ffffff;
+  }
+  .el-submenu__title{
+    color: #000000;
   }
   .el-menu-item,
   .el-submenu .el-submenu__title {
     height: 44px;
     line-height: 44px;
-    color: #dbdbdb;
     &:hover {
-      background-color: #2b3035;
+      background-color: rgba(240,136,2,0.10);
     }
   }
   .router-link-active {
-    color: #03a9f4;
+    color: #F08802;
   }
 }
 
@@ -193,10 +196,10 @@
 }
 a {
   text-decoration: none;
-  color: #C0CCDA;
+  color: #000000;
 }
 .router-link-active {
-  color: #20a0ff;
+  color: #F08802 ;
 }
 
 /* Enter and leave animations can use different */

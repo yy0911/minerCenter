@@ -1,5 +1,6 @@
 
 import 'normalize.css'
+// import './assets/theme_variable.scss'
 import 'element-ui/lib/theme-default/index.css'
 import Element from 'element-ui'
 import Vue from 'vue'
