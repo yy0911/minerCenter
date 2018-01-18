@@ -2,7 +2,88 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3426def4-41a7-4f54-9fda-b7bbbc1e7eea" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/element-variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/common/Header.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/components/common/header.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/package.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/alert.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/aside.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/autocomplete.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/badge.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/breadcrumb-item.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/breadcrumb.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/button-group.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/button.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/card.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/carousel-item.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/carousel.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/cascader.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/checkbox-button.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/checkbox-group.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/checkbox.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/col.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/collapse-item.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/collapse.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/color-picker.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/container.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/date-picker.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/dialog.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/display.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/dropdown-item.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/dropdown-menu.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/dropdown.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/element-variables.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/fonts/element-icons.ttf" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/fonts/element-icons.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/footer.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/form-item.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/form.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/header.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/icon.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/index.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/input-number.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/input.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/loading.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/main.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/menu-item-group.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/menu-item.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/menu.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/message-box.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/message.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/notification.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/option-group.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/option.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/pagination.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/popover.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/popper.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/progress.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/radio-button.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/radio-group.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/radio.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/rate.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/reset.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/row.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/scrollbar.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/select-dropdown.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/select.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/slider.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/spinner.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/step.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/steps.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/submenu.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/switch.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/tab-pane.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/table-column.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/table.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/tabs.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/tag.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/time-picker.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/time-select.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/tooltip.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/transfer.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/tree.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/theme/upload.css" />
       <change beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -42,11 +123,10 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+            <state relative-caret-position="90">
+              <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#140#162#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -254,17 +334,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516168828145</updated>
-      <workItem from="1516168829490" duration="26388000" />
+      <workItem from="1516168829490" duration="26501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26388000" />
+    <option name="totallyTimeSpent" value="26501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="810" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -538,14 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -564,13 +637,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        <state relative-caret-position="90">
+          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#140#162#0" expanded="true" />
           </folding>
         </state>
       </provider>
