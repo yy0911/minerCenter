@@ -14,7 +14,7 @@
       </template>
 
       <el-menu-item index="1-1">
-        <router-link to="/deviceMoint" class="nav-link">
+        <router-link to="/" class="nav-link">
           设备监控
         </router-link>
       </el-menu-item>

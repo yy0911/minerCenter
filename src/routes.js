@@ -1,11 +1,7 @@
 export default [
   {
-    path: '/',
-    component: resolve => require(['./pages/home/home.vue'], resolve)
-  },
-  {
     // 设备监控
-    path: '/deviceMoint',
+    path: '/',
     component: resolve => require(['./pages/deviceMoint/deviceMoint'], resolve)
   },
   {
