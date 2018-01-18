@@ -1,0 +1,55 @@
+<template>
+
+  <div class="bindingPhone-container">
+    <el-button  @click="dialogVisible = true" class="pos-abs-right">绑定</el-button>
+
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose">
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
+  </div>
+</template>
+<script>
+  export default {
+    data () {
+      return {
+        dialogVisible: false
+      }
+    },
+    methods: {
+      handleClose (done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done()
+          })
+          .catch(_ => {})
+      }
+    }
+  }
+</script>
+<style scoped>
+  .el-dialog--small {
+    width:433px;
+    height: 192px;
+    background-color: red;
+  }
+  .el-button {
+    width:88px;
+    padding-top:8px;
+    padding-bottom: 8px;
+
+  }
+  .pos-abs-right {
+    position: absolute;
+    right: 0;
+    top:50%;
+    transform: translate(0,-50%);
+  }
+</style>

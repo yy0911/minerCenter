@@ -115,9 +115,9 @@
       content: ' ';
       border-right: 1px solid rgba(0,0,0,0.15) ;
       position: absolute;
-      left: 30px;
+      left: 32px;
       height: 10px;
-      top: 8px;
+      top: 36%;
     }
     .status-circle {
       display: inline-block;
@@ -137,4 +137,5 @@
     .color-black {
       background-color:black;
     }
+
   </style>

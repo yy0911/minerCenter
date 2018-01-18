@@ -2,7 +2,7 @@
 <div class="deviceMoint-container">
   <div class="trade-record-container">
     <p>挖矿统计</p>
-    <ul class="record-titles flex fontSize-14 most-use-fontColor center text-center line-height-22">
+    <ul class="record-titles flex fontSize-14 fontcolor-opocity-54 center text-center line-height-22">
       <li class="flex-1">在线设备/总设备数（台）</li>
       <li class="flex-1">今日出币（个）</li>
       <li class="flex-1">昨日出币（个）</li>
@@ -11,7 +11,7 @@
     <ul class="record-numbers flex fontSize-38 theme-fontColor text-center line-height-46">
       <li class="flex-1 center">
         <span class="online-device">89</span>
-        <span class="most-use-fontColor">80</span>
+        <span class="fontcolor-opocity-54">80</span>
       </li>
       <li class="flex-1">
         <span>8.88</span>
@@ -25,15 +25,17 @@
     </ul>
   </div>
   <div class="my-jewel-box-container">
-    <p>我的宝盒</p>
+    <p class="me-box-title">我的宝盒</p>
     <div class="search-container">
-      <el-input class="most-use-fontColor"
-        placeholder="输入MAC地址搜索设备"
-        suffix-icon="el-icon-date">
+      <el-input class="fontcolor-opocity-54"
+        placeholder="输入S/N码搜索设备" suffix-icon="el-icon-date">
       </el-input>
-      <div class="jewel-right-container flex line-height-32">
-        <p class="deveice-adrress border-1px-themeColor">74:56:23:32</p>
-        <el-button class="fontSize-14 most-use-fontColor">添加设备</el-button>
+      <div class="jewel-right-container flex">
+        <el-input class="fontcolor-opocity-54 console-mac-address-input"
+                  placeholder="输入MAC地址"
+                  suffix-icon="el-icon-search">
+        </el-input>
+        <el-button class="fontSize-14 fontcolor-opocity-54">添加设备</el-button>
       </div>
     </div>
   </div>
@@ -58,6 +60,15 @@
 </script>
 
 <style scoped>
+
+.record-titles {
+  padding-top:24px;
+  padding-bottom: 16px;
+}
+.me-box-title {
+  padding-top:32px;
+  padding-bottom: 24px;
+}
 .el-input, .el-input__inner {
   width:243px;
 }
@@ -73,7 +84,7 @@
 
 }
 .jewel-table-container {
-  margin-top:10px;
+  margin-top:16px;
 }
 .online-device {
   position: relative;
@@ -84,6 +95,10 @@
   position: absolute;
   left: 47px;
   height: 20px;
-  top: 14px;
+  top: 30%;
+}
+.console-mac-address-input {
+  margin-right: 10px;
+  width:160px;
 }
 </style>

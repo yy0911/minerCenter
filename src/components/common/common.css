@@ -15,20 +15,36 @@ i{font-style:normal;}
 .theme-bgColor {
   background-color:#F08802;
 }
-.most-use-fontColor {
-  color:rgba(0,0,0,0.54);
+.fontcolor-opocity-87 {
+  color:rgba(0,0,0,0.87);
 }
 
+.fontcolor-opocity-38 {
+  color:rgba(0,0,0,0.38);
+}
+
+.fontcolor-opocity-54 {
+  color:rgba(0,0,0,0.54);
+}
+.fontSize-16 {
+  font-size: 16px;
+}
 .fontSize-14 {
   font-size: 14px;
 }
+.fontSize-12 {
+  font-size: 12px;
+}
+
 .fontSize-38 {
   font-size: 38px;
 }
 .text-center {
   text-align:center;
 }
-
+.line-height-20 {
+  line-height: 20px;
+}
 .line-height-22 {
   line-height: 22px;
 }
@@ -81,4 +97,14 @@ i{font-style:normal;}
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+}
+.transform-vertical-horizontal {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
 }

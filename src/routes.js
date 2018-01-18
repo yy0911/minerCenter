@@ -10,6 +10,16 @@ export default [
     component: resolve => require(['./pages/extractBmanage/extractBmanage'], resolve)
   },
   {
+    // 我的订单
+    path: '/myOrder',
+    component: resolve => require(['./pages/myOrder/myOrder'], resolve)
+  },
+  {
+    // 账户设置
+    path: '/accountSetting',
+    component: resolve => require(['./pages/accountSetting/accountSetting'], resolve)
+  },
+  {
     path: '/user',
     component: resolve => require(['./pages/user'], resolve)
   },

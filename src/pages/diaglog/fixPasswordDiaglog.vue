@@ -1,17 +1,17 @@
 <template>
-<div>
-  <el-button  type="warning" class="mining-btn marginLeft-85 fontSize-16" @click="dialogVisible = true" >立即提币</el-button>
-  <el-dialog
+
+<div class="fixpassword-container">
+<el-button  @click="dialogVisible = true" class="pos-abs-right">修改</el-button>
+
+<el-dialog
+  title="提示"
   :visible.sync="dialogVisible"
-  >
-    <template slot="title">
-      <i class="el-icon-warning theme-fontColor"></i>
-      <span>确认要打币到该地址？</span>
-    </template>
-  <span class="fontSize-14 fontcolor-opocity-54">提币操作无法撤回，请再次确认您所填写的收币地址及提币金额正确无误。</span>
+  width="30%"
+  :before-close="handleClose">
+  <span>这是一段信息</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="warning" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
 </el-dialog>
 </div>
@@ -38,12 +38,13 @@
   .el-dialog--small {
     width:433px;
     height: 192px;
+    background-color: red;
   }
-  .marginLeft-85 {
-    margin-left: 85px;
-  }
-  .mining-btn {
-    padding:11px 47px;
+  .el-button {
+    width:88px;
+    padding-top:8px;
+    padding-bottom: 8px;
+
   }
   .pos-abs-right {
     position: absolute;
