@@ -2,7 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'normalize.css'
 // import './assets/theme_variable.scss'
-import 'element-ui/lib/theme-default/index.css'
+// import 'element-ui/lib/theme-default/index.css'
+import '../theme/index.css'
 import Element from 'element-ui'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
