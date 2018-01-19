@@ -35,14 +35,16 @@
                   placeholder="输入MAC地址"
                   suffix-icon="el-icon-search">
         </el-input>
-        <el-button class="fontSize-14 fontcolor-opocity-54">添加设备</el-button>
+        <el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="addDeviceSuccess">添加设备</el-button>
       </div>
     </div>
   </div>
   <div class="jewel-table-container">
     <jewel-table></jewel-table>
   </div>
+
 </div>
+
 </template>
 
 <script>
@@ -55,10 +57,39 @@
       },
       components: {
         jewelTable
+      },
+      methods: {
+        addDeviceSuccess () {
+          this.$message({
+            message: '设备添加成功',
+            type: 'success'
+          })
+        }
+
       }
     }
 </script>
-
+<style>
+.el-message {
+  width:138px;
+  height: 40px;
+  min-width: 0;
+  font-size: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.15);
+  border-radius: 4px;
+  padding:14px;
+  color: rgba(0,0,0,0.65);
+  letter-spacing: 0;
+  line-height: 22px;
+}
+.el-message img {
+  width:14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+</style>
 <style scoped>
 
 .record-titles {

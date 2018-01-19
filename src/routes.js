@@ -2,7 +2,8 @@ export default [
   {
     // 设备监控
     path: '/',
-    component: resolve => require(['./pages/deviceMoint/deviceMoint'], resolve)
+    component: resolve => require(['./pages/deviceMoint/deviceMoint'], resolve),
+    redirect: '/deviceMoint'
   },
   {
     // 提币管理
@@ -18,10 +19,6 @@ export default [
     // 账户设置
     path: '/accountSetting',
     component: resolve => require(['./pages/accountSetting/accountSetting'], resolve)
-  },
-  {
-    path: '/user',
-    component: resolve => require(['./pages/user'], resolve)
   },
   {
     path: '/table',

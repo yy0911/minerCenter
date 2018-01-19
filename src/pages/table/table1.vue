@@ -35,11 +35,14 @@
       label="操作"
       prop="name">
       <template slot-scope="scope">
-        <el-button type="text" size="small" class="pause-btn">停止</el-button>
-        <el-button type="text" size="small">解绑</el-button>
+        <el-button type="text" size="small" class="pause-btn" >停止</el-button>
+        <el-button type="text" size="small" >解绑</el-button>
       </template>
     </el-table-column>
-  </el-table></div>
+  </el-table>
+
+
+</div>
 </template>
 
 <script>
@@ -70,40 +73,10 @@
           address: '上海市普陀区金沙江路 1518 弄',
           detailAddress: '金沙江路 1518 弄',
           zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: 4,
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
         }]
       }
+    },
+    methods: {
     }
   }
 </script>
