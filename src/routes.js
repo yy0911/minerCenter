@@ -2,8 +2,12 @@ export default [
   {
     // 设备监控
     path: '/',
-    component: resolve => require(['./pages/deviceMoint/deviceMoint'], resolve),
     redirect: '/deviceMoint'
+  },
+  {
+    // 设备监控
+    path: '/deviceMoint',
+    component: resolve => require(['./pages/deviceMoint/deviceMoint'], resolve)
   },
   {
     // 提币管理

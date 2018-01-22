@@ -5,7 +5,7 @@
     <el-dialog
       title="绑定手机"
       :visible.sync="dialogVisible"
-      :before-close="handleClose" class="commonStyle-diglog">
+      :before-close="handleClose" class="bindingPhone-container">
       <el-form :model="ruleForm" status-icon  ref="ruleForm"  class="">
         <el-form-item >
           <el-input type="telphone" placeholder="输入您要绑定的手机号码"></el-input>
@@ -45,27 +45,36 @@
   }
 </script>
 <style>
-  .bindingPhone-container .commonStyle-diglog {
-    height: 366px;
-  }
-  .bindingPhone-container .print-note-input .el-input__inner {
-    border:0!important;
-    position: relative;
-  }
-  .send-note-container {
-    border:1px solid rgba(0,0,0,.15);
-    height: 40px;
-    border-radius: 4px;
-  }
-  .send-note-btn.el-button {
-    font-size: 14px;
-  }
-  .bindingPhone-container .print-note-input::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    height: 20px;
-    top:20%;
-    border-right: 1px solid rgba(0,0,0,0.15);
-  }
+.bindingPhone-container .el-dialog {
+  top:50%!important;
+  transform: translate(0,-50%);
+}
+.bindingPhone-container .el-dialog.el-dialog--small {
+  width:392px;
+  height: 366px;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
+  border-radius: 4px;
+  margin:auto;
+  overflow: auto;
+}
+.bindingPhone-container .print-note-input .el-input__inner {
+  border:0!important;
+  position: relative;
+}
+.send-note-container {
+  border:1px solid rgba(0,0,0,.15);
+  height: 40px;
+  border-radius: 4px;
+}
+.send-note-btn.el-button {
+  font-size: 14px;
+}
+.bindingPhone-container .print-note-input::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  height: 20px;
+  top:20%;
+  border-right: 1px solid rgba(0,0,0,0.15);
+}
 </style>

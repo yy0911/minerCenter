@@ -6,7 +6,7 @@
         星际宝盒
       </template>
       <el-menu-item index="1_1">
-        <router-link to="/" class="nav-link">
+        <router-link to="/deviceMoint" class="nav-link">
           设备监控
         </router-link>
       </el-menu-item>
