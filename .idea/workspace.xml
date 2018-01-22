@@ -9,8 +9,8 @@
       <change beforePath="" afterPath="$PROJECT_DIR$/src/pages/orderManage/orderManage.vue" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/components/common/NavMenu.vue" afterPath="$PROJECT_DIR$/src/components/common/NavMenu.vue" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/common.css" afterPath="$PROJECT_DIR$/src/components/common/common.css" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/style.scss" afterPath="$PROJECT_DIR$/src/components/common/style.scss" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css/common.css" afterPath="$PROJECT_DIR$/src/assets/css/common.css" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css/style/scss" afterPath="$PROJECT_DIR$/src/assets/css/style/scss" />
       <change beforePath="$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue" afterPath="$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue" />
       <change beforePath="$PROJECT_DIR$/src/pages/diaglog/sureGetbDiag.vue" afterPath="$PROJECT_DIR$/src/pages/diaglog/sureGetbDiag.vue" />
       <change beforePath="$PROJECT_DIR$/src/pages/extractBmanage/extractBmanage.vue" afterPath="$PROJECT_DIR$/src/pages/extractBmanage/extractBmanage.vue" />
@@ -64,7 +64,7 @@
         </entry>
       </file>
       <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/common/common.css">
+        <entry file="file://$PROJECT_DIR$/src/assets/css/common.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
               <caret line="94" column="18" lean-forward="false" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="18" />
@@ -108,7 +108,7 @@
         <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
         <option value="$PROJECT_DIR$/src/pages/question/question.vue" />
         <option value="$PROJECT_DIR$/src/components/common/Container.vue" />
-        <option value="$PROJECT_DIR$/src/components/common/common.css.scss" />
+        <option value="$PROJECT_DIR$/src/assets/css/common.css.scss" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/pages/table/index.vue" />
@@ -120,10 +120,10 @@
         <option value="$PROJECT_DIR$/src/pages/myOrder/myOrder.vue" />
         <option value="$PROJECT_DIR$/src/pages/orderManage/orderManage.vue" />
         <option value="$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue" />
-        <option value="$PROJECT_DIR$/src/components/common/common.css" />
+        <option value="$PROJECT_DIR$/src/assets/css/common.css" />
         <option value="$PROJECT_DIR$/src/pages/extractBmanage/extractBmanage.vue" />
         <option value="$PROJECT_DIR$/src/pages/table/table1.vue" />
-        <option value="$PROJECT_DIR$/src/components/common/style.scss" />
+        <option value="$PROJECT_DIR$/src/assets/css/style/scss" />
         <option value="$PROJECT_DIR$/src/pages/accountSettint/accountSetting.vue" />
         <option value="$PROJECT_DIR$/src/routes.js" />
         <option value="$PROJECT_DIR$/src/components/common/NavMenu.vue" />
@@ -430,7 +430,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/common.css.scss">
+    <entry file="file://$PROJECT_DIR$/src/assets/css/common.css.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -583,7 +583,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/style.scss">
+    <entry file="file://$PROJECT_DIR$/src/assets/css/style/scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-468">
           <caret line="184" column="39" lean-forward="false" selection-start-line="184" selection-start-column="39" selection-end-line="184" selection-end-column="39" />
@@ -639,7 +639,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/common.css">
+    <entry file="file://$PROJECT_DIR$/src/assets/css/common.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="94" column="18" lean-forward="false" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="18" />

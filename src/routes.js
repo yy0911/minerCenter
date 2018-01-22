@@ -20,10 +20,6 @@ export default [
     component: resolve => require(['./pages/accountSetting/accountSetting'], resolve)
   },
   {
-    path: '/user',
-    component: resolve => require(['./pages/user'], resolve)
-  },
-  {
     path: '/table',
     component: resolve => require(['./pages/table/table1'], resolve)
   }
