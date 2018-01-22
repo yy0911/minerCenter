@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+=======
+    <list default="true" id="3426def4-41a7-4f54-9fda-b7bbbc1e7eea" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/Register.vue" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/components/UnRegister.vue" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/NavMenu.vue" afterPath="$PROJECT_DIR$/src/components/common/NavMenu.vue" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/assets/css/common.css" afterPath="$PROJECT_DIR$/src/assets/css/common.css" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css/style/scss" afterPath="$PROJECT_DIR$/src/assets/css/style/scss" />
+=======
+>>>>>>> 70ff38115307686973ebe280413aa3af667ed0d4
+      <change beforePath="$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue" afterPath="$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue" />
+      <change beforePath="$PROJECT_DIR$/src/pages/diaglog/bindingPhone.vue" afterPath="$PROJECT_DIR$/src/pages/diaglog/bindingPhone.vue" />
+      <change beforePath="$PROJECT_DIR$/src/pages/diaglog/fixPasswordDiaglog.vue" afterPath="$PROJECT_DIR$/src/pages/diaglog/fixPasswordDiaglog.vue" />
+      <change beforePath="$PROJECT_DIR$/src/pages/diaglog/sureGetbDiag.vue" afterPath="$PROJECT_DIR$/src/pages/diaglog/sureGetbDiag.vue" />
+      <change beforePath="$PROJECT_DIR$/src/pages/table/table1.vue" afterPath="$PROJECT_DIR$/src/pages/table/table1.vue" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/index.vue" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" afterPath="$PROJECT_DIR$/src/routes.js" />
+    </list>
+>>>>>>> 44ce3e987d919f0a46e476f32201e459f6ac3dc5
     <list id="b73b3a9d-a15b-487a-8381-25343cdf2acd" name="dev 1.18date yhl" comment="dev 1.18date yhl&#10;&#10;(cherry picked from commit 94ab5de)">
       <changelist_data name="Hengli Yang" email="hengliyang@henglidemacbook-pro.local" date="1516275131000">
         <option name="date" value="1516275131000" />
@@ -89,8 +109,13 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/assets/css/common.css">
+=======
       <file leaf-file-name="orderManage.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/orderManage/orderManage.vue">
+>>>>>>> 70ff38115307686973ebe280413aa3af667ed0d4
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="559">
               <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="14" selection-end-line="97" selection-end-column="14" />
@@ -147,7 +172,7 @@
         <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
         <option value="$PROJECT_DIR$/src/pages/question/question.vue" />
         <option value="$PROJECT_DIR$/src/components/common/Container.vue" />
-        <option value="$PROJECT_DIR$/src/components/common/common.css.scss" />
+        <option value="$PROJECT_DIR$/src/assets/css/common.css.scss" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/pages/table/index.vue" />
@@ -158,8 +183,16 @@
         <option value="$PROJECT_DIR$/src/pages/question/myOrder.vue" />
         <option value="$PROJECT_DIR$/src/pages/myOrder/myOrder.vue" />
         <option value="$PROJECT_DIR$/src/pages/orderManage/orderManage.vue" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/pages/deviceMoint/deviceMoint.vue" />
+        <option value="$PROJECT_DIR$/src/assets/css/common.css" />
+        <option value="$PROJECT_DIR$/src/pages/extractBmanage/extractBmanage.vue" />
+        <option value="$PROJECT_DIR$/src/pages/table/table1.vue" />
+        <option value="$PROJECT_DIR$/src/assets/css/style/scss" />
+=======
         <option value="$PROJECT_DIR$/src/components/common/common.css" />
         <option value="$PROJECT_DIR$/src/pages/extractBmanage/extractBmanage.vue" />
+>>>>>>> 70ff38115307686973ebe280413aa3af667ed0d4
         <option value="$PROJECT_DIR$/src/pages/accountSettint/accountSetting.vue" />
         <option value="$PROJECT_DIR$/src/components/common/style.scss" />
         <option value="$PROJECT_DIR$/src/pages/accountSetting/accountSetting.vue" />
@@ -531,6 +564,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+<<<<<<< HEAD
+=======
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/css/common.css.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 44ce3e987d919f0a46e476f32201e459f6ac3dc5
         </state>
       </provider>
     </entry>
@@ -618,7 +663,11 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/assets/css/style/scss">
+=======
     <entry file="file://$PROJECT_DIR$/src/components/common/common.css">
+>>>>>>> 70ff38115307686973ebe280413aa3af667ed0d4
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
@@ -700,7 +749,11 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/assets/css/common.css">
+=======
     <entry file="file://$PROJECT_DIR$/src/pages/orderManage/orderManage.vue">
+>>>>>>> 70ff38115307686973ebe280413aa3af667ed0d4
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="559">
           <caret line="97" column="14" lean-forward="false" selection-start-line="97" selection-start-column="14" selection-end-line="97" selection-end-column="14" />
