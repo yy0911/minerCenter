@@ -1,11 +1,11 @@
 <template>
 
-  <div class="bindingPhone-container">
+  <div class="bindingPhone-wrapper">
     <el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">绑定</el-button>
     <el-dialog
       title="绑定手机"
       :visible.sync="dialogVisible"
-      :before-close="handleClose" class="bindingPhone-container">
+      :before-close="handleClose" class="commoneStyle-container bindingPhone-container">
       <el-form :model="ruleForm" status-icon  ref="ruleForm"  class="">
         <el-form-item >
           <el-input type="telphone" placeholder="输入您要绑定的手机号码"></el-input>
@@ -13,7 +13,10 @@
         <el-form-item>
           <div class="send-note-container">
             <el-input type="text" placeholder="输入验证码" style="width: 204px;float: left" class="print-note-input"></el-input>
-            <el-button type="text" style="width: 84px;float: right" class="send-note-btn">发送验证码</el-button>
+            <el-button type="text" style="width: calc(100% - 204px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
+              发送验证码
+            </el-button>
+            <span  style="width:calc(100% - 204px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s</span>
           </div>
         </el-form-item>
         <el-form-item >
@@ -29,9 +32,15 @@
     data () {
       return {
         dialogVisible: false,
+        isCountDown: true,
+        noteMsg: '',
+        countTotal: '',
+        timer: null,
         ruleForm: {
         }
       }
+    },
+    computed: {
     },
     methods: {
       handleClose (done) {
@@ -40,6 +49,22 @@
             done()
           })
           .catch(_ => {})
+      },
+      countDownMethod () {
+        const TIME_COUNT = 60
+        if (!this.timer) {
+          this.countTotal = TIME_COUNT
+          this.isCountDown = false
+          this.timer = setInterval(() => {
+            if (this.countTotal > 0 && this.countTotal <= TIME_COUNT) {
+              this.countTotal--
+            } else {
+              this.isCountDown = true
+              clearInterval(this.timer)
+              this.timer = null
+            }
+          }, 1000)
+        }
       }
     }
   }
@@ -57,7 +82,7 @@
   margin:auto;
   overflow: auto;
 }
-.bindingPhone-container .print-note-input .el-input__inner {
+.commoneStyle-container .print-note-input .el-input__inner {
   border:0!important;
   position: relative;
 }
@@ -69,12 +94,27 @@
 .send-note-btn.el-button {
   font-size: 14px;
 }
-.bindingPhone-container .print-note-input::after {
+.send-note-btn {
+  position: relative;
+}
+.commoneStyle-container .send-note-btn::before {
   content: '';
   position: absolute;
-  right: 0;
+  left:0px;
   height: 20px;
   top:20%;
-  border-right: 1px solid rgba(0,0,0,0.15);
+  border-left: 1px solid rgba(0,0,0,0.15);
+  z-index: 888;
+}
+.countdownstyle {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: rgba(0,0,0,0.15);
+  color: #ffffff;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  z-index: 9999!important;
+
 }
 </style>
