@@ -3,6 +3,7 @@
   <el-button  type="warning" class="mining-btn marginLeft-85 fontSize-16" @click="dialogVisible = true" >立即提币</el-button>
   <el-dialog
   :visible.sync="dialogVisible"
+  :before-close="handleClose"
   >
     <template slot="title">
       <i class="el-icon-warning theme-fontColor"></i>
@@ -43,12 +44,7 @@
     margin-left: 85px;
   }
   .mining-btn {
-    padding:11px 47px;
-  }
-  .pos-abs-right {
-    position: absolute;
-    right: 0;
-    top:50%;
-    transform: translate(0,-50%);
+    padding:12px 51px;
+    margin-top:40px;
   }
 </style>

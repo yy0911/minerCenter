@@ -5,7 +5,6 @@
         <i class="el-icon-news"></i>
         星际宝盒
       </template>
-
       <el-menu-item index="1_1">
         <router-link to="/" class="nav-link">
           设备监控
