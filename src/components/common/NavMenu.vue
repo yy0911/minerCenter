@@ -2,7 +2,7 @@
   <el-menu id="nav-menu" theme="orange"  :default-openeds="['1']">
     <el-submenu index="1">
       <template slot="title">
-        <i class="el-icon-news"></i>
+        <img src="../../assets/css/icon/ic_device.svg">
         星际宝盒
       </template>
       <el-menu-item index="1_1">
@@ -20,7 +20,7 @@
     </el-submenu>
     <el-submenu index="2">
       <template slot="title">
-        <i class="el-icon-tickets"></i>
+        <img src="../../assets/css/icon/ic_order.svg">
         订单管理
       </template>
       <el-menu-item index="2_1">
@@ -31,7 +31,7 @@
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">
-        <i class="el-icon-setting"></i>
+        <img src="../../assets/css/icon/ic_archive.svg">
         个人信息
       </template>
       <el-menu-item index="3_1">

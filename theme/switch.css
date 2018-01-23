@@ -254,7 +254,7 @@
     vertical-align: middle;
     color: #303133; }
     .el-switch__label.is-active {
-      color: #F08802; }
+      color: #1890FF; }
     .el-switch__label--left {
       margin-right: 10px; }
     .el-switch__label--right {
@@ -270,7 +270,7 @@
     opacity: 0;
     margin: 0; }
     .el-switch__input:focus ~ .el-switch__core {
-      outline: 1px solid #F08802; }
+      outline: 1px solid #1890FF; }
   .el-switch__core {
     margin: 0;
     display: inline-block;
@@ -300,8 +300,8 @@
       height: 16px;
       background-color: #fff; }
   .el-switch.is-checked .el-switch__core {
-    border-color: #F08802;
-    background-color: #F08802; }
+    border-color: #1890FF;
+    background-color: #1890FF; }
   .el-switch.is-disabled {
     opacity: 0.6; }
   .el-switch--wide .el-switch__label.el-switch__label--left span {

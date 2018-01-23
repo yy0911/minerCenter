@@ -80,7 +80,7 @@
     display: inline-block;
     position: relative;
     &:hover {
-      background-color: rgba(240,136,2,0.10);
+      background-color: rgba(24,144,255,0.10);
       .drop-menu {
         display: block;
       }
@@ -166,18 +166,18 @@
     color: #000000;
   }
   .el-menu-item.is-active{
-    background-color: rgba(240,136,2,0.10);
+    background-color: rgba(24,144,255,0.10);
   }
   .el-menu-item,
   .el-submenu .el-submenu__title {
     height: 44px;
     line-height: 44px;
     &:hover {
-      background-color: rgba(240,136,2,0.10);
+      background-color: rgba(24,144,255,0.10);
     }
   }
   .router-link-active {
-    color: #F08802;
+    color: #1890FF;
   }
 }
 .el-table th.is-leaf {
@@ -206,7 +206,7 @@ a {
   color: #000000;
 }
 .router-link-active {
-  color: #F08802 ;
+  color: #1890FF ;
 }
 
 /* Enter and leave animations can use different */
