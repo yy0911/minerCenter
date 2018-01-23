@@ -37,25 +37,26 @@
       prop="name">
       <template slot-scope="scope">
         <el-button type="text" size="small" class="pause-btn" >停止</el-button>
-          <el-popover
-            ref="unbindDevice"
-            v-model="visible"
-            placement="top-start"
-            trigger="click"
-            width="173"
-            >
-            <span >
-              <i class="el-icon-error" style="color: red"></i>
-              你确定要解绑该设备？
-            </span>
-            <div class="unbindDevice-poppver-content">
-              <el-button @click="visible=false">取 消</el-button>
-              <el-button type="primary" @click="sureUnbindDevice">确 定</el-button>
-            </div>
-          </el-popover>
-        <el-button type="text" size="small" class="unbindDevice-btn" v-popover:unbindDevice>解绑</el-button>
+        <el-popover
+          ref="unbindDevice"
+          placement="top-start"
+          trigger="click"
+          width="173"
+          v-model="scope.row.visible"
+          >
+          <span >
+            <i class="el-icon-error" style="color: red"></i>
+            你确定要解绑该设备？
+          </span>
+          <div class="unbindDevice-poppver-content">
+            <el-button @click="scope.row.visible=false">取 消</el-button>
+            <el-button type="primary" @click="sureUnbindDevice(scope)">确 定</el-button>
+          </div>
+        </el-popover>
+        <el-button type="text" size="small" class="unbindDevice-btn" v-popover:unbindDevice >解绑</el-button>
       </template>
     </el-table-column>
+
   </el-table>
 
 
@@ -67,7 +68,6 @@
   export default {
     data () {
       return {
-        visible: false,
         tableData3: [{
           date: '2016-05-03',
           name: 1,
@@ -75,7 +75,8 @@
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
           detailAddress: '金沙江路 1518 弄',
-          zip: 200333
+          zip: 200333,
+          visible: false
         }, {
           date: '2016-05-02',
           name: 2,
@@ -96,8 +97,8 @@
       }
     },
     methods: {
-      sureUnbindDevice () {
-        this.visible = false
+      sureUnbindDevice (scope) {
+        scope.row.visible = false
       }
     }
   }

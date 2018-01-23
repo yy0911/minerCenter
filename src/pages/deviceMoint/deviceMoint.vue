@@ -48,15 +48,19 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import jewelTable from '../table/table1.vue'
-
     export default {
       data () {
         return {
+          testMock: ''
         }
       },
       components: {
         jewelTable
+      },
+      mounted () {
+        this.getMockData()
       },
       methods: {
         addDeviceSuccess () {
@@ -65,7 +69,20 @@
             type: 'success',
             customClass: 'messageLocation'
           })
+        },
+        getMockData () {
+          let _this = this
+          axios.get('http://localhost:8080/mock/mockdata1.json')
+            .then(function (response) {
+              console.log(response)
+              _this.testMock = response.data.posts
+              console.log((Array.isArray(_this.testMock)))
+            })
+            .catch(function (error) {
+              this.testMock = 'throw new Error' + error
+            })
         }
+
       }
     }
 </script>
@@ -119,12 +136,13 @@
 }
 .online-device {
   position: relative;
+  padding-right: 10px;
 }
 .online-device:after {
   content: ' ';
   border-right: 2px solid rgba(0,0,0,0.15) ;
   position: absolute;
-  left: 47px;
+  left: 100%;
   height: 20px;
   top: 30%;
 }
