@@ -49,6 +49,8 @@
   export default {
     data () {
       return {
+        test: [],
+        visible2: false,
         tableData3: [{
           date: '2016-05-03',
           name: 1,

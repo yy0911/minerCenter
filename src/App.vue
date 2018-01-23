@@ -1,12 +1,19 @@
 <template>
 	<div id="app">
-		<el-row>
-	  		<Header></Header>
-		</el-row>
-  		<el-row class="container">
-		    <NavMenu></NavMenu>
-		    <Container></Container>
-  		</el-row>
+		<el-container style="width: 100%;">
+			<el-header>
+			  	<Header></Header>
+			</el-header>
+			<el-container>
+		  		<el-row class="container">
+				    <NavMenu></NavMenu>
+				    <Container></Container>
+		  		</el-row>
+			</el-container>
+	  		<el-footer>
+	  			<Footer></Footer>
+	  		</el-footer>
+		</el-container>
   	</div>
 </template>
 <script>
@@ -15,13 +22,14 @@ import './assets/css/common.css'
 import Header from './components/common/Header'
 import NavMenu from './components/common/NavMenu.vue'
 import Container from './components/common/Container.vue'
-
+import Footer from './components/common/Footer.vue'
 export default {
   name: 'app',
   components: {
   	Header,
     NavMenu,
-    Container
+    Container,
+    Footer
   }
 }
 </script>

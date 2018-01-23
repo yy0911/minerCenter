@@ -1,9 +1,15 @@
 <template>
 	<div class="footer">
 		<div>
-			<span class="iconfont icon-ren"></span>
-			<span class="iconfont icon-ren"></span>
-			<span class="iconfont icon-ren"></span>
+			<span>
+				<img src="../../assets/css/icon/ic_email_default.svg" />
+			</span>
+			<span>
+				<img src="../../assets/css/icon/ic_qq_default.svg" />
+			</span>
+			<span>
+				<img src="../../assets/css/icon/ic_wecaht_default.svg" />
+			</span>
 		</div>
 		<p>Copyright © 2017 MobiPromo Ltd.</p>
 	</div>
@@ -22,7 +28,7 @@
 		background: #f2f2f2;
 		text-align: center;
 		overflow: hidden;
-		height: calc(100% - 438px);
+		/*height: calc(100% - 438px);*/
 		min-height: 160px;
 	}
 	.footer div {

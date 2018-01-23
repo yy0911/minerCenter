@@ -1,7 +1,7 @@
 <template>
 	<div id="header">
 		<ul class="logo">
-			<img src="../../assets/images/logo.png" height="30px;">
+			<img src="../../assets/css/icon/logo.svg" height="30px;">
 		</ul>
 		<ul class="head_l">
 			<li>主页</li>
@@ -12,7 +12,7 @@
 		</ul>
 		<ul class="head_r">
 			<li>个人中心</li>
-			<li>退出</li>
+			<li style='color: #1890FF;'>退出</li>
 			<li><i class="iconfont icon-ren"></i>English</li>
 		</ul>
 	</div>
