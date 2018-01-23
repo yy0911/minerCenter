@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-button  type="warning" class="mining-btn marginLeft-85 fontSize-16" @click="dialogVisible = true" >立即提币</el-button>
+  <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="dialogVisible = true" >立即提币</el-button>
   <el-dialog
   :visible.sync="dialogVisible"
   :before-close="handleClose"
@@ -45,6 +45,5 @@
   }
   .mining-btn {
     padding:12px 51px;
-    margin-top:40px;
   }
 </style>

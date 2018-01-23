@@ -39,10 +39,10 @@
       </div>
     </div>
   </div>
+
   <div class="jewel-table-container">
     <jewel-table></jewel-table>
   </div>
-
 </div>
 
 </template>
@@ -62,10 +62,10 @@
         addDeviceSuccess () {
           this.$message({
             message: '设备添加成功',
-            type: 'success'
+            type: 'success',
+            customClass: 'messageLocation'
           })
         }
-
       }
     }
 </script>
@@ -82,6 +82,7 @@
   color: rgba(0,0,0,0.65);
   letter-spacing: 0;
   line-height: 22px;
+  top:64px;
 }
 .el-message img {
   width:14px;
@@ -91,7 +92,6 @@
 }
 </style>
 <style scoped>
-
 .record-titles {
   padding-top:24px;
   padding-bottom: 16px;
