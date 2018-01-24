@@ -5,18 +5,17 @@
         <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">当前CAN <span class="theme-fontColor">23242</span> 个，每次提币固定收取手续费 </p>
         <div class="receiver-container">
           <div class="address-container flex">
-            <p class="fontSize-14 fontcolor-opocity-54">收货地址：</p>
+            <p class="fontSize-14 fontcolor-opocity-54">收币地址：</p>
             <el-input class=" address-input"
-                      placeholder=""
-                      suffix-icon="el-icon-date">
+                      placeholder="输入收币地址">
             </el-input>
           </div>
           <div class="mining-money-container flex">
             <p class="fontSize-14 fontcolor-opocity-54">提币金额：</p>
             <el-input class="mining-money-input"
-                      placeholder=""
-                      suffix-icon="el-icon-date">
+                      placeholder="输入金额">
             </el-input>
+            <span class="fontSize-14 fontcolor-opocity-54">CAN</span>
           </div>
           <sure-getb-diag></sure-getb-diag>
         </div>
@@ -51,7 +50,8 @@
   width:440px;
 }
 .mining-money-input {
-  width:320px;
+  width:160px;
+  margin-right: 8px;
 }
 
 .el-input__inner {
@@ -63,7 +63,7 @@
 
 .address-container,.mining-money-container {
   line-height: 40px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 .address-input,.mining-money-input {
   margin-left: 16px;

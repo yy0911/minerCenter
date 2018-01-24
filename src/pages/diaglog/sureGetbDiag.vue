@@ -44,6 +44,6 @@
     margin-left: 85px;
   }
   .mining-btn {
-    padding:12px 51px;
+    padding:11px 47px;
   }
 </style>

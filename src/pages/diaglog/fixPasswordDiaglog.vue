@@ -5,7 +5,7 @@
 <el-dialog
   title="修改密码"
   :visible.sync="dialogVisible"
-  :before-close="handleClose" class="commoneStyle-container fixPass-Container">
+  class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
     <el-form-item prop="oldPass">
       <el-input type="password" v-model="ruleForm.oldPass" auto-complete="off" placeholder="输入原密码"></el-input>
@@ -23,7 +23,7 @@
     </el-form-item>
     <ident-note style="float: right" @useIdentPlugin="getNoteCodeData"></ident-note>
 
-    <el-button type="warning" @click="fixPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认修改</el-button>
+    <el-button type="primary" @click="fixPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认修改</el-button>
   </el-form>
 </el-dialog>
 </div>
@@ -38,7 +38,6 @@
       //原密码验证
       var validateOldPass = (rule, value, callback) => {
         if (value === '') {
-          console.log('dasfasfa')
           return callback(new Error('请输入原密码'))
         } else {
           callback()
@@ -48,7 +47,7 @@
       var validatePass = (rule, value, callback) => {
         console.log(callback)
         if (value === '') {
-          callback(new Error('请输入密码'))
+          return callback(new Error('请输入密码'))
         } else {
           if (this.ruleForm.newPass !== '') {
             this.$refs.ruleForm.validateField('newPass')
@@ -58,7 +57,7 @@
       }
       //新密码一致性验证
       var validatePass2 = (rule, value, callback) => {
-        console.log(value)
+        console.log(this.dialogVisible)
         if (value === '') {
           callback(new Error('请再次输入密码'))
         } else if (value !== this.ruleForm.pass) {
@@ -82,6 +81,7 @@
       }
       return {
         dialogVisible: false,
+        closeOnClickModa: false,
         ruleForm: {
           oldPass: '',
           pass: '',
@@ -109,11 +109,8 @@
     },
     methods: {
       handleClose (done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done()
-          })
-          .catch(_ => {})
+        this.$refs[ 'ruleForm' ].resetFields()
+        done()
       },
       fixPassSubmitForm (formName) {
         this.$refs[formName].validate((valid) => {
@@ -136,14 +133,15 @@
 .fixPass-Container .el-dialog {
   top:50%!important;
   transform: translate(0,-50%);
-}
-.fixPass-Container .el-dialog.el-dialog--small {
   width:392px;
   height: 422px;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
   border-radius: 4px;
   margin:auto;
   overflow: auto;
+}
+.el-input__suffix {
+  height: 40px;
 }
 .commoneStyle-container .el-dialog__header {
   padding:15px 24px;

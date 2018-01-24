@@ -1,7 +1,7 @@
 <template>
 <div class="deviceMoint-container">
   <div class="trade-record-container">
-    <p>挖矿统计</p>
+    <p class="font-weight-500">挖矿统计</p>
     <ul class="record-titles flex fontSize-14 fontcolor-opocity-54 center text-center line-height-22">
       <li class="flex-1">在线设备/总设备数（台）</li>
       <li class="flex-1">今日出币（个）</li>
@@ -11,7 +11,7 @@
     <ul class="record-numbers flex fontSize-38 theme-fontColor text-center line-height-46">
       <li class="flex-1 center">
         <span class="online-device">89</span>
-        <span class="fontcolor-opocity-54">80</span>
+        <span class="fontcolor-opocity-87">80</span>
       </li>
       <li class="flex-1">
         <span>8.88</span>
@@ -25,15 +25,14 @@
     </ul>
   </div>
   <div class="my-jewel-box-container">
-    <p class="me-box-title">我的宝盒</p>
+    <p class="me-box-title font-weight-500">我的宝盒</p>
     <div class="search-container">
       <el-input class="fontcolor-opocity-54"
-        placeholder="输入S/N码搜索设备" suffix-icon="el-icon-date">
+        placeholder="输入S/N码搜索设备" suffix-icon="el-icon-search">
       </el-input>
       <div class="jewel-right-container flex">
         <el-input class="fontcolor-opocity-54 console-mac-address-input"
-                  placeholder="输入MAC地址"
-                  suffix-icon="el-icon-search">
+                  placeholder="输入S/N码搜索设备">
         </el-input>
         <el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="addDeviceSuccess">添加设备</el-button>
       </div>
@@ -68,11 +67,12 @@
             message: '设备添加成功',
             type: 'success',
             customClass: 'messageLocation'
+            // duration: 0
           })
         },
         getMockData () {
           let _this = this
-          axios.get('http://localhost:8080/mock/mockdata1.json')
+          axios.get('http://localhost:8081/mock/mockdata1.json')
             .then(function (response) {
               console.log(response)
               _this.testMock = response.data.posts
@@ -99,13 +99,19 @@
   color: rgba(0,0,0,0.65);
   letter-spacing: 0;
   line-height: 22px;
-  top:64px;
+  top:76px;
 }
 .el-message img {
   width:14px;
   height: 14px;
   border-radius: 50%;
   margin-right: 10px;
+}
+.el-message--success {
+  border: 0;
+}
+.el-message--success .el-message__content {
+  color: rgba(0,0,0,0.65);
 }
 </style>
 <style scoped>

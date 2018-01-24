@@ -13,7 +13,9 @@ i{font-style:normal;}
 .theme-fontColor {
   color: #1890FF;
 }
-
+.font-weight-500 {
+  font-weight: 500;
+}
 .theme-bgColor {
   background-color:#F08802;
 }

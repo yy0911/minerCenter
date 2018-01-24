@@ -36,10 +36,10 @@
       label="操作"
       prop="name">
       <template slot-scope="scope">
-        <el-button type="text" size="small" class="pause-btn" >停止</el-button>
+        <el-button type="text" size="small" class="pause-btn fontSize-14">停止</el-button>
         <el-popover
           ref="unbindDevice"
-          placement="top-start"
+          placement="top"
           trigger="click"
           width="173"
           v-model="scope.row.visible"
@@ -53,7 +53,7 @@
             <el-button type="primary" @click="sureUnbindDevice(scope)">确 定</el-button>
           </div>
         </el-popover>
-        <el-button type="text" size="small" class="unbindDevice-btn" v-popover:unbindDevice >解绑</el-button>
+        <el-button type="text" size="small" class="unbindDevice-btn fontSize-14" v-popover:unbindDevice >解绑</el-button>
       </template>
     </el-table-column>
 

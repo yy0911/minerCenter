@@ -19,7 +19,9 @@ Vue.prototype.$http = axios
 const router = new VueRouter({
   routes
 })
-
+Vue.filter('currency', function (value) {
+  return '¥ ' + value
+})
 /* eslint-disable no-new */
 new Vue({
   store,
