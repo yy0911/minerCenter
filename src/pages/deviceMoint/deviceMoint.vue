@@ -71,15 +71,14 @@
           })
         },
         getMockData () {
-          let _this = this
-          axios.get('http://localhost:8081/mock/mockdata1.json')
+          //TESTPOSTS======
+          axios.post('/promo/authed/account/box/connect',
+                {boxSN: '9632672654634536435000'})
             .then(function (response) {
               console.log(response)
-              _this.testMock = response.data.posts
-              console.log((Array.isArray(_this.testMock)))
             })
             .catch(function (error) {
-              this.testMock = 'throw new Error' + error
+              console.log(error)
             })
         }
 

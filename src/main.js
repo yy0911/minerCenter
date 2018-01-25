@@ -19,6 +19,9 @@ Vue.prototype.$http = axios
 const router = new VueRouter({
   routes
 })
+const AUTH_TOKEN = 'Bearer 0a6bf4edb9b9d03503fada1fe749deffdf2c7413'
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
+axios.defaults.headers['Content-Type'] = 'application/json'
 Vue.filter('currency', function (value) {
   return '¥ ' + value
 })

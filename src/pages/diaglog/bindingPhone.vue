@@ -6,21 +6,21 @@
       title="绑定手机"
       :visible.sync="dialogVisible"
       class="commoneStyle-container bindingPhone-container" :close-on-click-modal="false" :before-close="handleClose">
-      <el-form :model="ruleForm2" status-icon ref="ruleForm2">
+      <el-form :model="ruleForm2" status-icon :rules="rules" ref="ruleForm2">
         <el-form-item prop="telphone">
-          <el-input type="telphone" placeholder="输入您要绑定的手机号码"></el-input>
+          <el-input type="telphone" placeholder="输入您要绑定的手机号码" v-model="ruleForm2.telphone"></el-input>
         </el-form-item>
         <el-form-item prop="noteCode">
           <div class="send-note-container">
-            <el-input type="text" placeholder="输入验证码" style="width: 178px;float: left" class="print-note-input"></el-input>
+            <el-input type="text" placeholder="输入验证码" style="width: 178px;float: left" class="print-note-input" v-model="ruleForm2.noteCode"></el-input>
             <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
               发送验证码
             </el-button>
-            <span  style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s发送验证码</span>
+            <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s发送验证码</span>
           </div>
         </el-form-item>
         <el-form-item prop="accountPassword">
-          <el-input type="password" placeholder="输入账户密码" auto-complete="off"></el-input>
+          <el-input type="password" placeholder="输入账户密码" auto-complete="off" v-model="ruleForm2.accountPassword"></el-input>
         </el-form-item>
         <el-button type="primary"  class="sure-fixpassword-btn">确认绑定</el-button>
       </el-form>
@@ -31,6 +31,10 @@
   export default {
     data () {
       var validateTelphone = (rule, value, callback) => {
+        if (value !== '') {
+          callback(new Error(''))
+        } else {
+        }
       }
       var validateNoteCode = (rule, value, callback) => {
       }

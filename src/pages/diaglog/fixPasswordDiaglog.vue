@@ -45,10 +45,12 @@
       }
       //新密码验证
       var validatePass = (rule, value, callback) => {
-        console.log(callback)
-        if (value === '') {
+        if (value === '' && !this.$refs.ruleForm.validateField('oldPass')) {
+          return
+        } else if (value === '') {
           return callback(new Error('请输入密码'))
         } else {
+          console.log(1111)
           if (this.ruleForm.newPass !== '') {
             this.$refs.ruleForm.validateField('newPass')
           }
@@ -57,7 +59,6 @@
       }
       //新密码一致性验证
       var validatePass2 = (rule, value, callback) => {
-        console.log(this.dialogVisible)
         if (value === '') {
           callback(new Error('请再次输入密码'))
         } else if (value !== this.ruleForm.pass) {
@@ -68,8 +69,6 @@
       }
       //验证码验证
       var validateIdentNoteCode = (rule, value, callback) => {
-        console.log(value)
-        console.log(this.ruleFormidentNoteCode)
         if (value === '') {
           callback(new Error('请输入验证码'))
         } else if (value !== this.ruleForm.identNoteCode) {
@@ -81,7 +80,6 @@
       }
       return {
         dialogVisible: false,
-        closeOnClickModa: false,
         ruleForm: {
           oldPass: '',
           pass: '',
@@ -155,9 +153,6 @@
 .commoneStyle-container .el-input__inner {
   font-size: 16px;
   border:1px solid rgba(0,0,0,.15);
-}
-.commoneStyle-container .el-input__inner:focus {
-  border:1px solid #F08802;
 }
 .commoneStyle-container .el-input__inner::-webkit-input-placeholder { /* WebKit browsers */
   color: rgba(0,0,0,.38);
