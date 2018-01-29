@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "posts":[
+    {
+      "id":1,
+      "title":"mock data",
+      "author":"henry"
+    }
+  ]
+}

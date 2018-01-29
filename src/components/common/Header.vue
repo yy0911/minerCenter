@@ -1,7 +1,7 @@
 <template>
 	<div id="header">
 		<ul class="logo">
-			<img src="../../assets/css/icon/logo.svg" height="30px;">
+			<img src="../../assets/css/icon/logo_white.svg" height="30px;">
 		</ul>
 		<ul class="head_l">
 			<li>主页</li>
@@ -40,7 +40,7 @@
 		overflow: hidden;
 		background: #000;
 		color: #fff;
-		padding-left: 143px;
+		padding-left: 136px;
 		padding-right: 118px;
 		box-sizing: border-box;
 	}
