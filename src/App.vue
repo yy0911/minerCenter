@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<el-container style="width: 100%;">
-			<el-header>
+			<el-header style="padding: 0; height: 64px;">
 			  	<Header></Header>
 			</el-header>
 			<el-container>
@@ -39,7 +39,6 @@ export default {
 		width: 100%;
 		padding: 24px 136px;
 		background: #f2f2f2;
-		margin-top: 64px;
 	}
 	#container {
 		background: #fff;
