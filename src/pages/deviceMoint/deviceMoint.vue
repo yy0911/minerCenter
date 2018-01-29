@@ -10,17 +10,17 @@
     </ul>
     <ul class="record-numbers flex fontSize-38 theme-fontColor text-center line-height-46">
       <li class="flex-1 center">
-        <span class="online-device">89</span>
-        <span class="fontcolor-opocity-87">80</span>
+        <span class="online-device">{{ miningStatisticsData.onLineBox }}</span>
+        <span class="fontcolor-opocity-87">{{ miningStatisticsData.allBox }}</span>
       </li>
       <li class="flex-1">
-        <span>8.88</span>
+        <span>{{ miningStatisticsData.allTodayCoins }}</span>
       </li>
       <li class="flex-1">
-        <span>9.00</span>
+        <span>{{ miningStatisticsData.allYesterdayCoins }}</span>
       </li>
       <li class="flex-1">
-        <span>43343.23</span>
+        <span>{{ miningStatisticsData.totalMiningCoin }}</span>
       </li>
     </ul>
   </div>
@@ -28,19 +28,19 @@
     <p class="me-box-title font-weight-500">我的宝盒</p>
     <div class="search-container">
       <el-input class="fontcolor-opocity-54"
-        placeholder="输入S/N码搜索设备" suffix-icon="el-icon-search">
+        placeholder="输入S/N码搜索设备" suffix-icon="el-icon-search" v-model="SNSearchNumber" @input="SearchSNDevice">
       </el-input>
       <div class="jewel-right-container flex">
         <el-input class="fontcolor-opocity-54 console-mac-address-input"
-                  placeholder="输入S/N码搜索设备">
+                  placeholder="输入S/N码添加设备" v-model="SNAddNumber">
         </el-input>
-        <el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="addDeviceSuccess">添加设备</el-button>
+        <el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="BindSNDevice">添加设备</el-button>
       </div>
     </div>
   </div>
 
   <div class="jewel-table-container">
-    <jewel-table></jewel-table>
+    <jewel-table  :isSuccess='isSuccess' :searchDeviceData="searchDeviceData"></jewel-table>
   </div>
 </div>
 
@@ -52,30 +52,77 @@
     export default {
       data () {
         return {
-          testMock: ''
+          SNSearchNumber: '',
+          SNAddNumber: '',
+          isSuccess: true,
+          searchDeviceData: '',
+          bindNewOneDevice: {},
+          miningStatisticsData: ''
         }
       },
       components: {
         jewelTable
       },
       mounted () {
-        this.getMockData()
+        this.GetMiningStatistics()
       },
       methods: {
-        addDeviceSuccess () {
-          this.$message({
-            message: '设备添加成功',
-            type: 'success',
-            customClass: 'messageLocation'
-            // duration: 0
-          })
-        },
-        getMockData () {
-          //TESTPOSTS======
-          axios.post('/promo/authed/account/box/connect',
-                {boxSN: '9632672654634536435000'})
+        //获取挖矿统计接口请求
+        GetMiningStatistics () {
+          let vm = this
+          axios.get('promo/authed/account/allbox/statistics')
             .then(function (response) {
-              console.log(response)
+              vm.miningStatisticsData = response.data
+            }).catch(function (error) {
+              console.log(error)
+            })
+        },
+        //查询设备sn接口请求
+        SearchSNDevice () {
+          let vm = this
+          if (this.SNSearchNumber === '') {
+            this.searchDeviceData = ''
+            return
+          }
+          axios.get('/promo/authed/account/box/search/' + vm.SNSearchNumber)
+            .then(function (response) {
+              if (JSON.stringify(response.data) === '{}') {
+                vm.searchDeviceData = []
+                return
+              }
+              vm.searchDeviceData = Array.isArray(response.data) ? response.data : [response.data]
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+        },
+        BindSNDevice () {
+          //绑定设备接口请求======
+          let vm = this
+          if (this.SNAddNumber === '') {
+            this.isSuccess = true
+            return
+          }
+          this.isSuccess = false
+          axios.post('/promo/authed/account/box/connect',
+                {boxSN: vm.SNAddNumber})
+            .then(function (response) {
+              vm.isSuccess = response.data.isSuccess
+              if (vm.isSuccess === true) {
+                console.log('dsafasfafdsa------')
+                vm.$message({
+                  message: '设备添加成功',
+                  type: 'success',
+                  customClass: 'messageLocation'
+                })
+                return
+              }
+              vm.$message({
+                message: '设备添加失败',
+                type: 'error',
+                customClass: 'messageLocation'
+              })
+              console.log(vm.isSuccess)
             })
             .catch(function (error) {
               console.log(error)

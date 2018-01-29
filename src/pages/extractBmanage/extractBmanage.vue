@@ -2,22 +2,22 @@
     <div class="extractBmanage-container">
       <div class="mining-statist-container">
         <p>CAN提币</p>
-        <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">当前CAN <span class="theme-fontColor">23242</span> 个，每次提币固定收取手续费 </p>
+        <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">当前 <span class="theme-fontColor">23242</span> CAN，每次提币固定收取手续费 </p>
         <div class="receiver-container">
           <div class="address-container flex">
             <p class="fontSize-14 fontcolor-opocity-54">收币地址：</p>
             <el-input class=" address-input"
-                      placeholder="输入收币地址">
+                      placeholder="输入收币地址" v-model="canReceiveAddress">
             </el-input>
           </div>
           <div class="mining-money-container flex">
-            <p class="fontSize-14 fontcolor-opocity-54">提币金额：</p>
-            <el-input class="mining-money-input"
-                      placeholder="输入金额">
+            <p class="fontSize-14 fontcolor-opocity-54">提币数额：</p>
+            <el-input class="mining-money-input" type="number"
+                      placeholder="输入数额" v-model="amount">
             </el-input>
             <span class="fontSize-14 fontcolor-opocity-54">CAN</span>
           </div>
-          <sure-getb-diag></sure-getb-diag>
+          <sure-getb-diag :canReceiveAddress="canReceiveAddress" :amount="amount"></sure-getb-diag>
         </div>
       </div>
       <div class="mining-record-container">
@@ -36,11 +36,16 @@
   export default {
     data () {
       return {
+        canReceiveAddress: '',
+        amount: ''
       }
     },
+
     components: {
       tableMiningRecord,
       sureGetbDiag
+    },
+    methods: {
     }
   }
 </script>

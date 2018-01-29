@@ -2,41 +2,41 @@
     <div class="table1-container">
 
   <el-table
-    :data="tableData3"
+    :data="deviceDetailData"
     style="width:100%">
     <el-table-column
-      label="MAC地址"
-      prop="date">
+      label="S/N码"
+      prop="boxSN">
     </el-table-column>
     <el-table-column
       label="状态"
-      prop="name">
+      prop="status">
       <template slot-scope="scope">
-        <span class="status-circle color-red" v-if="scope.row.name == 1"></span>
-        <span class="status-circle color-blue" v-else-if="scope.row.name == 2"></span>
-        <span class="status-circle color-grey" v-else-if="scope.row.name == 3"></span>
-        <span class="status-circle color-black" v-else></span>
-        {{ scope.row.name }}
+        <span class="status-circle color-grey" v-if="scope.row.status == '未连接'"></span>
+        <span class="status-circle color-green" v-else-if="scope.row.status == '挖矿中'"></span>
+        <span class="status-circle color-orange" v-else-if="scope.row.status == '待机中'"></span>
+        <span class="status-circle color-red" v-else></span>
+        {{ scope.row.status }}
       </template>
     </el-table-column>
     <el-table-column
       label="上行带宽 (Mbps)"
-      prop="name">
+      prop="uplinkBandwidth">
     </el-table-column>
     <el-table-column
       label="存储 (TB)"
-      prop="name">
+      prop="storageSize">
     </el-table-column>
     <el-table-column
       label="今日出币 (个)"
-      prop="name">
+      prop="allTodayCoins">
     </el-table-column>
 
     <el-table-column
       label="操作"
       prop="name">
       <template slot-scope="scope">
-        <el-button type="text" size="small" class="pause-btn fontSize-14">停止</el-button>
+        <el-button type="text" size="small" class="pause-btn fontSize-14"  v-html="scope.row.isMining === true ? '停止' : '开始' " @click="isMiningEvent(scope.row.boxSN, scope.row.isMining)"></el-button>
         <el-popover
           ref="unbindDevice"
           placement="top"
@@ -65,40 +65,118 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
+    props: ['isSuccess', 'searchDeviceData'],
     data () {
       return {
-        tableData3: [{
-          date: '2016-05-03',
-          name: 1,
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333,
-          visible: false
-        }, {
-          date: '2016-05-02',
-          name: 2,
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-04',
-          name: 3,
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }]
+        deviceDetailData: []
       }
     },
+    computed: {
+    },
+    watch: {
+      isSuccess (newdata) {
+        if (newdata === true) {
+          this.GetDeviceList()
+        }
+        return
+      },
+      searchDeviceData (newdata) {
+        if (newdata === '') {
+          this.GetDeviceList()
+          return
+        }
+        this.deviceDetailData = this.$options.methods.responseArray(newdata)
+        return this.deviceDetailData
+      }
+    },
+    created () {
+      this.GetDeviceList()
+    },
+    mounted () {
+    },
     methods: {
+      // 公共方法，根据响应状态码返回不同的中文
+      responseArray (array) {
+        array.map(item => {
+          for (let [k, v] of Object.entries(item)) {
+            if (v === '') {
+               item[k] = '--'
+            }
+          }
+          if (item.status === 0) {
+            item.status = '未连接'
+          } else if (item.status === 1) {
+            item.status = '挖矿中'
+          } else if (item.status === 2) {
+            item.status = '待机中'
+          } else if (item.status === 3) {
+            item.status = '异常'
+          }
+        })
+        return array
+      },
+      GetDeviceList () {
+        //获取设备列表接口请求======
+        let vm = this
+        axios.get('/promo/authed/account/box/lists/1/5')
+          .then(function (response) {
+            vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
+            return
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      //解绑设备接口请求
       sureUnbindDevice (scope) {
-        scope.row.visible = false
+        let vm = this
+        let boxUnbindDeviceSN = scope.row.boxSN
+        axios.post('/promo/authed/account/box/disconnect',
+          {boxSN: boxUnbindDeviceSN})
+          .then(function (response) {
+            console.log(response.data.isSuccess)
+            if (response.data.isSuccess) {
+              // vm.$options.methods.GetDeviceList()
+              axios.get('/promo/authed/account/box/lists/1/5')
+                .then(function (response) {
+                  vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
+                  return
+                })
+                .catch(function (error) {
+                  console.log(error)
+                })
+              scope.row.visible = false
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      //停止或者开始挖矿接口请求
+      isMiningEvent (boxSN, isMining) {
+        console.log(isMining)
+        let  vm = this
+        axios.get('/promo/authed/account/box/stop/mining/' + boxSN + '/' + !isMining)
+          .then(function (response) {
+            if (response.data.isSuccess) {
+              // vm.$options.methods.GetDeviceList()
+              // vm.$router.push({path: '/deviceMoint'})
+              axios.get('/promo/authed/account/box/lists/1/5')
+                .then(function (response) {
+                  vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
+                  return
+                })
+                .catch(function (error) {
+                  console.log(error)
+                })
+            }
+            return
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     }
   }
@@ -126,16 +204,16 @@
       border-radius: 50%;
     }
     .color-red {
-      background-color:red;
+      background-color:#F5222D;
     }
-    .color-blue {
-      background-color:blue;
+    .color-orange {
+      background-color:#FFC64B;
     }
     .color-grey {
-      background-color:gray;
+      background-color:rgba(0,0,0,0.22);
     }
-    .color-black {
-      background-color:black;
+    .color-green {
+      background-color:#52C41A;
     }
     .table1-container .el-popover {
       padding:16px;
