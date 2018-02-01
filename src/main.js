@@ -12,8 +12,8 @@ import App from './App'
 import routes from './routes'
 import { store } from './store/store'
 import { UTIL } from './util/util'
-// import { SERVICE } from './service/service'
-
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate)
 Vue.use(Element)
 Vue.use(VueRouter)
 Vue.prototype.$http = axios
@@ -22,36 +22,40 @@ const router = new VueRouter({
   routes
 })
 //定义登陆时候存储的acdess_token
-const ACCESS_TOKEN = new Promise(function (resolve, reject) {
-  let formParams = 'username=18810083326&password=555555&grant_type=password'
-  axios({
-    url: '/promo/token',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic cHJvbW9zZXJ2ZXI6ZTYxOTcyMDViYTZmOWM2'
-    },
-    data: formParams
-  })
-    .then(function (response) {
-      resolve(response)
-    })
-    .catch(function (reason) {
-    })
-})
-  .then(function (response) {
-    const AUTH_HEADER = 'Bearer '
-    let sdaf = UTIL.SetCookie('auth', AUTH_HEADER + response.data.access_token, 1000000)
-    //从cookie里面获取auth
-  })
-  .catch(function (reason) {
-    console.log(reason)
-  })
-  .then(function () {
-    const AUTH_TOKEN = UTIL.GetCookie('auth')
-    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
-    axios.defaults.headers['Content-Type'] = 'application/json'
-  })
+// const ACCESS_TOKEN = new Promise(function (resolve, reject) {
+//   let formParams = 'username=18810083326&password=555555&grant_type=password'
+//   axios({
+//     url: '/promo/token',
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//       'Authorization': 'Basic cHJvbW9zZXJ2ZXI6ZTYxOTcyMDViYTZmOWM2'
+//     },
+//     data: formParams
+//   })
+//     .then(function (response) {
+//       resolve(response)
+//     })
+//     .catch(function (reason) {
+//     })
+// })
+//   .then(function (response) {
+//     const AUTH_HEADER = 'Bearer '
+//     let sdaf = UTIL.SetCookie('auth', AUTH_HEADER + response.data.access_token, 1000000)
+//     //从cookie里面获取auth
+//   })
+//   .catch(function (reason) {
+//     console.log(reason)
+//   })
+//   .then(function () {
+//     const AUTH_TOKEN = UTIL.GetCookie('auth')
+//     axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
+//     axios.defaults.headers['Content-Type'] = 'application/json'
+//   })
+//从官网里面获取cookie
+const AUTH_TOKEN = UTIL.GetCookie('auth')
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
+axios.defaults.headers['Content-Type'] = 'application/json'
 //货比符号转换
 Vue.filter('currency', function (value) {
   return '¥ ' + value

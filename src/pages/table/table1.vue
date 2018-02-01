@@ -120,7 +120,14 @@
       GetDeviceList () {
         //获取设备列表接口请求======
         let vm = this
-        axios.get('/promo/authed/account/box/lists/1/5')
+        axios.get('/promo/authed/account/box/lists/1/5',{
+          validateStatus: function (status) {
+            if (status === 401 || status === 404) {
+              window.location.href = '../pages/login.html'
+            }
+            return
+          }
+        })
           .then(function (response) {
             vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
             return
@@ -134,12 +141,26 @@
         let vm = this
         let boxUnbindDeviceSN = scope.row.boxSN
         axios.post('/promo/authed/account/box/disconnect',
-          {boxSN: boxUnbindDeviceSN})
+          {boxSN: boxUnbindDeviceSN}, {
+            validateStatus: function (status) {
+              if (status === 401 || status === 404) {
+                window.location.href = '../pages/login.html'
+              }
+              return
+            }
+          })
           .then(function (response) {
             console.log(response.data.isSuccess)
             if (response.data.isSuccess) {
               // vm.$options.methods.GetDeviceList()
-              axios.get('/promo/authed/account/box/lists/1/5')
+              axios.get('/promo/authed/account/box/lists/1/5', {
+                validateStatus: function (status) {
+                  if (status === 401 || status === 404) {
+                    window.location.href = '../pages/login.html'
+                  }
+                  return
+                }
+              })
                 .then(function (response) {
                   vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
                   return
@@ -162,8 +183,14 @@
           .then(function (response) {
             if (response.data.isSuccess) {
               // vm.$options.methods.GetDeviceList()
-              // vm.$router.push({path: '/deviceMoint'})
-              axios.get('/promo/authed/account/box/lists/1/5')
+              axios.get('/promo/authed/account/box/lists/1/5', {
+                validateStatus: function (status) {
+                  if (status === 401 || status === 404) {
+                    window.location.href = '../pages/login.html'
+                  }
+                  return
+                }
+              })
                 .then(function (response) {
                   vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
                   return

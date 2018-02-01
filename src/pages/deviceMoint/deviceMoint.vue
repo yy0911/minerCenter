@@ -70,7 +70,14 @@
         //获取挖矿统计接口请求
         GetMiningStatistics () {
           let vm = this
-          axios.get('promo/authed/account/allbox/statistics')
+          axios.get('promo/authed/account/allbox/statistics',{
+            validateStatus: function (status) {
+              if (status === 401 || status === 404) {
+                window.location.href = '../pages/login.html'
+              }
+              return
+            }
+          })
             .then(function (response) {
               vm.miningStatisticsData = response.data
             }).catch(function (error) {
@@ -84,7 +91,14 @@
             this.searchDeviceData = ''
             return
           }
-          axios.get('/promo/authed/account/box/search/' + vm.SNSearchNumber)
+          axios.get('/promo/authed/account/box/search/' + vm.SNSearchNumber, {
+            validateStatus: function (status) {
+              if (status === 401 || status === 404) {
+                window.location.href = '../pages/login.html'
+              }
+              return
+            }
+          })
             .then(function (response) {
               if (JSON.stringify(response.data) === '{}') {
                 vm.searchDeviceData = []
@@ -105,7 +119,14 @@
           }
           this.isSuccess = false
           axios.post('/promo/authed/account/box/connect',
-                {boxSN: vm.SNAddNumber})
+                {boxSN: vm.SNAddNumber}, {
+                  validateStatus: function (status) {
+                    if (status === 401 || status === 404) {
+                      window.location.href = '../pages/login.html'
+                    }
+                    return
+                  }
+                })
             .then(function (response) {
               vm.isSuccess = response.data.isSuccess
               if (vm.isSuccess === true) {
@@ -132,34 +153,6 @@
       }
     }
 </script>
-<style>
-.el-message {
-  width:138px;
-  height: 40px;
-  min-width: 0;
-  font-size: 14px;
-  background: #FFFFFF;
-  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.15);
-  border-radius: 4px;
-  padding:14px;
-  color: rgba(0,0,0,0.65);
-  letter-spacing: 0;
-  line-height: 22px;
-  top:76px;
-}
-.el-message img {
-  width:14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.el-message--success {
-  border: 0;
-}
-.el-message--success .el-message__content {
-  color: rgba(0,0,0,0.65);
-}
-</style>
 <style scoped>
 .record-titles {
   padding-top:24px;

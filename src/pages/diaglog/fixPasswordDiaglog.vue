@@ -18,10 +18,21 @@
     <el-form-item prop="newPass">
       <el-input type="password" v-model="ruleForm.newPass" auto-complete="off" placeholder="再次输入新密码" ></el-input>
     </el-form-item>
-    <el-form-item prop="identNoteCode" style="float: left">
-      <el-input  auto-complete="off" placeholder="请输入验证码" style="width: 204px;" v-model="ruleForm.identNoteCode"></el-input>
+
+    <el-form-item prop="identNoteCode commone-note-container">
+      <div class="send-note-container">
+        <el-input type="tel" v-model="ruleForm.identNoteCode" auto-complete="off" placeholder="短信验证码" class="print-note-input" style="width: 178px;float: left"></el-input>
+        <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
+          发送验证码
+        </el-button>
+        <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s发送验证码</span>
+      </div>
     </el-form-item>
-    <ident-note style="float: right" @useIdentPlugin="getNoteCodeData"></ident-note>
+
+    <!--<el-form-item prop="identNoteCode" style="float: left">-->
+      <!--<el-input  auto-complete="off" placeholder="请输入验证码" style="width: 204px;" v-model="ruleForm.identNoteCode"></el-input>-->
+    <!--</el-form-item>-->
+    <!--<ident-note style="float: right" @useIdentPlugin="getNoteCodeData"></ident-note>-->
 
     <el-button type="primary" @click="fixPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认修改</el-button>
   </el-form>
@@ -29,6 +40,7 @@
 </div>
 </template>
 <script>
+  import axios from 'axios'
   import identNote from '../plugins/condest.vue'
   export default {
     components: {
@@ -45,12 +57,9 @@
       }
       //新密码验证
       var validatePass = (rule, value, callback) => {
-        if (value === '' && !this.$refs.ruleForm.validateField('oldPass')) {
-          return
-        } else if (value === '') {
+        if (value === '') {
           return callback(new Error('请输入密码'))
         } else {
-          console.log(1111)
           if (this.ruleForm.newPass !== '') {
             this.$refs.ruleForm.validateField('newPass')
           }
@@ -71,10 +80,7 @@
       var validateIdentNoteCode = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入验证码'))
-        } else if (value !== this.ruleForm.identNoteCode) {
-          callback(new Error('验证码错误!'))
         } else {
-          console.log('success')
           callback()
         }
       }
@@ -86,6 +92,8 @@
           newPass: '',
           identNoteCode: ''
         },
+        countTotal: '',
+        isCountDown: true,
         rules: {
           oldPass: [
             {validator: validateOldPass, trigger: 'blur'}
@@ -103,7 +111,6 @@
       }
     },
     mounted () {
-      this.getNoteCodeData()
     },
     methods: {
       handleClose (done) {
@@ -113,16 +120,70 @@
       fixPassSubmitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log('submit!')
+            let vm = this
+            //确认修改密码
+            axios.post('/promo/modify/account/pass/update',
+              {
+                code: vm.ruleForm.identNoteCode,
+                password: vm.ruleForm.pass,
+                repassword: vm.ruleForm.newPass,
+                oldpassword: vm.ruleForm.oldPass
+              }, {
+                validateStatus: function (status) {
+                  if (status === 401 || status === 404) {
+                    window.location.href = '../pages/login.html'
+                  }
+                  return
+                }
+              })
+              .then(function (response) {
+
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
           } else {
             console.log('error submit!!')
             return false
           }
         })
       },
-      getNoteCodeData (msg) {
-        this.ruleForm.identifyCode = msg
-        console.log(this.ruleForm.identifyCode)
+      //获取图形验证码
+      // getNoteCodeData (msg) {
+      //   this.ruleForm.identifyCode = msg
+      //   console.log(this.ruleForm.identifyCode)
+      // },
+      //时间倒计时
+      countDownMethod () {
+        const TIME_COUNT = 60
+        if (!this.timer) {
+          this.countTotal = TIME_COUNT
+          this.isCountDown = false
+          this.timer = setInterval(() => {
+            if (this.countTotal > 0 && this.countTotal <= TIME_COUNT) {
+              this.countTotal--
+            } else {
+              this.isCountDown = true
+              clearInterval(this.timer)
+              this.timer = null
+            }
+          }, 1000)
+        }
+        //获取手机验证码
+        axios.get('promo/modify/account/pass/sendcode', {
+          validateStatus: function (status) {
+            if (status === 401 || status === 404) {
+              window.location.href = '../pages/login.html'
+            }
+            return
+          }
+        })
+          .then(function (response) {
+            console.log(response.data)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     }
   }
@@ -194,5 +255,10 @@
 .el-form-item__error {
   position: relative;
   padding-bottom: 16px;
+}
+.send-note-container {
+  border:1px solid rgba(0,0,0,.15);
+  height: 40px;
+  border-radius: 4px;
 }
 </style>

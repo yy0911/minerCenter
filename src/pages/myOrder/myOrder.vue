@@ -4,18 +4,19 @@
       <el-menu-item index="1">全部订单</el-menu-item>
       <el-menu-item index="2">待付款</el-menu-item>
       <el-menu-item index="3">已完成</el-menu-item>
+      <el-menu-item index="4">交易关闭</el-menu-item>
     </el-menu>
 
-      <div class="all-order-container" v-if="menuIndex == 1">
-          <order-manage v-for="item in items" :childOrderData="item"  ></order-manage>
+      <div class="all-order-container">
+          <order-manage v-for="item in sellRecordList" :childOrderData="item"  ></order-manage>
       </div>
-
-      <div class="wait-order-container" v-else-if="menuIndex == 2" >
-        <order-manage  v-for="item in waitPayOrdersComputed" :childOrderData="item"></order-manage>
-      </div>
-      <div class="end-pay-order-container" v-else>
-        <order-manage  v-for="item in endPayOrderComputed" :childOrderData="item"></order-manage>
-      </div>
+      <div class="text-center" v-show="sellRecordList == '' || sellRecordList.length<=0 " style="margin-top: 100px"><p>暂无订单</p></div>
+      <!--<div class="wait-order-container" v-else-if="menuIndex == 2" >-->
+        <!--<order-manage  v-for="item in waitPayOrdersComputed" :childOrderData="item"></order-manage>-->
+      <!--</div>-->
+      <!--<div class="end-pay-order-container" v-else>-->
+        <!--<order-manage  v-for="item in endPayOrderComputed" :childOrderData="item"></order-manage>-->
+      <!--</div>-->
 
   </div>
 
@@ -23,44 +24,22 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import orderManage from '../orderManage/orderManage.vue'
   export default {
     data () {
       return {
         activeIndex: '1',
         menuIndex: 1,
-        //状态1是已付款 状态2 是未付款
-        items: [{
-          date: '2018-1-23',
-          consignee: 'henry',
-          orderNumber: 201783732232,
-          numTotal: 5,
-          phoneNumber: 13834738983,
-          priceTotal: 988,
-          status: 1,
-          statusTitle: '已完成',
-          address: '北京市昌平区国风美唐小区'
-        }, {
-          date: '2018-1-23',
-          consignee: 'henry',
-          orderNumber: 201783732232,
-          numTotal: 5,
-          phoneNumber: 13834738983,
-          priceTotal: 988,
-          status: 2,
-          statusTitle: '带付款',
-          address: '北京市昌平区国风美唐小区全宇宙疯狂王者浪迹天涯者仰天长啸都是淡淡的'
-        }, {
-          date: '2018-1-23',
-          consignee: 'henry',
-          orderNumber: 201783732232,
-          numTotal: 8,
-          phoneNumber: 13834738983,
-          priceTotal: 988,
-          status: 3,
-          statusTitle: '代付款',
-          address: '北京市昌平区国风美唐小区'
-        }]
+        curPage: 1,
+        //状态all是全部 状态2未付款 状态三是已完成 状态四四取消付款  all;waitPay;ok;cancleOrrefund
+        sellRecordList: '',
+        sellListStatus: 'all'//默认未全部订单
+      }
+    },
+    watch: {
+      statusTitleComputed () {
+        this.getSellRecordList()
       }
     },
     computed: {
@@ -73,14 +52,53 @@
         return this.items.filter(function (item) {
           return item.status === 1
         })
+      },
+      statusTitleComputed () {
+        this.sellListStatus = 'all'
+         if (this.menuIndex === 1) {
+            return this.sellListStatus = 'all'
+         } else if (this.menuIndex === 2) {
+           return this.sellListStatus = 'waitPay'
+         } else if (this.menuIndex === 3) {
+           return this.sellListStatus = 'ok'
+         } else {
+           return this.sellListStatus = 'cancleOrrefund'
+         }
       }
+    },
+    mounted () {
+      this.getSellRecordList()
     },
     components: {
       orderManage
     },
     methods: {
       handleSelect (key, keyPath) {
-        this.menuIndex = key
+        this.menuIndex = Number(key)
+      },
+      getSellRecordList () {
+        let vm = this
+        axios.post('/promo/authed/account/get/selllist/bystatus',
+          {
+            status: vm.statusTitleComputed,
+            curPage: vm.curPage
+          }, {
+            validateStatus: function (status) {
+              if (status === 401 || status === 404) {
+                window.location.href = '../pages/login.html'
+              }
+              return
+            }
+          })
+          .then(function (response) {
+            vm.sellRecordList = response.data.data
+            console.log(response.data.data)
+          })
+          .catch(function (error) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          })
       }
     }
   }

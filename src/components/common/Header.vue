@@ -1,32 +1,65 @@
 <template>
-	<div id="header">
-		<ul class="logo">
-			<img src="../../assets/css/icon/logo_white.svg" height="30px;">
-		</ul>
-		<ul class="head_l">
-			<li>主页</li>
-			<li>白皮书</li>
-			<li>项目</li>
-			<li>通知</li>
-			<li>CAN星际宝盒</li>
-		</ul>
-		<ul class="head_r">
-			<li>个人中心</li>
-			<li style='color: #1890FF;'>退出</li>
-			<li><i class="iconfont icon-ren"></i>English</li>
-		</ul>
-	</div>
+    <div id="header">
+      <ul class="logo">
+          <a href="#">
+            <img src="../../assets/css/icon/logo1.svg" height="30px;">
+          </a>
+      </ul>
+      <ul class="head_l">
+        <li class="mainPape"><a href="../index.html">主页</a></li>
+        <li><a href="../whitepaper.pdf">白皮书</a></li>
+        <li class="productPage flex flex-align-center">
+          <div class="nav-pro-mouse flex flex-align-center" @mouseover="isMouseover = false" @mouseout="isMouseover = true">
+            产品 <span class="trink-icon"></span>
+          </div>
+          <div class="product-over-downContainer" :class="{proDisplay:isMouseover}" @mouseover="isMouseover = false" @mouseout="isMouseover = true">
+            <div class="product-content flex">
+              <div class="product-img-list text-center">
+                <a href="../pages/product.html">
+                  <p class="product-img" style="margin-bottom: 8px">
+                    <img src="../../assets/images/pic_device.png" alt="">
+                  </p>
+                  <span>星际宝盒</span>
+                </a>
+              </div>
+              <p style="padding-top: 26px;padding-left: 64px;color: rgba(255,255,255,.22)">更多产品敬请期待</p>
+            </div>
+          </div>
+        </li>
+        <li><a href="../pages/info.html">资讯</a></li>
+        <li><a href="../pages/aboutUs.html">关于</a></li>
+      </ul>
+      <ul class="head_r">
+        <li><a id="login" href="../pages/login.html">个人中心</a></li>
+        <li style='color: #1890FF;' @click="loginOutMethod">退出</li>
+        <li>
+          <a href="javascript:void(0);">
+            <i class="iconfont icon-ren"></i>English
+          </a>
+        </li>
+      </ul>
+    </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
-        activeIndex2: '1'
+        isMouseover: true
       }
     },
     methods: {
-      handleSelect (key, keyPath) {
-        console.log(key, keyPath)
+      //点击退出
+      loginOutMethod () {
+        axios.get('/promo/token/logout')
+          .then(function (response) {
+            if (response.data.isSuccess) {
+              window.location.href = '../pages/login.html'
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     }
   }
@@ -37,7 +70,7 @@
 		height: 64px;
 		position: fixed;
 		z-index: 10;
-		overflow: hidden;
+		/*overflow: hidden;*/
 		background: #000;
 		color: #fff;
 		padding-left: 136px;
@@ -77,6 +110,52 @@
 	#header .head_r li:nth-child(1) {
 		border-right: 1px solid rgba(255,255,255,0.54);
 	}
+  .product-over-downContainer {
+    height: 142px;
+    background: #181818;
+    position: absolute;
+    top:60px;
+    left: 0;
+    width: 100%;
+    transition:height 2s;
+    -moz-transition:height 2s; /* Firefox 4 */
+    -webkit-transition:height 2s; /* Safari and Chrome */
+    -o-transition:height 2s; /* Opera */
+    cursor: pointer;
+  }
+  .proDisplay {
+    display: none;
+  }
+  .product-content {
+    position: absolute;
+    top: 20px;
+    left: 335px;
+  }
+  .product-img-list a{
+    text-decoration: none;
+    color: rgba(255,255,255,.54);
+    font-size: 14px;
+  }
+  .product-img {
+    width: 72px;
+    height: 72px;
+  }
+  .product-img img {
+    width: 100%;
+    height: 100%;
+  }
+  #header a {
+    color: rgba(255,255,255,0.54);
+    text-decoration: none !important;
+  }
+  .trink-icon {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid rgba(255,255,255,.54);
+    margin-left: 8px;
+  }
 </style>
 
 

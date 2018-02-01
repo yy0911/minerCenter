@@ -3,40 +3,42 @@
   <div class="order-item-container fontSize-14 fontcolor-opocity-38" >
     <div class="flex flex-pack-justify order-header-container paddingLR-24">
       <div class="flex">
-        <p class="order-item-time">{{ childOrderData.date }}</p>
+        <p class="order-item-time">{{ childOrderData.updatedAt }}</p>
         <p>订单号：
-          <span class="fontcolor-opocity-54">{{ childOrderData.orderNumber }}</span>
+          <span class="fontcolor-opocity-54">{{ childOrderData.tradeNumber }}</span>
         </p>
       </div>
-      <p>{{ childOrderData.statusTitle }}</p>
+      <p>{{ childOrderData.status_ }}</p>
     </div>
     <div class="order-main-container flex">
       <div class="left-shop-introduce-container flex paddingTB-30">
-        <div class="img-container"></div>
+        <div class="img-container">
+          <img src="../../assets/images/pic_device.png" alt="">
+        </div>
         <div class="shop-content-container fontSize-12">
           <p class="fontSize-14 goods-container">
             <span class="fontcolor-opocity-87" style="padding-right: 16px">CAN星际宝盒</span>
-            <span class="theme-fontColor">x<span>{{ childOrderData.numTotal }}</span></span>
+            <span class="theme-fontColor">x<span>{{ childOrderData.buyAmount }}</span></span>
           </p>
           <div class="specific-info-container">
             <p>
               <span>收货人：</span>
-              <span>{{ childOrderData.consignee }}</span>
+              <span>{{ childOrderData.userName }}</span>
             </p>
             <p>
               <span>联系电话：</span>
-              <span>{{ childOrderData.phoneNumber }}</span>
+              <span>{{ childOrderData.userTel }}</span>
             </p>
             <p class="address-recevier-content">
               <span>收货地址：</span>
-              <span>{{ childOrderData.address }}</span>
+              <span>{{ childOrderData.receivingAddress }}</span>
             </p>
           </div>
         </div>
       </div>
       <div class="center-price-container paddingTB-30  text-center">
         <div class="transform-vertical-horizontal">
-          <p class="fontcolor-opocity-87 total-price-desc">{{ childOrderData.priceTotal | currency}}</p>
+          <p class="fontcolor-opocity-87 total-price-desc">{{ childOrderData.totalRmb | currency}}</p>
           <p class="fontSize-12 freight-desc">含运费 <span>¥25.0</span></p>
         </div>
       </div>
@@ -50,6 +52,7 @@
         </div>
       </div>
     </div>
+    <div class="more_btn">点击加载更多<i class="icons" style="color: rgb(51, 51, 51); font-size: 12px;"></i></div>
   </div>
   </transition>
 </template>
@@ -103,8 +106,11 @@
 .img-container {
   width:90px;
   height: 90px;
-  background-color: #CAD5D4;
   margin-right: 24px;
+}
+.img-container img {
+  width: 100%;
+  height: 100%;
 }
 .specific-info-container {
   width:376px;
@@ -149,5 +155,13 @@
 }
 .payMon-btn {
   margin-bottom: 16px;
+}
+.more_btn {
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 20px;
 }
 </style>

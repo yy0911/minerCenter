@@ -2,7 +2,7 @@ export default [
   {
     // 设备监控
     path: '/',
-    redirect: '/deviceMoint'
+    redirect: '/myOrder'
   },
   {
     // 设备监控

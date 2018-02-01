@@ -10,7 +10,7 @@
         <el-form-item prop="telphone">
           <el-input type="telphone" placeholder="输入您要绑定的手机号码" v-model="ruleForm2.telphone"></el-input>
         </el-form-item>
-        <el-form-item prop="noteCode">
+        <el-form-item prop="noteCode commone-note-container">
           <div class="send-note-container">
             <el-input type="text" placeholder="输入验证码" style="width: 178px;float: left" class="print-note-input" v-model="ruleForm2.noteCode"></el-input>
             <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
