@@ -38,9 +38,5 @@ export default {
 		display: flex;
 		padding: 24px 136px;
 		background: #f2f2f2;
-    margin:0 auto;
-	}
-	#container {
-		background: #fff;
 	}
 </style>
