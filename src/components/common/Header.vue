@@ -8,11 +8,11 @@
       <ul class="head_l">
         <li class="mainPape"><a href="../index.html">主页</a></li>
         <li><a href="../whitepaper.pdf">白皮书</a></li>
-        <li class="productPage flex flex-align-center">
-          <div class="nav-pro-mouse flex flex-align-center" @mouseover="isMouseover = false" @mouseout="isMouseover = true">
+        <li class="productPage flex flex-align-center" @mouseover="isMouseover = false" @mouseout="isMouseover = true">
+          <div class="nav-pro-mouse flex flex-align-center">
             产品 <span class="trink-icon"></span>
           </div>
-          <div class="product-over-downContainer" :class="{proDisplay:isMouseover}" @mouseover="isMouseover = false" @mouseout="isMouseover = true">
+          <div class="product-over-downContainer" :class="{proDisplay:isMouseover}">
             <div class="product-content flex">
               <div class="product-img-list text-center">
                 <a href="../pages/product.html">
