@@ -41,7 +41,7 @@
 </template>
 <script>
   import axios from 'axios'
-  import identNote from '../plugins/condest.vue'
+  import identNote from '../../plugins/noteCode/condest.vue'
   export default {
     components: {
       identNote
@@ -128,13 +128,6 @@
                 password: vm.ruleForm.pass,
                 repassword: vm.ruleForm.newPass,
                 oldpassword: vm.ruleForm.oldPass
-              }, {
-                validateStatus: function (status) {
-                  if (status === 401 || status === 404) {
-                    window.location.href = '../pages/login.html'
-                  }
-                  return
-                }
               })
               .then(function (response) {
 
@@ -170,14 +163,7 @@
           }, 1000)
         }
         //获取手机验证码
-        axios.get('promo/modify/account/pass/sendcode', {
-          validateStatus: function (status) {
-            if (status === 401 || status === 404) {
-              window.location.href = '../pages/login.html'
-            }
-            return
-          }
-        })
+        axios.get('/promo/modify/account/pass/sendcode')
           .then(function (response) {
             console.log(response.data)
           })
@@ -198,6 +184,7 @@
   border-radius: 4px;
   margin:auto;
   overflow: auto;
+  margin-top: 0!important;
 }
 .el-input__suffix {
   height: 40px;

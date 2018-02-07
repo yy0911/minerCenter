@@ -119,14 +119,7 @@
           }
           this.isSuccess = false
           axios.post('/promo/authed/account/box/connect',
-                {boxSN: vm.SNAddNumber}, {
-                  validateStatus: function (status) {
-                    if (status === 401 || status === 404) {
-                      window.location.href = '../pages/login.html'
-                    }
-                    return
-                  }
-                })
+                {boxSN: vm.SNAddNumber})
             .then(function (response) {
               vm.isSuccess = response.data.isSuccess
               if (vm.isSuccess === true) {

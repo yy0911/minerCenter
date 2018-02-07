@@ -38,7 +38,6 @@
         amount: ''
       }
     },
-
     components: {
       tableMiningRecord,
       sureGetbDiag

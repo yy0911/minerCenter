@@ -67,14 +67,7 @@
         // 获取用户是否绑定邮箱或者资金账户密码接口请求
         getUserIsBindingAccountData () {
           let vm = this
-          axios.get('/promo/authed/account/can/status', {
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
-          })
+          axios.get('/promo/authed/account/can/status')
             .then(function (response) {
               console.log(response.data)
               vm.userEmail = response.data.email

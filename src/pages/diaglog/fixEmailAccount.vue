@@ -33,7 +33,7 @@
 </template>
 <script>
   import axios from 'axios'
-  import identNote from '../plugins/condest.vue'
+  import identNote from '../../plugins/noteCode/condest.vue'
   export default {
     props: ['userEmail'],
     components: {
@@ -117,13 +117,6 @@
               {
                 code: vm.ruleForm.emailNoteCode,
                 password: vm.ruleForm.accountPass
-              }, {
-                validateStatus: function (status) {
-                  if (status === 401 || status === 404) {
-                    window.location.href = '../pages/login.html'
-                  }
-                  return
-                }
               })
               .then(function (response) {
                 console.log(response)
@@ -153,10 +146,12 @@
       },
       //发送验证码按钮
       countDownMethod () {
+        console.log(111)
         const TIME_COUNT = 60
         // 给用户邮箱发送验证吗
         let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-        if (this.emailAdress !== '' && reg.test(this.emailAdress)) {
+        if (this.ruleForm.emailAdress !== '' && reg.test(this.ruleForm.emailAdress)) {
+          console.log(222)
           if (!this.timer) {
             this.countTotal = TIME_COUNT
             this.isCountDown = false
@@ -173,14 +168,7 @@
           let vm = this
           axios.post('/promo/modify/account/email/sendcode',
             {
-              email: vm.emailAdress
-            }, {
-              validateStatus: function (status) {
-                if (status === 401 || status === 404) {
-                  window.location.href = '../pages/login.html'
-                }
-                return
-              }
+              email: vm.ruleForm.emailAdress
             })
             .then(function (response) {
               console.log(response.data)
@@ -197,13 +185,6 @@
         axios.post('/promo/modify/account/email/verifycode',
           {
             code: vm.ruleForm.emailNoteCode
-          }, {
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
           })
           .then(function (response) {
             console.log(response.data)
@@ -222,7 +203,7 @@
   top:50%!important;
   transform: translate(0,-50%);
   width:392px;
-  height: 422px;
+  height: 380px;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
   border-radius: 4px;
   margin:auto;

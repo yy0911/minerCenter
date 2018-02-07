@@ -43,25 +43,62 @@
         </div>
       </div>
       <div class="right-pay-container paddingTB-30 text-center">
-        <div class="transform-vertical-horizontal" v-if="childOrderData.status !== 1">
-          <el-button type="primary" class="order-dispose-btn payMon-btn">去付款</el-button>
-          <el-button class="order-dispose-btn fontcolor-opocity-38">取消订单</el-button>
+        <div class="transform-vertical-horizontal" v-if="childOrderData.status === 'wait'">
+          <el-button type="primary" class="order-dispose-btn payMon-btn" @click="payagain(childOrderData)">去付款</el-button>
+          <el-button class="order-dispose-btn fontcolor-opocity-38" @click="cancel(childOrderData)">取消订单</el-button>
+        </div>
+        <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'ok'">
+          <el-button class="order-dispose-btn fontcolor-opocity-38">删除订单</el-button>
+        </div>
+        <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'refund'">
+          <el-button class="order-dispose-btn fontcolor-opocity-38">已退款</el-button>
         </div>
         <div class="transform-vertical-horizontal" v-else>
-          <el-button class="order-dispose-btn fontcolor-opocity-38">删除订单</el-button>
+          <el-button class="order-dispose-btn fontcolor-opocity-38">已取消</el-button>
         </div>
       </div>
     </div>
-    <div class="more_btn">点击加载更多<i class="icons" style="color: rgb(51, 51, 51); font-size: 12px;"></i></div>
   </div>
   </transition>
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
       props: ['childOrderData'],
       data () {
         return {
+        }
+      },
+      methods: {
+        // 代支付订单
+        payagain (item) {
+          let vm = this
+          axios.post('/promo/alipay/coupon/order/payagain',
+            {
+              tradeNumber: item.tradeNumber
+            })
+            .then(function (response) {
+              window.location.href = response.data.httpurl
+              console.log(response.data)
+            })
+            .catch(function (error) {
+              console.log(error.response.data)
+            })
+        },
+        //取消订单
+        cancel (item) {
+          let vm = this
+          axios.post('/promo/alipay/order/cancel',
+            {
+              tradeNumber: item.tradeNumber
+            })
+            .then(function (response) {
+              console.log(response.data.data)
+            })
+            .catch(function (error) {
+              console.log(error.response.data)
+            })
         }
       }
     }
@@ -163,5 +200,6 @@
   cursor: pointer;
   display: inline-block;
   padding: 0 20px;
+  position: absolute;
 }
 </style>

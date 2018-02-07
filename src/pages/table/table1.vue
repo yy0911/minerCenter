@@ -120,14 +120,7 @@
       GetDeviceList () {
         //获取设备列表接口请求======
         let vm = this
-        axios.get('/promo/authed/account/box/lists/1/5',{
-          validateStatus: function (status) {
-            if (status === 401 || status === 404) {
-              window.location.href = '../pages/login.html'
-            }
-            return
-          }
-        })
+        axios.get('/promo/authed/account/box/lists/1/5')
           .then(function (response) {
             vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
             return
@@ -153,14 +146,7 @@
             console.log(response.data.isSuccess)
             if (response.data.isSuccess) {
               // vm.$options.methods.GetDeviceList()
-              axios.get('/promo/authed/account/box/lists/1/5', {
-                validateStatus: function (status) {
-                  if (status === 401 || status === 404) {
-                    window.location.href = '../pages/login.html'
-                  }
-                  return
-                }
-              })
+              axios.get('/promo/authed/account/box/lists/1/5')
                 .then(function (response) {
                   vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
                   return
@@ -183,14 +169,7 @@
           .then(function (response) {
             if (response.data.isSuccess) {
               // vm.$options.methods.GetDeviceList()
-              axios.get('/promo/authed/account/box/lists/1/5', {
-                validateStatus: function (status) {
-                  if (status === 401 || status === 404) {
-                    window.location.href = '../pages/login.html'
-                  }
-                  return
-                }
-              })
+              axios.get('/promo/authed/account/box/lists/1/5')
                 .then(function (response) {
                   vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
                   return

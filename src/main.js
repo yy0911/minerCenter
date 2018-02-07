@@ -1,8 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'normalize.css'
-// import './assets/theme_variable.scss'
-// import 'element-ui/lib/theme-default/index.css'
 import Element from 'element-ui'
 import axios from 'axios'
 import '../theme/index.css'
@@ -12,8 +10,8 @@ import App from './App'
 import routes from './routes'
 import { store } from './store/store'
 import { UTIL } from './util/util'
-import VeeValidate from 'vee-validate'
-Vue.use(VeeValidate)
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 Vue.use(Element)
 Vue.use(VueRouter)
 Vue.prototype.$http = axios
@@ -52,6 +50,64 @@ const ACCESS_TOKEN = new Promise(function (resolve, reject) {
     axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
     axios.defaults.headers['Content-Type'] = 'application/json'
   })
+// 定义axios拦截器，当cookie、失效时候导向登陆页面
+// axios.interceptors.response.use((response) => {
+//   const data = response.data
+// }, (err) => {
+//     if (err && err.response) {
+//       switch (err.response.status) {
+//         case 400:
+//           err.message = '请求错误'
+//           break
+//
+//         case 401:
+//           err.message = '未授权，请登录'
+//           window.location.href = '/pages/login.html'
+//           break
+//
+//         case 403:
+//           err.message = '拒绝访问'
+//           break
+//
+//         case 404:
+//           err.message = `请求地址出错: ${err.response.config.url}`
+//           window.location.href = '/pages/login.html'
+//           break
+//
+//         case 408:
+//           err.message = '请求超时'
+//           break
+//
+//         case 500:
+//           err.message = '服务器内部错误'
+//           break
+//
+//         case 501:
+//           err.message = '服务未实现'
+//           break
+//
+//         case 502:
+//           err.message = '网关错误'
+//           break
+//
+//         case 503:
+//           err.message = '服务不可用'
+//           break
+//
+//         case 504:
+//           err.message = '网关超时'
+//           break
+//
+//         case 505:
+//           err.message = 'HTTP版本不受支持'
+//           break
+//
+//         default:
+//       }
+//     }
+//   return Promise.reject(err)
+// })
+
 //从官网里面获取cookie
 // const AUTH_TOKEN = UTIL.GetCookie('auth')
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN

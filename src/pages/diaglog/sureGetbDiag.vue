@@ -41,13 +41,6 @@
             canReceiveAddress: vm.canReceiveAddress,
             amount: vm.amount,
             minerfee: 2
-          }, {
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
           })
           .then(function (response) {
             if (response.data.isSuccess) {

@@ -37,7 +37,7 @@
 </template>
 <script>
   import axios from 'axios'
-  import identNote from '../plugins/condest.vue'
+  import identNote from '../../plugins/noteCode/condest.vue'
   export default {
     props: ['isHaveCapitalPass'],
     components: {
@@ -135,13 +135,6 @@
                 password: vm.ruleForm.canPass,
                 repassword: vm.ruleForm.canRepaPass,
                 accountpassword: vm.ruleForm.accountPass
-              }, {
-                validateStatus: function (status) {
-                  if (status === 401 || status === 404) {
-                    window.location.href = '../pages/login.html'
-                  }
-                  return
-                }
               })
               .then(function (response) {
                 console.log(response)
@@ -175,13 +168,6 @@
         axios.post('/promo/modify/capitalpass/verifycode',
           {
             code: vm.phoneNoteCode
-          }, {
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
           })
           .then(function (response) {
             console.log(response.data)
@@ -209,14 +195,7 @@
         }
         //获取手机验证码
         let vm = this
-        axios.get('/promo/modify/capitalpass/sendcode', {
-          validateStatus: function (status) {
-            if (status === 401 || status === 404) {
-              window.location.href = '../pages/login.html'
-            }
-            return
-          }
-        })
+        axios.get('/promo/modify/capitalpass/sendcode')
           .then(function (response) {
             console.log(response.data)
             vm.$options.methods.validateReciveCode()
