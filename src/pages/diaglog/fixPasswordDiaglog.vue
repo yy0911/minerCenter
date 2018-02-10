@@ -3,7 +3,7 @@
 <el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">修改</el-button>
 
 <el-dialog
-  title="修改密码"
+  title="修改账户密码"
   :visible.sync="dialogVisible"
   class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
@@ -19,20 +19,16 @@
       <el-input type="password" v-model="ruleForm.newPass" auto-complete="off" placeholder="再次输入新密码" ></el-input>
     </el-form-item>
 
-    <el-form-item prop="identNoteCode commone-note-container">
+    <el-form-item prop="identNoteCode" class="commone-note-container">
       <div class="send-note-container">
         <el-input type="tel" v-model="ruleForm.identNoteCode" auto-complete="off" placeholder="短信验证码" class="print-note-input" style="width: 178px;float: left"></el-input>
         <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
           发送验证码
         </el-button>
-        <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s发送验证码</span>
+        <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s</span>
       </div>
     </el-form-item>
 
-    <!--<el-form-item prop="identNoteCode" style="float: left">-->
-      <!--<el-input  auto-complete="off" placeholder="请输入验证码" style="width: 204px;" v-model="ruleForm.identNoteCode"></el-input>-->
-    <!--</el-form-item>-->
-    <!--<ident-note style="float: right" @useIdentPlugin="getNoteCodeData"></ident-note>-->
 
     <el-button type="primary" @click="fixPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认修改</el-button>
   </el-form>
@@ -48,9 +44,10 @@
     },
     data () {
       //原密码验证
+      var isNullValidate = new RegExp("\\s")
       var validateOldPass = (rule, value, callback) => {
         if (value === '') {
-          return callback(new Error('请输入原密码'))
+          callback(new Error('请输入原密码'))
         } else {
           callback()
         }
@@ -58,7 +55,9 @@
       //新密码验证
       var validatePass = (rule, value, callback) => {
         if (value === '') {
-          return callback(new Error('请输入密码'))
+          callback(new Error('请输入新密码'))
+        } else if (value.length < 6 || value.length > 20 || isNullValidate.test(value) === true) {
+          callback(new Error('密码长度必须是6到20位的字符，并且不能包含空格'))
         } else {
           if (this.ruleForm.newPass !== '') {
             this.$refs.ruleForm.validateField('newPass')
@@ -69,7 +68,7 @@
       //新密码一致性验证
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请再次输入密码'))
+          callback(new Error('请再次输入新密码'))
         } else if (value !== this.ruleForm.pass) {
           callback(new Error('两次输入密码不一致!'))
         } else {
@@ -114,6 +113,7 @@
     },
     methods: {
       handleClose (done) {
+        this.isCountDown = true
         this.$refs[ 'ruleForm' ].resetFields()
         done()
       },
@@ -130,7 +130,21 @@
                 oldpassword: vm.ruleForm.oldPass
               })
               .then(function (response) {
-
+                if (response.data.isSuccess) {
+                  vm.$message({
+                    message: response.data.message,
+                    type: 'success'
+                  })
+                  vm.dialogVisible = false
+                  vm.isCountDown = true
+                  vm.$refs[ 'ruleForm' ].resetFields()
+                } else {
+                  vm.$message({
+                    message: response.data.message,
+                    type: 'error'
+                  })
+                  return false
+                }
               })
               .catch(function (error) {
                 console.log(error)
@@ -141,13 +155,39 @@
           }
         })
       },
-      //获取图形验证码
-      // getNoteCodeData (msg) {
-      //   this.ruleForm.identifyCode = msg
-      //   console.log(this.ruleForm.identifyCode)
-      // },
       //时间倒计时
       countDownMethod () {
+        if (this.ruleForm.oldPass === '' || this.ruleForm.pass === '') {
+          return false
+        }
+        //获取手机验证码
+        let vm = this
+        axios.post('/promo/modify/account/pass/sendcode',
+          {
+            oldpassword: vm.ruleForm.oldPass,
+            password: vm.ruleForm.pass,
+            repassword: vm.ruleForm.newPass
+          })
+          .then(function (response) {
+            console.log(response.data)
+            if (response.data.isSuccess) {
+              vm.$message({
+                message: '验证码发送成功',
+                type: 'success'
+              })
+              vm.isCountDown = false
+            } else {
+              vm.$message({
+                message: response.data.message,
+                type: 'error'
+              })
+              vm.isCountDown = true
+              return false
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
         const TIME_COUNT = 60
         if (!this.timer) {
           this.countTotal = TIME_COUNT
@@ -162,22 +202,22 @@
             }
           }, 1000)
         }
-        //获取手机验证码
-        axios.get('/promo/modify/account/pass/sendcode')
-          .then(function (response) {
-            console.log(response.data)
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
       }
     }
   }
 </script>
 <style>
+  @media screen and (max-width: 768px) {
+    .fixPass-Container .el-dialog {
+      margin-top: 20rem;
+    }
+  }
 .fixPass-Container .el-dialog {
-  top:50%!important;
-  transform: translate(0,-50%);
+  position: fixed;
+  top:40%!important;
+  left:50%!important;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
   width:392px;
   height: 422px;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
@@ -232,6 +272,7 @@
   right: 0;
   top:50%;
   transform: translate(0,-50%);
+  -webkit-transform: translate(0,-50%);
 }
 .commoneStyle-container .el-dialog__body {
   padding:25px 48px;

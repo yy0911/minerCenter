@@ -43,7 +43,7 @@
       // 提币申请记录查询接口
       applyRecordDataRequest () {
         let vm = this
-        axios.get('promo/authed/account/coins/extract/lists/1/5')
+        axios.get('/promo/authed/account/coins/extract/lists/1/5')
           .then(function (response) {
             console.log(response.data)
             vm.applyCANRecordList = UTIL.fliterNullArr(response.data)

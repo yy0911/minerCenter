@@ -24,16 +24,16 @@
           <p>提币密码</p>
           <p class="theme-fontColor">{{ isHaveCapitalPass ? '已设置' : '未设置'}}</p>
         </div>
-        <set-canpass-diaglog :isHaveCapitalPass="isHaveCapitalPass"></set-canpass-diaglog>
+        <set-canpass-diaglog :isHaveCapitalPass="isHaveCapitalPass" @listenFixPassSuccess="listenFixPassSuccess"></set-canpass-diaglog>
       </div>
     </div>
     <div class="account-setItem-container flex flex-align-center">
       <div>
         <div class="" style="float: left;">
           <p>邮箱账号</p>
-          <p class="theme-fontColor">{{ userEmail !== '' ? userEmail : '未设置'}}</p>
+          <p class="theme-fontColor">{{ userEmail !== null ? userEmail : '未设置'}}</p>
         </div>
-        <fix-email-diaglog :userEmail="userEmail"></fix-email-diaglog>
+        <fix-email-diaglog :userEmail="userEmail" @listenFixPassSuccess="listenFixPassSuccess"></fix-email-diaglog>
       </div>
     </div>
   </div>
@@ -51,7 +51,22 @@
       data () {
         return {
           userEmail: '',
-          isHaveCapitalPass: false
+          isHaveCapitalPass: false,
+          isFixSuccess: false
+        }
+      },
+      computedUserEmail () {
+        if (this.userEmail === '' || this.userEmail === null) {
+          return this.userEmail = '未设置'
+        } else {
+          return this.userEmail
+        }
+      },
+      watch: {
+        isFixSucess (newdata) {
+          this.isFixSuccess = newdata
+          this.listenFixPassSuccess()
+          return
         }
       },
       components: {
@@ -62,6 +77,7 @@
       },
       mounted () {
         this.getUserIsBindingAccountData()
+        this.listenFixPassSuccess()
       },
       methods: {
         // 获取用户是否绑定邮箱或者资金账户密码接口请求
@@ -69,13 +85,27 @@
           let vm = this
           axios.get('/promo/authed/account/can/status')
             .then(function (response) {
-              console.log(response.data)
               vm.userEmail = response.data.email
               vm.isHaveCapitalPass = response.data.isHaveCapitalPass
             })
             .catch(function (error) {
               console.log(error)
             })
+        },
+        listenFixPassSuccess (msg) {
+          this.isFixSuccess = msg
+          let vm = this
+          if (vm.isFixSuccess) {
+            axios.get('/promo/authed/account/can/status')
+              .then(function (response) {
+                vm.userEmail = response.data.email
+                vm.isHaveCapitalPass = response.data.isHaveCapitalPass
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+          }
+          return
         }
       }
     }

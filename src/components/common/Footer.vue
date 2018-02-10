@@ -1,15 +1,15 @@
 <template>
-  <div class="footer">
+  <div class="footer" style="width: 100%">
     <div class="footer-downbig-Cotainer">
 			<span class="email-com-a">
-				<a href="mailto:mz-marketing@meizu.com">
+				<a href="mailto:support@mobipromo.io">
 					<img src="../../assets/css/icon/ic_email_default.svg" />
 				</a>
 			</span>
       <span class="qq-info" @mouseover="qqQrcode = true" @mouseout="qqQrcode = false">
 				<img src="../../assets/css/icon/ic_qq_default.svg" />
 				<span id="qq_Qrcode" v-show="qqQrcode === true">
-					<img src="../../assets/images/qr_code.png" alt="">
+					<img src="../../assets/images/qq.png" alt="">
 					<span class="qrcord_downIcon">
 						<img src="../../assets/images/Triangle.png" alt="">
 					</span>
@@ -18,7 +18,7 @@
       <span class="wechat-info" @mouseover="wechatQrcode = true" @mouseout="wechatQrcode = false">
 				<img src="../../assets/css/icon/ic_wecaht_default.svg" />
         <span id="wechat_Qrcode" v-show="wechatQrcode === true">
-            <img src="../../assets/images/qr_code.png" alt="">
+            <img src="../../assets/images/wechat.png" alt="">
             <span class="qrcord_downIcon">
 						  <img src="../../assets/images/Triangle.png" alt="">
 					  </span>
@@ -95,6 +95,9 @@
     padding:0;
     /*display: none;*/
     transition: all 0.5s ease-in-out;
+  }
+  #qq_Qrcode>img,#wechat_Qrcode>img {
+    width: 160px;
   }
   .qrcord_downIcon {
     position: absolute!important;

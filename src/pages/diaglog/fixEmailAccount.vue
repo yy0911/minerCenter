@@ -1,9 +1,9 @@
 <template>
 <div class="fixPass-wrapper">
-<el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">{{ userEmail !== '' ? '修改' : '设置'}}</el-button>
+<el-button  v-show="computedUserEmail" @click="dialogVisible = true" class="pos-abs-right set-common-btn" >设置</el-button>
 
 <el-dialog
-  :title="userEmail !== '' ? '设置邮箱' : '修改邮箱'"
+  title="设置邮箱"
   :visible.sync="dialogVisible"
   class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose" style="margin-top: 0!important;">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
@@ -14,7 +14,7 @@
 
     <el-form-item prop="emailNoteCode" class="phone-note-container commone-note-container">
       <div class="send-note-container">
-        <el-input type="tel" v-model="ruleForm.emailNoteCode" auto-complete="off" placeholder="输入邮箱验证码" class="print-note-input" style="width: 178px;float: left" @blur="verifyEmailMethod"></el-input>
+        <el-input type="tel" v-model="ruleForm.emailNoteCode" auto-complete="off" placeholder="输入邮箱验证码" class="print-note-input" style="width: 178px;float: left"></el-input>
         <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
           发送验证码
         </el-button>
@@ -25,7 +25,6 @@
     <el-form-item prop="accountPass">
       <el-input type="password" v-model="ruleForm.accountPass" auto-complete="off" placeholder="输入账户密码" ></el-input>
     </el-form-item>
-    <p class="" style="color: red;padding-bottom: 10px">{{ submitError }}</p>
     <el-button type="primary" @click="fixCanPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认</el-button>
   </el-form>
 </el-dialog>
@@ -38,6 +37,15 @@
     props: ['userEmail'],
     components: {
       identNote
+    },
+    computed: {
+      computedUserEmail () {
+        if (this.userEmail === '' || this.userEmail === null) {
+          return true
+        } else {
+          return false
+        }
+      }
     },
     data () {
       //邮箱地址验证
@@ -55,22 +63,23 @@
       var validateEmailNoteCode = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入邮箱验证码'))
-          return
-        } else if (!this.emailCodeIsRight) {
-          callback(new Error(this.verifyReturnInfo))
         } else {
           callback()
         }
       }
+      // } else if (!this.emailCodeIsRight) {
+      //   callback(new Error(this.verifyReturnInfo))
+      // }
       //账户密码验证
       var validateAccountPass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入账户验证码'))
+          callback(new Error('请输入账户密码'))
         } else {
           callback()
         }
       }
       return {
+        isFixSuccess: false,
         dialogVisible: false,
         ruleForm: {
           emailAdress: '',
@@ -81,7 +90,6 @@
         verifyReturnInfo: '',
         countTotal: '',
         isCountDown: true,
-        submitError: '',
         rules: {
           emailAdress: [
             {validator: validateEmailAdress, trigger: 'blur'}
@@ -106,6 +114,7 @@
     methods: {
       handleClose (done) {
         this.$refs[ 'ruleForm' ].resetFields()
+        this.isCountDown = true
         done()
       },
       fixCanPassSubmitForm (formName) {
@@ -119,16 +128,22 @@
                 password: vm.ruleForm.accountPass
               })
               .then(function (response) {
-                console.log(response)
                 if (response.data.isSuccess) {
                   vm.$message({
-                    message: '确认成功',
+                    message: response.data.message,
                     type: 'success'
                   })
                   vm.dialogVisible = false
+                  vm.isCountDown = true
+                  vm.isFixSuccess = true
+                  vm.$emit('listenFixPassSuccess', vm.isFixSuccess)
                   vm.$refs[ 'ruleForm' ].resetFields()
                 } else {
-                  vm.submitError = response.data.message
+                  vm.$message({
+                    message: response.data.message,
+                    type: 'error'
+                  })
+                  return false
                 }
               })
               .catch(function (error) {
@@ -146,12 +161,13 @@
       },
       //发送验证码按钮
       countDownMethod () {
-        console.log(111)
+        if (this.ruleForm.emailAdress === '') {
+          return false
+        }
         const TIME_COUNT = 60
         // 给用户邮箱发送验证吗
         let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
         if (this.ruleForm.emailAdress !== '' && reg.test(this.ruleForm.emailAdress)) {
-          console.log(222)
           if (!this.timer) {
             this.countTotal = TIME_COUNT
             this.isCountDown = false
@@ -171,37 +187,37 @@
               email: vm.ruleForm.emailAdress
             })
             .then(function (response) {
-              console.log(response.data)
+              if (response.data.isSuccess) {
+                vm.$message({
+                  message: '验证码发送成功',
+                  type: 'success'
+                })
+                vm.isCountDown = false
+              } else {
+                vm.$message({
+                  message: response.data.message,
+                  type: 'error'
+                })
+                vm.isCountDown = true
+                return false
+              }
             })
             .catch(function (error) {
               console.log(error)
             })
         }
         return
-      },
-      //验证code 当blur的时候
-      verifyEmailMethod () {
-        let vm = this
-        axios.post('/promo/modify/account/email/verifycode',
-          {
-            code: vm.ruleForm.emailNoteCode
-          })
-          .then(function (response) {
-            console.log(response.data)
-            vm.emailCodeIsRight = response.data.isSuccess
-            vm.verifyReturnInfo = response.data.message
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
       }
     }
   }
 </script>
 <style>
 .fixPass-Container .el-dialog {
-  top:50%!important;
-  transform: translate(0,-50%);
+  position: fixed;
+  left:50%!important;
+  top:40%!important;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
   width:392px;
   height: 380px;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
@@ -255,6 +271,7 @@
   right: 0;
   top:50%;
   transform: translate(0,-50%);
+  -webkit-transform: translate(0,-50%);
 }
 .commoneStyle-container .el-dialog__body {
   padding:25px 48px;

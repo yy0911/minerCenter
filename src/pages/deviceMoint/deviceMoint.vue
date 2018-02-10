@@ -28,7 +28,8 @@
     <p class="me-box-title font-weight-500">我的宝盒</p>
     <div class="search-container">
       <el-input class="fontcolor-opocity-54"
-        placeholder="输入S/N码搜索设备" suffix-icon="el-icon-search" v-model="SNSearchNumber" @input="SearchSNDevice">
+        placeholder="输入S/N码搜索设备" v-model="SNSearchNumber" @input="SearchSNDevice">
+        <i slot="suffix" class="el-input__icon el-icon-search" @click="iconSearchClick"></i>
       </el-input>
       <div class="jewel-right-container flex">
         <el-input class="fontcolor-opocity-54 console-mac-address-input"
@@ -70,14 +71,7 @@
         //获取挖矿统计接口请求
         GetMiningStatistics () {
           let vm = this
-          axios.get('promo/authed/account/allbox/statistics',{
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
-          })
+          axios.get('/promo/authed/account/allbox/statistics')
             .then(function (response) {
               vm.miningStatisticsData = response.data
             }).catch(function (error) {
@@ -91,18 +85,11 @@
             this.searchDeviceData = ''
             return
           }
-          axios.get('/promo/authed/account/box/search/' + vm.SNSearchNumber, {
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
-          })
+          axios.get('/promo/authed/account/box/search/' + vm.SNSearchNumber)
             .then(function (response) {
               if (JSON.stringify(response.data) === '{}') {
                 vm.searchDeviceData = []
-                return
+                return false
               }
               vm.searchDeviceData = Array.isArray(response.data) ? response.data : [response.data]
             })
@@ -123,7 +110,6 @@
             .then(function (response) {
               vm.isSuccess = response.data.isSuccess
               if (vm.isSuccess === true) {
-                console.log('dsafasfafdsa------')
                 vm.$message({
                   message: '设备添加成功',
                   type: 'success',
@@ -132,7 +118,7 @@
                 return
               }
               vm.$message({
-                message: '设备添加失败',
+                message: response.data.reason,
                 type: 'error',
                 customClass: 'messageLocation'
               })
@@ -141,6 +127,9 @@
             .catch(function (error) {
               console.log(error)
             })
+        },
+        iconSearchClick () {
+          this.$options.methods.SearchSNDevice.bind(this)()
         }
 
       }

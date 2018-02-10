@@ -3,7 +3,7 @@
   <div class="order-item-container fontSize-14 fontcolor-opocity-38" >
     <div class="flex flex-pack-justify order-header-container paddingLR-24">
       <div class="flex">
-        <p class="order-item-time">{{ childOrderData.updatedAt }}</p>
+        <p class="order-item-time">{{ childOrderData.createdAt }}</p>
         <p>订单号：
           <span class="fontcolor-opocity-54">{{ childOrderData.tradeNumber }}</span>
         </p>
@@ -45,18 +45,33 @@
       <div class="right-pay-container paddingTB-30 text-center">
         <div class="transform-vertical-horizontal" v-if="childOrderData.status === 'wait'">
           <el-button type="primary" class="order-dispose-btn payMon-btn" @click="payagain(childOrderData)">去付款</el-button>
-          <el-button class="order-dispose-btn fontcolor-opocity-38" @click="cancel(childOrderData)">取消订单</el-button>
+          <el-button class="order-dispose-btn fontcolor-opocity-38" @click="cancel()">取消订单</el-button>
         </div>
         <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'ok'">
-          <el-button class="order-dispose-btn fontcolor-opocity-38">删除订单</el-button>
+          <p class="fontcolor-opocity-38">已付款</p>
         </div>
         <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'refund'">
-          <el-button class="order-dispose-btn fontcolor-opocity-38">已退款</el-button>
+          <p class="fontcolor-opocity-38">已退款</p>
         </div>
         <div class="transform-vertical-horizontal" v-else>
-          <el-button class="order-dispose-btn fontcolor-opocity-38">已取消</el-button>
+          <p class="fontcolor-opocity-38">已取消</p>
         </div>
       </div>
+
+      <el-dialog
+        :visible.sync="dialogVisible"
+        :close-on-click-modal="false"
+      >
+        <template slot="title">
+          <i class="el-icon-question" style="color: #e6a23c"></i>
+          <span  class="fontcolor-opocity-87">确认要取消订单？</span>
+        </template>
+        <span class="fontSize-14 fontcolor-opocity-54" style="margin-left: 16px">取消订单后不可撤回，请再次确认您的操作。</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="sureCancelOrder(childOrderData)">确 定</el-button>
+  </span>
+      </el-dialog>
     </div>
   </div>
   </transition>
@@ -68,9 +83,14 @@
       props: ['childOrderData'],
       data () {
         return {
+          dialogVisible: false,
+          tellParentCancelOrder: false
         }
       },
       methods: {
+        handleClose (done) {
+          done()
+        },
         // 代支付订单
         payagain (item) {
           let vm = this
@@ -87,23 +107,42 @@
             })
         },
         //取消订单
-        cancel (item) {
+        cancel () {
+          this.dialogVisible = true
+        },
+        //取消订单
+        sureCancelOrder (item) {
           let vm = this
           axios.post('/promo/alipay/order/cancel',
             {
               tradeNumber: item.tradeNumber
             })
             .then(function (response) {
-              console.log(response.data.data)
+              vm.dialogVisible = false
+              vm.tellParentCancelOrder = true
+              vm.$emit('listenCancelOrderUser', vm.tellParentCancelOrder)
             })
             .catch(function (error) {
+              vm.dialogVisible = false
               console.log(error.response.data)
             })
         }
       }
     }
 </script>
-
+<style>
+  .order-item-container .el-dialog {
+    top:50%!important;
+    transform: translate(0,-50%);
+    width:433px;
+    height: 192px;
+    box-shadow: 0 0px 0px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    margin:auto;
+    overflow: auto;
+    margin-top: 0!important;
+  }
+</style>
 <style scoped>
   .slide-fade-enter-active {
   transition: all .3s ease;

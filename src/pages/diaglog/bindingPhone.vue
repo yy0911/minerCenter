@@ -93,6 +93,7 @@
 .bindingPhone-container .el-dialog {
   top:50%!important;
   transform: translate(0,-50%);
+  -webkit-transform: translate(0,-50%);
   width:392px;
   height: 366px;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
@@ -132,6 +133,10 @@
   right: 0;
   text-align: center;
   z-index: 9999!important;
-
+}
+@media screen and (max-width: 768px) {
+  .bindingPhone-container .el-dialog {
+    margin-top: 20rem;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" ref="app">
     <el-container style="width: 100%;">
       <el-header style="padding: 0; height: 64px;">
         <Header></Header>
@@ -30,11 +30,16 @@ export default {
     NavMenu,
     Container,
     Footer
+  },
+  mounted () {
+  },
+  methods: {
   }
 }
 </script>
 <style type="text/css">
 	.main-container {
+    width: 100%;
 		display: flex;
 		padding: 24px 136px;
 		background: #f2f2f2;

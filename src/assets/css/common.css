@@ -8,7 +8,9 @@ html, body, ul, li, p, h1, h2, h3, h4, h5, h6 {
 ul,li {
   list-style: none;
 }
-
+[v-cloak] {
+  display: none;
+}
 i{font-style:normal;}
 .theme-fontColor {
   color: #1890FF;
@@ -112,3 +114,22 @@ i{font-style:normal;}
   -moz-transform: translate(-50%,-50%);
   -o-transform: translate(-50%,-50%);
 }
+.error_warn {
+  margin-left: 85px;
+  padding-bottom: 10px;
+  color: #F5222D ;
+  font-size: 14px;
+}
+.color-red {
+  color: rgba(245,34,45,0.87)
+}
+.paddingT-8 {
+  padding-top: 8px;
+}
+.paddingT-16 {
+  padding-top: 16px;
+}
+.margin-top-16 {
+  margin-top: 16px;
+}
+

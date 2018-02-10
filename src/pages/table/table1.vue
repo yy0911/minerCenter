@@ -134,14 +134,7 @@
         let vm = this
         let boxUnbindDeviceSN = scope.row.boxSN
         axios.post('/promo/authed/account/box/disconnect',
-          {boxSN: boxUnbindDeviceSN}, {
-            validateStatus: function (status) {
-              if (status === 401 || status === 404) {
-                window.location.href = '../pages/login.html'
-              }
-              return
-            }
-          })
+          {boxSN: boxUnbindDeviceSN})
           .then(function (response) {
             console.log(response.data.isSuccess)
             if (response.data.isSuccess) {

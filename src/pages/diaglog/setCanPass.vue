@@ -3,7 +3,7 @@
 <el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">{{ isHaveCapitalPass ? '修改' : '设置'}}</el-button>
 
 <el-dialog
-  :title="isHaveCapitalPass ? '设置密码' : '修改密码'"
+  :title="isHaveCapitalPass ? '修改提币密码' : '设置提币密码'"
   :visible.sync="dialogVisible"
   class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose" style="margin-top: 0!important;">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
@@ -29,7 +29,6 @@
     <el-form-item prop="accountPass">
       <el-input type="password" v-model="ruleForm.accountPass" auto-complete="off" placeholder="输入账户密码" ></el-input>
     </el-form-item>
-    <p class="" style="color: red;padding-bottom: 10px">{{ submitError }}</p>
     <el-button type="primary" @click="fixCanPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认</el-button>
   </el-form>
 </el-dialog>
@@ -45,9 +44,12 @@
     },
     data () {
       //提币密码验证
+      var isNullValidate = new RegExp("\\s")
       var validateCanPass = (rule, value, callback) => {
         if (value === '') {
           return callback(new Error('请输入提币密码'))
+        } else if (value.length < 6 || value.length > 20 || isNullValidate.test(value) === true) {
+          return callback(new Error('密码长度必须是6到20位的字符，并且不能包含空格'))
         } else {
           if (this.ruleForm.canRepaPass !== '') {
             this.$refs.ruleForm.validateField('canRepaPass')
@@ -69,8 +71,6 @@
       var validatePhoneNoteCode = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入手机验证码'))
-        } else if (value !== this.rightCode) {
-          callback(new Error('手机验证码错误'))
         } else {
           callback()
         }
@@ -78,12 +78,13 @@
       //账户密码验证
       var validateAccountPass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入账户验证码'))
+          callback(new Error('请输入账户密码'))
         } else {
           callback()
         }
       }
       return {
+        isFixSuccess: false,
         dialogVisible: false,
         ruleForm: {
           canPass: '',
@@ -94,7 +95,6 @@
         rightCode: '',
         countTotal: '',
         isCountDown: true,
-        submitError: '',
         rules: {
           canPass: [
             {validator: validateCanPass, trigger: 'blur'}
@@ -121,6 +121,7 @@
     },
     methods: {
       handleClose (done) {
+        this.isCountDown = true
         this.$refs[ 'ruleForm' ].resetFields()
         done()
       },
@@ -140,13 +141,20 @@
                 console.log(response)
                 if (response.data.isSuccess) {
                   vm.$message({
-                    message: '确认成功',
+                    message: response.data.message,
                     type: 'success'
                   })
                   vm.dialogVisible = false
+                  vm.isCountDown = true
+                  vm.isFixSuccess = true
+                  vm.$emit('listenFixPassSuccess', vm.isFixSuccess)
                   vm.$refs[ 'ruleForm' ].resetFields()
                 } else {
-                  vm.submitError = response.data.message
+                  vm.$message({
+                    message: response.data.message,
+                    type: 'error'
+                  })
+                  return false
                 }
               })
               .catch(function (error) {
@@ -154,7 +162,7 @@
                   message: '确认失败',
                   type: 'error'
                 })
-                console(error)
+                console.log(error)
               })
           } else {
             console.log('error submit!!')
@@ -167,7 +175,7 @@
         let vm = this
         axios.post('/promo/modify/capitalpass/verifycode',
           {
-            code: vm.phoneNoteCode
+            code: vm.ruleForm.phoneNoteCode
           })
           .then(function (response) {
             console.log(response.data)
@@ -179,6 +187,34 @@
       },
       //时间倒计时
       countDownMethod () {
+        if (this.ruleForm.canPass === '' || this.ruleForm.canRepaPass === '') {
+          return false
+        }
+        //获取手机验证码
+        let vm = this
+        axios.post('/promo/modify/capitalpass/sendcode', {
+          password: vm.ruleForm.canPass,
+          repassword: vm.ruleForm.canRepaPass
+        })
+          .then(function (response) {
+            if (response.data.isSuccess) {
+              vm.$message({
+                message: '验证码发送成功',
+                type: 'success'
+              })
+              vm.isCountDown = false
+            } else {
+              vm.$message({
+                message: response.data.message,
+                type: 'error'
+              })
+              vm.isCountDown = true
+              return false
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
         const TIME_COUNT = 60
         if (!this.timer) {
           this.countTotal = TIME_COUNT
@@ -193,24 +229,22 @@
             }
           }, 1000)
         }
-        //获取手机验证码
-        let vm = this
-        axios.get('/promo/modify/capitalpass/sendcode')
-          .then(function (response) {
-            console.log(response.data)
-            vm.$options.methods.validateReciveCode()
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
       }
     }
   }
 </script>
 <style>
+  @media screen and (max-width: 768px) {
+    .fixPass-Container .el-dialog {
+      margin-top: 20rem;
+    }
+  }
 .fixPass-Container .el-dialog {
-  top:50%!important;
-  transform: translate(0,-50%);
+  position: fixed;
+  left:50%!important;
+  top:40%!important;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
   width:392px;
   height: 422px;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
@@ -264,6 +298,7 @@
   right: 0;
   top:50%;
   transform: translate(0,-50%);
+  -webkit-transform: translate(0,-50%);
 }
 .commoneStyle-container .el-dialog__body {
   padding:25px 48px;

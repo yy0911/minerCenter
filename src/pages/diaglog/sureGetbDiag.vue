@@ -1,13 +1,13 @@
 <template>
 <div>
-  <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="dialogVisible = true" >立即提币</el-button>
+  <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >立即提币</el-button>
   <el-dialog
   :visible.sync="dialogVisible"
   :close-on-click-modal="false"
   >
     <template slot="title">
       <i class="el-icon-warning theme-fontColor"></i>
-      <span>确认要打币到该地址？</span>
+      <span>确认要提币到该地址？</span>
     </template>
   <span class="fontSize-14 fontcolor-opocity-54">提币操作无法撤回，请再次确认您所填写的收币地址及提币金额正确无误。</span>
   <span slot="footer" class="dialog-footer">
@@ -18,7 +18,7 @@
 </div>
 </template>
 <script>
-  import  axios from 'axios'
+  import axios from 'axios'
   export default {
     props: ['canReceiveAddress', 'amount'],
     data () {
@@ -33,8 +33,16 @@
       }
     },
     methods: {
+      commitGetCan () {
+        if (this.canReceiveAddress === '' && this.amount === '') {
+          return false
+        } else {
+          this.dialogVisible = true
+        }
+      },
       //提取can的接口
       sureGetCANBI () {
+        console.log(this.canReceiveAddress)
         let vm = this
         axios.post('/promo/authed/account/coins/extract',
           {
@@ -53,7 +61,7 @@
             }
             vm.dialogVisible = false
             vm.$message({
-              message: '提币失败',
+              message: response.data.reason,
               type: 'error'
             })
           })
