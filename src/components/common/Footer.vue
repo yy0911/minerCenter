@@ -24,6 +24,16 @@
 					  </span>
 				</span>
 			</span>
+      <!--ic_wecaht_default copy-->
+      <span class="email-com-a">
+				<a href="https://t.me/CANteam">
+					<img src="../../assets/css/icon/ic_wecaht_default copy.svg" />
+				</a>
+			</span>
+      <div class="right-qrcord-container">
+        <img src="../../assets/images/5utoken_qrcode.jpg" alt="">
+        <p>5U Token</p>
+      </div>
     </div>
     <p class="font-weight300">Copyright © 2017 MobiPromo Ltd.</p>
   </div>
@@ -49,7 +59,10 @@
     /*overflow: hidden;*/
     padding-top: 52px;
     margin-bottom: 17px;
-    padding-left: calc(50% - 70px);
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
     position: absolute;
   }
   .footer>div span {
@@ -70,7 +83,7 @@
     width: 1px;
     background: rgba(0,0,0,0.15);
   }
-  .footer>div span:last-child::after {
+  .footer>div span:last-child::after ,.footer>div span:nth-child(4)::after{
     width: 0!important;
     height: 0;
   }
@@ -99,6 +112,19 @@
   #qq_Qrcode>img,#wechat_Qrcode>img {
     width: 160px;
   }
+  .right-qrcord-container>img {
+    width: 69px;
+  }
+  .right-qrcord-container{
+    position: absolute;
+    right: -120px;
+    top: 14px;
+  }
+  .right-qrcord-container p{
+    font-size:10px;
+    -webkit-transform:scale(0.8);
+    color:rgba(0,0,0,0.38)
+  }
   .qrcord_downIcon {
     position: absolute!important;
     right: 46px;
@@ -107,6 +133,7 @@
     width: 34px;
     padding-bottom: 20px;
   }
+
 </style>
 
 

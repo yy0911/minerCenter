@@ -5,14 +5,14 @@
       style="width:100%">
       <el-table-column
         label="日期"
-        >
+      >
         <template slot-scope="scope">
           <p class="">{{ scope.row.createdAt | subDate }}</p>
         </template>
       </el-table-column>
       <el-table-column
-      label="收币地址"
-      prop="canReceiveAddress">
+        label="收币地址"
+        prop="canReceiveAddress">
       </el-table-column>
       <el-table-column
         label="提币数 (个)"
@@ -47,7 +47,8 @@
           .then(function (response) {
             console.log(response.data)
             vm.applyCANRecordList = UTIL.fliterNullArr(response.data)
-          }).catch(function (error) {
+          })
+          .catch(function (error) {
             console.log(error)
           })
       }

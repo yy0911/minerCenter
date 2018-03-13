@@ -1,56 +1,77 @@
 <template>
-    <div class="extractBmanage-container" v-cloak>
-      <div class="mining-statist-container">
-        <p>CAN提币</p>
-        <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">
-          当前<span class="theme-fontColor">{{remainMiningCoin}}</span> CAN数量，
-          锁定数量为  <span>{{lockingCoins}}</span> CAN,
-          每次提币固定收取手续费 <span>{{fei}}
+  <div class="extractBmanage-container" v-cloak>
+    <div class="mining-statist-container">
+      <p>
+        CAN提币
+      </p>
+      <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">
+        当前
+        <span class="theme-fontColor">{{remainMiningCoin}}</span>数量，
+        锁定数量为
+        <span>{{lockingCoins}}</span> CAN,
+        每次提币固定收取手续费<span>{{fei}}
         </span>
-        </p>
-        <div class="receiver-container">
-            <div class="address-container flex">
-              <p class="fontSize-14 fontcolor-opocity-54">收币地址：</p>
-              <el-input class="address-input"
-                        placeholder="输入收币地址" v-model="canReceiveAddress" @blur="isNullCanAdress">
-              </el-input>
-            </div>
-          <p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>
-          <div class="mining-money-container flex">
-                <p class="fontSize-14 fontcolor-opocity-54">提币数额：</p>
-                <el-input class="mining-money-input" placeholder="输入数额" v-model.number="amount" @blur="isNullCanNumber"></el-input>
-                <span class="fontSize-14 fontcolor-opocity-54">CAN</span>
-            </div>
-          <p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>
+      </p>
+      <div class="receiver-container">
+        <div class="address-container flex">
+          <p class="fontSize-14 fontcolor-opocity-54">
+            收币地址：
+          </p>
+          <el-input class="address-input"
+                    placeholder="输入收币地址" v-model="canReceiveAddress" @blur="isNullCanAdress">
+          </el-input>
 
-
-            <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >立即提币</el-button>
-            <el-dialog
-              :visible.sync="dialogVisible"
-              :close-on-click-modal="false"
-              class="getCandiaglog-container">
-              <template slot="title">
-                <span>输入提币密码</span>
-              </template>
-              <p class="fontSize-14 fontcolor-opocity-54">收币地址：</p>
-              <p>{{canReceiveAddress}}</p>
-              <p class="paddingT-8 fontSize-14 fontcolor-opocity-54">提币金额：</p>
-              <p><span class="color-red fontSize-16">{{amount}}</span> <span class="fontSize-12 fontcolor-opocity-54">CAN</span></p>
-              <el-input type="password" class="paddingT-16" v-model.trim="CanPassword"></el-input>
-              <p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>
-              <el-button type="primary" class="margin-top-16" @click="endSureGetCanMethod">确认</el-button>
-            </el-dialog>
-          <!--<sure-getb-diag :canReceiveAddress="canReceiveAddress" :amount="amount"></sure-getb-diag>-->
         </div>
-      </div>
-      <div class="mining-record-container">
-        <p class="paddingTB-24">提币记录</p>
-        <div class="tableMiningRecord-container">
-          <table-mining-record></table-mining-record>
+        <p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>
+        <div class="mining-money-container flex">
+          <p class="fontSize-14 fontcolor-opocity-54">
+            提币数额：
+          </p>
+          <el-input class="mining-money-input" placeholder="输入数额" v-model.number="amount" @blur="isNullCanNumber"></el-input>
+          <span class="fontSize-14 fontcolor-opocity-54">CAN</span>
         </div>
-      </div>
+        <p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>
 
+
+        <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >
+          立即提币
+        </el-button>
+        <el-dialog
+          :visible.sync="dialogVisible"
+          :close-on-click-modal="false"
+          class="getCandiaglog-container">
+          <template slot="title">
+                <span>
+                  输入提币密码
+                </span>
+          </template>
+          <p class="fontSize-14 fontcolor-opocity-54">
+            收币地址：
+          </p>
+          <p>{{canReceiveAddress}}</p>
+          <p class="paddingT-8 fontSize-14 fontcolor-opocity-54">
+            提币金额：
+          </p>
+          <p><span class="color-red fontSize-16">{{amount}}</span> <span class="fontSize-12 fontcolor-opocity-54">CAN</span></p>
+          <el-input type="password" class="paddingT-16" v-model.trim="CanPassword"></el-input>
+          <p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>
+          <el-button type="primary" class="margin-top-16" @click="endSureGetCanMethod">
+            确认
+          </el-button>
+        </el-dialog>
+        <!--<sure-getb-diag :canReceiveAddress="canReceiveAddress" :amount="amount"></sure-getb-diag>-->
+      </div>
     </div>
+    <div class="mining-record-container">
+      <p class="paddingTB-24">
+        提币记录
+      </p>
+      <div class="tableMiningRecord-container">
+        <table-mining-record></table-mining-record>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -158,8 +179,9 @@
           })
           .then(function (response) {
             if (response.data.isSuccess) {
+              //提币申请提交成功
               vm.$message({
-                message: '提币成功',
+                message: 'The application was submitted successfully.',
                 type: 'success'
               })
               vm.dialogVisible = false

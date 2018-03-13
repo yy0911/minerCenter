@@ -1,86 +1,130 @@
 <template>
-    <div id="header" :class="isProDISPLAY ? 'headerGreyMouse' : 'header000Mouse'">
-      <div class="header-container">
-        <div style="display: flex;justify-content: left" class="web-head-container">
-          <div class="header">
-            <ul class="logo">
-              <a href="/index.html">
-                <img src="../../assets/css/icon/logo_white.svg" height="32px;">
-              </a>
-            </ul>
-            <ul class="head_l">
-              <li class="mainPape"><a href="/index.html">主页</a></li>
-              <li><a href="/whitepaper.pdf">白皮书</a></li>
-              <li class="productPage" @mouseover="isProDISPLAY = true" @mouseout="isProDISPLAY = false">
-                <div class="nav-pro-mouse flex flex-align-center" :class="isProDISPLAY ? 'proColorMouse87' : 'proColorMouse54'">
-                  产品 <span class="trink-icon" :class="isProDISPLAY ? 'trinkIconRotate180' : 'trinkIconRotate0e'"></span>
-                </div>
-                <div class="product-over-downContainer" :class="isProDISPLAY ? 'height206' : 'height0'">
-                  <div class="product-content flex">
-                    <div class="product-img-list text-center" style="width: 72px">
-                        <a href="/pages/product.html"  class="pro-a-item" :class="isProDISPLAY ? 'boxLeftMouse0' : 'boxLeftMouse80'">
-                          <p class="product-img">
-                            <img src="../../assets/images/pic_device.png" alt="">
-                          </p>
-                          <p class="margin-top16">星际宝盒</p>
-                        </a>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="news-page"><a href="/pages/info.html">资讯</a></li>
-              <li class="aboutUs-page"><a href="/pages/aboutUs.html">关于</a></li>
-            </ul>
-            <ul class="head_r">
-              <li><a id="userCenter" href="#">个人中心</a></li>
-              <li @click="loginOutMethod"><a>退出</a></li>
-              <!--<li>-->
-                <!--<a href="javascript:void(0);" class="noDisableA">-->
-                  <!--<i class="iconfont icon-ren"></i>简体中文-->
-                <!--</a>-->
-              <!--</li>-->
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="m-header-container" style="display: none">
-        <div class="header flex flex-pack-justify flex-align-center">
+  <div id="header" :class="isProDISPLAY ? 'headerGreyMouse' : 'header000Mouse'">
+    <div class="header-container">
+      <div style="display: flex;justify-content: left" class="web-head-container">
+        <div class="header">
           <ul class="logo">
             <a href="/index.html">
               <img src="../../assets/css/icon/logo_white.svg" height="32px;">
             </a>
           </ul>
-          <div class="m-header-right-btn" @click="mRightBtnMethod">
-            <img v-if='downVisble===true' src="../../assets/css/icon/ArtboardCopy.svg" alt="">
-            <img v-else src="../../assets/css/icon/Artboard.svg" alt="">
-          </div>
-        </div>
-        <div class="select-headerdown" v-show="downVisble">
-          <ul class="header_select_list">
-            <li class="mainPape"><a href="/index.html">主页</a></li>
-            <li><a href="/whitepaper.pdf">白皮书</a></li>
-            <li class="productPage m-productPage">
-              <a href="/pages/product.html">星际宝盒</a>
+          <ul class="head_l">
+            <li class="mainPape"><a href="/index.html">
+              主页
+            </a></li>
+            <li><a href="/whitepaper.pdf">
+              白皮书
+            </a></li>
+            <li class="productPage" @mouseover="isProDISPLAY = true" @mouseout="isProDISPLAY = false">
+              <div class="nav-pro-mouse flex flex-align-center" :class="isProDISPLAY ? 'proColorMouse87' : 'proColorMouse54'">
+                产品
+                <span class="trink-icon" :class="isProDISPLAY ? 'trinkIconRotate180' : 'trinkIconRotate0e'"></span>
+              </div>
+              <div class="product-over-downContainer" :class="isProDISPLAY ? 'height206' : 'height0'">
+                <div class="product-content flex">
+                  <div class="product-img-list text-center" style="width: 72px">
+                    <a href="/pages/product.html"  class="pro-a-item" :class="isProDISPLAY ? 'boxLeftMouse0' : 'boxLeftMouse80'">
+                      <p class="product-img">
+                        <img src="../../assets/images/pic_device.png" alt="">
+                      </p>
+                      <p class="margin-top16">
+                        星际宝盒
+                      </p>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li class="news-page"><a href="/pages/info.html">资讯</a></li>
-            <li class="aboutUs-page"><a href="/pages/aboutUs.html">关于</a></li>
-            <li><a id="userCenter" href="#">个人中心</a></li>
-            <li @click="loginOutMethod"><a>退出</a></li>
+            <li class="news-page"><a href="/pages/info.html">
+              资讯
+            </a></li>
+            <li class="aboutUs-page"><a href="/pages/aboutUs.html">
+              关于
+            </a></li>
+          </ul>
+          <ul class="head_r">
+            <li><a id="userCenter" href="#">
+              个人中心
+            </a></li>
+            <li @click="dialogVisible = true"><a>
+              退出
+            </a></li>
             <!--<li>-->
-              <!--<a href="javascript:void(0);" class="noDisableA">-->
-                <!--<i class="iconfont icon-ren"></i>简体中文-->
-              <!--</a>-->
+            <!--<a href="javascript:void(0);" class="noDisableA">-->
+            <!--<i class="iconfont icon-ren"></i>简体中文-->
+            <!--</a>-->
             <!--</li>-->
           </ul>
         </div>
       </div>
     </div>
+    <div class="m-header-container" style="display: none">
+      <div class="header flex flex-pack-justify flex-align-center">
+        <ul class="logo">
+          <a href="/index.html">
+            <img src="../../assets/css/icon/logo_white.svg" height="32px;">
+          </a>
+        </ul>
+        <div class="m-header-right-btn" @click="mRightBtnMethod">
+          <img v-if='downVisble===true' src="../../assets/css/icon/ArtboardCopy.svg" alt="">
+          <img v-else-if="downVisble===false" src="../../assets/css/icon/Artboard.svg" alt="">
+        </div>
+      </div>
+      <div class="select-headerdown" v-show="downVisble">
+        <ul class="header_select_list">
+          <li class="mainPape"><a href="/index.html">
+            主页
+          </a></li>
+          <li><a href="/whitepaper.pdf">
+            白皮书
+          </a></li>
+          <li class="productPage m-productPage">
+            <a href="/pages/product.html">
+              星际宝盒
+            </a>
+          </li>
+          <li class="news-page"><a href="/pages/info.html">
+            资讯
+          </a></li>
+          <li class="aboutUs-page"><a href="/pages/aboutUs.html">
+            关于
+          </a></li>
+          <li><a id="userCenter" href="#">
+            个人中心
+          </a></li>
+          <li @click="dialogVisible = true"><a>
+            退出
+          </a></li>
+
+          <!--<li>-->
+          <!--<a href="javascript:void(0);" class="noDisableA">-->
+          <!--<i class="iconfont icon-ren"></i>简体中文-->
+          <!--</a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+    </div>
+    <el-dialog
+      :visible.sync="dialogVisible"
+      :close-on-click-modal="false"
+    >
+      <template slot="title">
+        <i class="el-icon-warning theme-fontColor"></i>
+        <span>确认要退出登录吗？</span>
+      </template>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="warning" @click="sureLoginout">确 定</el-button>
+  </span>
+    </el-dialog>
+  </div>
 </template>
 <script>
   import axios from 'axios'
   export default {
     data () {
       return {
+        dialogVisible: false,
         isProDISPLAY: false,
         downVisble: false
       }
@@ -90,7 +134,7 @@
     },
     methods: {
       //点击退出
-      loginOutMethod () {
+      sureLoginout () {
         axios.get('/promo/token/logout')
           .then(function (response) {
             if (response.data.isSuccess) {
@@ -119,6 +163,7 @@
     }
   }
 </script>
+
 <style type="text/scss">
   #userCenter {
     color: rgba(255,255,255,.87);
@@ -129,6 +174,16 @@
     top: 0;
     height: 64px ;
     z-index: 20000;
+  }
+  #header  .el-dialog {
+    position: fixed;
+    left:50%!important;
+    top:40%!important;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    width:392px;
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
+    border-radius: 4px;
   }
   .header {
     width: 100%;
@@ -287,6 +342,7 @@
   .header000Mouse {
     background-color: #000;
   }
+
   @media screen and (max-width: 768px){
     .web-head-container {
       display: none!important;
@@ -352,6 +408,7 @@
       width: 90%!important;
     }
   }
+
 </style>
 
 

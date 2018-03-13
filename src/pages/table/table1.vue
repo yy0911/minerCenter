@@ -1,8 +1,7 @@
   <template>
     <div class="table1-container">
-
-  <el-table
-    :data="deviceDetailData"
+       <el-table
+    :data="deviceDetailData" empty-text="No data"
     style="width:100%">
     <el-table-column
       label="S/N码"
@@ -12,9 +11,9 @@
       label="状态"
       prop="status">
       <template slot-scope="scope">
-        <span class="status-circle color-grey" v-if="scope.row.status == '未连接'"></span>
-        <span class="status-circle color-green" v-else-if="scope.row.status == '挖矿中'"></span>
-        <span class="status-circle color-orange" v-else-if="scope.row.status == '待机中'"></span>
+        <span class="status-circle color-grey" v-if="scope.row.status == 'Ununited'"></span>
+        <span class="status-circle color-green" v-else-if="scope.row.status == 'Active'"></span>
+        <span class="status-circle color-orange" v-else-if="scope.row.status == 'Idle'"></span>
         <span class="status-circle color-red" v-else></span>
         {{ scope.row.status }}
       </template>
@@ -31,12 +30,11 @@
       label="今日出币 (个)"
       prop="allTodayCoins">
     </el-table-column>
-
     <el-table-column
       label="操作"
       prop="name">
       <template slot-scope="scope">
-        <el-button type="text" size="small" class="pause-btn fontSize-14"  v-html="scope.row.isMining === true ? '停止' : '开始' " @click="isMiningEvent(scope.row.boxSN, scope.row.isMining)"></el-button>
+        <el-button type="text" size="small" class="pause-btn fontSize-14"  v-html="scope.row.isMining === true ? 'stop' : 'begin' " @click="isMiningEvent(scope.row.boxSN, scope.row.isMining)"></el-button>
         <el-popover
           ref="unbindDevice"
           placement="top"
@@ -47,21 +45,32 @@
           <span >
             <i class="el-icon-error" style="color: red"></i>
             你确定要解绑该设备？
+            <!--Are you sure unbinding this device?-->
           </span>
           <div class="unbindDevice-poppver-content">
-            <el-button @click="scope.row.visible=false">取 消</el-button>
-            <el-button type="primary" @click="sureUnbindDevice(scope)">确 定</el-button>
+            <el-button @click="scope.row.visible=false">
+              取 消
+              <!--Cancel-->
+            </el-button>
+            <el-button type="primary" @click="sureUnbindDevice(scope)">
+              确 定
+              <!--Sure-->
+            </el-button>
           </div>
         </el-popover>
-        <el-button type="text" size="small" class="unbindDevice-btn fontSize-14" v-popover:unbindDevice >解绑</el-button>
+        <el-button type="text" size="small" class="unbindDevice-btn fontSize-14" v-popover:unbindDevice >
+          解绑
+          <!--Unbind-->
+        </el-button>
       </template>
     </el-table-column>
-
   </el-table>
-
-
-
-</div>
+      <div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreDevices">
+      <!--点击加载更多-->
+      Click load more<br/>
+        <i class="el-icon-arrow-down"></i>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -70,7 +79,8 @@
     props: ['isSuccess', 'searchDeviceData'],
     data () {
       return {
-        deviceDetailData: []
+        deviceDetailData: [],
+        limit: '1'
       }
     },
     computed: {
@@ -106,21 +116,33 @@
             }
           }
           if (item.status === 0) {
-            item.status = '未连接'
+            item.status = 'Ununited'
           } else if (item.status === 1) {
-            item.status = '挖矿中'
+            item.status = 'Active'
           } else if (item.status === 2) {
-            item.status = '待机中'
+            item.status = 'Idle'
           } else if (item.status === 3) {
-            item.status = '异常'
+            item.status = 'Error'
           }
         })
         return array
       },
+      fmtLength (row, column) {
+        const arr = row[column.property]
+        /* 这里的 if(arr === undefined)
+         * 是根据自己的需求，决定arr长度为0时的判断条件
+         * 可以和这个不同
+         */
+        if (arr === undefined) {
+          return '0'
+        } else {
+          return arr.length
+        }
+      },
       GetDeviceList () {
         //获取设备列表接口请求======
         let vm = this
-        axios.get('/promo/authed/account/box/lists/1/5')
+        axios.get('/promo/authed/account/box/lists/1/' + vm.limit)
           .then(function (response) {
             vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
             return
@@ -138,15 +160,7 @@
           .then(function (response) {
             console.log(response.data.isSuccess)
             if (response.data.isSuccess) {
-              // vm.$options.methods.GetDeviceList()
-              axios.get('/promo/authed/account/box/lists/1/5')
-                .then(function (response) {
-                  vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
-                  return
-                })
-                .catch(function (error) {
-                  console.log(error)
-                })
+              vm.GetDeviceList()
               scope.row.visible = false
             }
           })
@@ -157,25 +171,28 @@
       //停止或者开始挖矿接口请求
       isMiningEvent (boxSN, isMining) {
         console.log(isMining)
-        let  vm = this
+        let vm = this
         axios.get('/promo/authed/account/box/stop/mining/' + boxSN + '/' + !isMining)
           .then(function (response) {
             if (response.data.isSuccess) {
-              // vm.$options.methods.GetDeviceList()
-              axios.get('/promo/authed/account/box/lists/1/5')
-                .then(function (response) {
-                  vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
-                  return
-                })
-                .catch(function (error) {
-                  console.log(error)
-                })
+              vm.GetDeviceList()
             }
             return
           })
           .catch(function (error) {
             console.log(error)
           })
+      },
+      // 点击加载更多
+      loadMoreDevices () {
+        this.limit ++
+        this.GetDeviceList()
+        if (this.deviceDetailData.length <= 1) {
+          this.$message({
+            message: '没有更多设备了 ',
+            type: 'warning'
+          })
+        }
       }
     }
   }
@@ -224,5 +241,8 @@
     .unbindDevice-poppver-content .el-button {
       padding:4px 7px;
     }
-
+    .more_btn {
+      cursor: pointer;
+      padding-top: 5rem;
+    }
   </style>
