@@ -45,7 +45,6 @@
         let vm = this
         axios.get('/promo/authed/account/coins/extract/lists/1/5')
           .then(function (response) {
-            console.log(response.data)
             vm.applyCANRecordList = UTIL.fliterNullArr(response.data)
           })
           .catch(function (error) {

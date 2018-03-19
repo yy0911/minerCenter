@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {UTIL} from './util'
-//
+
 // const ACCESS_TOKEN = new Promise(function (resolve, reject) {
-//   let formParams = 'username=13012345678&password=12&grant_type=password'
+//   let formParams = 'username=18810083327&password=123456789&grant_type=password'
 //   axios({
 //     url: '/promo/token',
 //     method: 'POST',
@@ -53,5 +53,4 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error.response.data)
   })
-
 export default axios

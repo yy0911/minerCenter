@@ -1,5 +1,5 @@
 <template>
-  <div id="myOrderWrapper" >
+  <div id="myOrderWrapper">
     <el-menu :default-active="activeIndex" class="nav-orderlist-container" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">
         全部订单
@@ -14,15 +14,20 @@
         交易关闭
       </el-menu-item>
     </el-menu>
-    <div class="all-order-container" ref="myOrderWrapper">
+    <div class="all-order-container"
+         ref="myOrderWrapper"
+         v-infinite-scroll="loadMore"
+         infinite-scroll-disabled="busy"
+         infinite-scroll-distance="10"
+         v-loading="loading"
+         element-loading-text="拼命加载中"
+         element-loading-spinner="el-icon-loading"
+         element-loading-background="rgba(0, 0, 0, 0.8)">
       <order-manage v-for="item in sellRecordList" :childOrderData="item"  @listenCancelOrderUser="listenCancelOrderUser"></order-manage>
     </div>
     <div class="text-center fontSize-14 fontcolor-opocity-38" v-show="sellRecordList == '' || sellRecordList.length<=0 " style="margin-top: 100px"><p>
       暂无订单
     </p></div>
-    <div class="more_btn fontcolor-opocity-87" @click="loadMoreOrder" v-show="sellRecordList.length>0">
-      点击加载更多
-    </div>
   </div>
 </template>
 
@@ -49,7 +54,8 @@
         //状态all是全部 状态2未付款 状态三是已完成 状态四四取消付款  all;waitPay;ok;cancle
         sellRecordList: '',
         sellListStatus: 'all',//默认未全部订单
-        limit: 1 //点击加载更多,
+        limit: 1 ,//点击加载更多,
+        moreOrder: true
       }
     },
     watch: {
@@ -95,6 +101,7 @@
         this.limit = 1
         this.menuIndex = Number(key)
         this.flag = false
+        this.moreOrder = true
       },
       getSellRecordList () {
         let vm = this
@@ -119,6 +126,7 @@
             curPage: vm.limit
           })
           .then(function (response) {
+            vm.loading = false
             if (vm.flag) {
               if (JSON.stringify(response.data.data) === '[]') {
                 vm.loading = false
@@ -126,6 +134,7 @@
                   message: '没有更多订单了',
                   type: 'warning'
                 })
+                vm.moreOrder = false
                 return false
               } else {
                 vm.sellRecordList = vm.sellRecordList.concat(response.data.data)
@@ -135,9 +144,6 @@
               vm.busy = false
               vm.flag = true
             }
-            setTimeout(function () {
-              vm.loading = false
-            }, 800)
           })
           .catch(function (error) {
             console.log(error)
@@ -147,6 +153,11 @@
         this.receiveChildCancelOrder = msg
       },
       loadMore () {
+        if (this.sellRecordList === '' || this.sellRecordList.length <= 0) {
+          return false
+        } else if (!this.moreOrder) {
+          return false
+        }
         // 多次加载数据
         this.busy = false
         setTimeout(() => {
@@ -160,6 +171,15 @@
     }
   }
 </script>
+<style>
+#myOrderWrapper .el-loading-mask {
+  background-color:rgba(0,0,0,0) !important;
+}
+#myOrderWrapper .el-loading-spinner {
+  top:0!important;
+  bottom: 20px!important;
+}
+</style>
 <style scoped>
 .nav-orderlist-container {
   padding-bottom: 0;
@@ -173,4 +193,5 @@
 .overflowYClass {
   overflow-y: auto;
 }
+
 </style>

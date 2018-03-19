@@ -11,9 +11,9 @@
       label="状态"
       prop="status">
       <template slot-scope="scope">
-        <span class="status-circle color-grey" v-if="scope.row.status == 'Ununited'"></span>
-        <span class="status-circle color-green" v-else-if="scope.row.status == 'Active'"></span>
-        <span class="status-circle color-orange" v-else-if="scope.row.status == 'Idle'"></span>
+        <span class="status-circle color-grey" v-if="scope.row.status == '未连接'"></span>
+        <span class="status-circle color-green" v-else-if="scope.row.status == '挖矿中'"></span>
+        <span class="status-circle color-orange" v-else-if="scope.row.status == '待机中'"></span>
         <span class="status-circle color-red" v-else></span>
         {{ scope.row.status }}
       </template>
@@ -34,7 +34,7 @@
       label="操作"
       prop="name">
       <template slot-scope="scope">
-        <el-button type="text" size="small" class="pause-btn fontSize-14"  v-html="scope.row.isMining === true ? 'stop' : 'begin' " @click="isMiningEvent(scope.row.boxSN, scope.row.isMining)"></el-button>
+        <el-button type="text" size="small" class="pause-btn fontSize-14"  v-html="scope.row.isMining === true ? '停止' : '开始' " @click="isMiningEvent(scope.row.boxSN, scope.row.isMining)"></el-button>
         <el-popover
           ref="unbindDevice"
           placement="top"
@@ -58,7 +58,7 @@
             </el-button>
           </div>
         </el-popover>
-        <el-button type="text" size="small" class="unbindDevice-btn fontSize-14" v-popover:unbindDevice >
+        <el-button type="text" size="small" class="unbindDevice-btn fontSize-14" v-popover:unbindDevice>
           解绑
           <!--Unbind-->
         </el-button>
@@ -66,8 +66,8 @@
     </el-table-column>
   </el-table>
       <div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreDevices">
-      <!--点击加载更多-->
-      Click load more<br/>
+        点击加载更多
+        <br/>
         <i class="el-icon-arrow-down"></i>
       </div>
     </div>
@@ -75,12 +75,17 @@
 
 <script>
   import axios from 'axios'
+  import infiniteScroll from 'vue-infinite-scroll'
   export default {
     props: ['isSuccess', 'searchDeviceData'],
+    directives: {
+      infiniteScroll
+    },
     data () {
       return {
         deviceDetailData: [],
-        limit: '1'
+        limit: '1',
+        loadMoreLimit: ''
       }
     },
     computed: {
@@ -116,13 +121,13 @@
             }
           }
           if (item.status === 0) {
-            item.status = 'Ununited'
+            item.status = '未连接'
           } else if (item.status === 1) {
-            item.status = 'Active'
+            item.status = '挖矿中'
           } else if (item.status === 2) {
-            item.status = 'Idle'
+            item.status = '待机中'
           } else if (item.status === 3) {
-            item.status = 'Error'
+            item.status = '失败'
           }
         })
         return array
@@ -142,10 +147,10 @@
       GetDeviceList () {
         //获取设备列表接口请求======
         let vm = this
-        axios.get('/promo/authed/account/box/lists/1/' + vm.limit)
+        axios.get('/promo/authed/account/box/lists/' + vm.limit + '/5')
           .then(function (response) {
             vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
-            return
+            return vm.deviceDetailData
           })
           .catch(function (error) {
             console.log(error)
@@ -170,33 +175,73 @@
       },
       //停止或者开始挖矿接口请求
       isMiningEvent (boxSN, isMining) {
-        console.log(isMining)
         let vm = this
         axios.get('/promo/authed/account/box/stop/mining/' + boxSN + '/' + !isMining)
           .then(function (response) {
             if (response.data.isSuccess) {
               vm.GetDeviceList()
+            } else {
+              vm.$message({
+                message: response.data.reason,
+                type: 'error'
+              })
             }
             return
           })
           .catch(function (error) {
             console.log(error)
+            console.log(error.response)
+            if (error.response.status === 500) {
+                vm.$message({
+                  message: '服务器内部错误',
+                  type: 'error'
+                })
+            }
           })
       },
       // 点击加载更多
       loadMoreDevices () {
         this.limit ++
-        this.GetDeviceList()
-        if (this.deviceDetailData.length <= 1) {
+        if (this.loadMoreLimit > 4) {
           this.$message({
-            message: '没有更多设备了 ',
+            message: '提示次数上限 ',
             type: 'warning'
           })
+          return false
         }
+        let vm = this
+        axios.get('/promo/authed/account/box/lists/' + vm.limit + '/5')
+          .then(function (response) {
+            if (JSON.stringify(response.data) === '[]') {
+              vm.loading = false
+              vm.$message({
+                message: '没有更多设备了 ',
+                type: 'warning'
+              })
+              vm.loadMoreLimit = Number(vm.limit)
+              return
+            } else {
+              let moreData = vm.$options.methods.responseArray(response.data)
+              vm.deviceDetailData = vm.deviceDetailData.concat(moreData)
+              return
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
       }
     }
   }
 </script>
+  <style>
+    .table1-container .el-loading-mask {
+      background-color:rgba(0,0,0,0) !important;
+    }
+    .table1-container .el-loading-spinner {
+      top:0!important;
+      bottom: 20px!important;
+    }
+  </style>
   <style scoped>
     .unbindDevice-btn {
       padding-left: 8px;

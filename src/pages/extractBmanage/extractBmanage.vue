@@ -122,7 +122,6 @@
         let vm = this
         axios.get('/promo/authed/account/can/status')
           .then(function (response) {
-            console.log(response.data)
             vm.remainMiningCoin = response.data.remainMiningCoin
             vm.lockingCoins = response.data.lockingCoins
             vm.fei = response.data.fei

@@ -118,7 +118,7 @@
   .right-qrcord-container{
     position: absolute;
     right: -120px;
-    top: 14px;
+    top: 50%;
   }
   .right-qrcord-container p{
     font-size:10px;

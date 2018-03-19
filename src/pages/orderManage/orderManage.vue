@@ -100,10 +100,9 @@
             })
             .then(function (response) {
               window.location.href = response.data.httpurl
-              console.log(response.data)
             })
             .catch(function (error) {
-              console.log(error.response.data)
+              console.log(error.response)
             })
         },
         //取消订单

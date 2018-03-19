@@ -195,8 +195,8 @@
     color: #fff;
     box-sizing: border-box;
     transition: all 1s ease-in-out;
-    padding-left: 143px;
-    padding-right: 118px;
+    padding-left: 150px;
+    padding-right: 150px;
   }
   .header ul {
     list-style: none;
@@ -209,6 +209,7 @@
     height: 100%;
     line-height: 64px;
     padding:0;
+    width: calc(100% - 258px);
   }
   .header ul li {
     float: left;
@@ -245,7 +246,7 @@
   .header .head_r li:nth-child(2){
     position: relative;
     padding-left: 0px;
-    padding-right: 32px;
+    padding-right: 0px;
   }
   .header .head_r li:nth-child(3){
     position: relative;
