@@ -13,7 +13,7 @@
     <div class="order-main-container flex">
       <div class="left-shop-introduce-container flex paddingTB-30">
         <div class="img-container">
-          <img src="../../assets/images/pic_device.png" alt="">
+          <img src="../../assets/images/Rectangle16.png" alt="">
         </div>
         <div class="shop-content-container fontSize-12">
           <p class="fontSize-14 goods-container">

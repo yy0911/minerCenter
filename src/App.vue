@@ -1,7 +1,7 @@
 <template>
   <div id="app" ref="app">
     <el-container style="width: 100%;">
-      <el-header style="padding: 0; height: 64px;">
+      <el-header>
         <Header></Header>
       </el-header>
       <el-container>
@@ -10,7 +10,7 @@
           <Container></Container>
         </el-row>
       </el-container>
-      <el-footer style="padding:0;">
+      <el-footer>
         <Footer></Footer>
       </el-footer>
     </el-container>
@@ -41,7 +41,24 @@ export default {
 	.main-container {
     width: 100%;
 		display: flex;
-		padding: 24px 136px;
+		padding: 24px 150px;
 		background: #f2f2f2;
 	}
+  .el-footer {
+    width: 1440px;
+    height: 200px !important;
+    padding: 0;
+  }
+  .footer {
+    height: 200px;
+    padding: 0;
+    background: #f2f2f2;
+  }
+  .el-header {
+    padding: 0;
+  }
+  .el-container {
+    width: 1440px;
+    min-height: 2400px;
+  }
 </style>

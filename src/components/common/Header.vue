@@ -8,7 +8,7 @@
               <img src="../../assets/css/icon/logo_white.svg" height="32px;">
             </a>
           </ul>
-          <ul class="head_l">
+          <ul class="head_l flex flex-pack-center">
             <li class="mainPape"><a href="/index.html">
               主页
             </a></li>
@@ -109,12 +109,12 @@
       :close-on-click-modal="false"
     >
       <template slot="title">
-        <i class="el-icon-warning theme-fontColor"></i>
+        <i class="el-icon-question" style="color: #e6a23c"></i>
         <span>确认要退出登录吗？</span>
       </template>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="warning" @click="sureLoginout">确 定</el-button>
+    <el-button type="primary" @click="sureLoginout">确 定</el-button>
   </span>
     </el-dialog>
   </div>
@@ -179,15 +179,19 @@
     position: fixed;
     left:50%!important;
     top:40%!important;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-40%);
+    -webkit-transform: translate(-50%,-40%);
     width:392px;
     box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
     border-radius: 4px;
+    margin-top: 0!important;
+  }
+  #header  .el-dialog .el-button {
+    padding: 8px 20px;
   }
   .header {
-    width: 100%;
-    /*width: 1168px!important;*/
+    /*width: 100%;*/
+    width: 1440px!important;
     height: 64px;
     position: fixed;
     z-index: 2001;
@@ -286,7 +290,7 @@
   }
   .product-content {
     position: absolute;
-    left: 30.5%;
+    left: 47%;
     height: 100%;
   }
   .product-img-list {
