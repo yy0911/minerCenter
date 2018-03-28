@@ -27,15 +27,15 @@
         <set-canpass-diaglog :isHaveCapitalPass="isHaveCapitalPass" @listenFixPassSuccess="listenFixPassSuccess"></set-canpass-diaglog>
       </div>
     </div>
-    <div class="account-setItem-container flex flex-align-center">
-      <div>
-        <div class="" style="float: left;">
-          <p>邮箱账号</p>
-          <p class="theme-fontColor">{{ userEmail !== null ? userEmail : '未设置'}}</p>
-        </div>
-        <fix-email-diaglog :userEmail="userEmail" @listenFixPassSuccess="listenFixPassSuccess"></fix-email-diaglog>
-      </div>
-    </div>
+    <!--<div class="account-setItem-container flex flex-align-center">-->
+      <!--<div>-->
+        <!--<div class="" style="float: left;">-->
+          <!--<p>邮箱账号</p>-->
+          <!--<p class="theme-fontColor">{{ userEmail !== null ? userEmail : '未设置'}}</p>-->
+        <!--</div>-->
+        <!--<fix-email-diaglog :userEmail="userEmail" @listenFixPassSuccess="listenFixPassSuccess"></fix-email-diaglog>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
 </div>

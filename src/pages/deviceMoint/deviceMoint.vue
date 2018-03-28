@@ -59,9 +59,9 @@
       <!--<jewel-table  :isSuccess='isSuccess' :searchDeviceData="searchDeviceData"></jewel-table>-->
     <!--</div>-->
   <!--</div>-->
-  <!--<div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25);">-->
-    <!--暂未开放-->
-  <!--</div>-->
+  <div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25);">
+    暂未开放
+  </div>
 </template>
 
 <script>

@@ -95,12 +95,6 @@
           <li @click="dialogVisible = true"><a>
             退出
           </a></li>
-
-          <!--<li>-->
-          <!--<a href="javascript:void(0);" class="noDisableA">-->
-          <!--<i class="iconfont icon-ren"></i>简体中文-->
-          <!--</a>-->
-          <!--</li>-->
         </ul>
       </div>
     </div>
@@ -280,7 +274,7 @@
     transition:height 0.5s ease-in-out;
     height: 0px;
     background: rgba(24,24,24,1);
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0%;
     width: 100%;
