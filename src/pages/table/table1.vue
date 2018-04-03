@@ -1,7 +1,7 @@
   <template>
     <div class="table1-container">
        <el-table
-    :data="deviceDetailData" empty-text="No data"
+    :data="deviceDetailData" empty-text="暂无数据"
     style="width:100%">
     <el-table-column
       label="S/N码"
@@ -65,27 +65,35 @@
       </template>
     </el-table-column>
   </el-table>
-      <div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreDevices">
-        点击加载更多
-        <br/>
-        <i class="el-icon-arrow-down"></i>
+      <!--<div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreDevices" v-show="deviceDetailData.length>0 ">-->
+        <!--点击加载更多-->
+        <!--<br/>-->
+        <!--<i class="el-icon-arrow-down"></i>-->
+      <!--</div>-->
+      <!--==============/分页==============-->
+      <div class="pagination-wrapper">
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          layout="prev, pager, next, jumper"
+          :total="countsNumber"
+          >
+        </el-pagination>
       </div>
     </div>
 </template>
 
 <script>
   import axios from 'axios'
-  import infiniteScroll from 'vue-infinite-scroll'
   export default {
     props: ['isSuccess', 'searchDeviceData'],
-    directives: {
-      infiniteScroll
-    },
     data () {
       return {
+        countsNumber: 1,
         deviceDetailData: [],
         limit: '1',
-        loadMoreLimit: ''
+        loadMoreLimit: '',
+        currentPage: 1
       }
     },
     computed: {
@@ -147,9 +155,10 @@
       GetDeviceList () {
         //获取设备列表接口请求======
         let vm = this
-        axios.get('/promo/authed/account/box/lists/' + vm.limit + '/5')
+        axios.get('/promo/authed/account/box/lists/' + vm.limit + '/10')
           .then(function (response) {
-            vm.deviceDetailData = vm.$options.methods.responseArray(response.data)
+            vm.deviceDetailData = vm.$options.methods.responseArray(response.data.list)
+            vm.countsNumber = Number(response.data.count)
             return vm.deviceDetailData
           })
           .catch(function (error) {
@@ -200,31 +209,39 @@
           })
       },
       // 点击加载更多
-      loadMoreDevices () {
-        this.limit ++
-        if (this.loadMoreLimit > 4) {
-          this.$message({
-            message: '提示次数上限 ',
-            type: 'warning'
-          })
-          return false
-        }
+      // loadMoreDevices () {
+      //   this.limit ++
+      //   let vm = this
+      //   axios.get('/promo/authed/account/box/lists/' + vm.limit + '/5')
+      //     .then(function (response) {
+      //       if (JSON.stringify(response.data) === '[]') {
+      //         vm.loading = false
+      //         vm.$message({
+      //           message: '没有更多设备了 ',
+      //           type: 'warning'
+      //         })
+      //         vm.loadMoreLimit = Number(vm.limit)
+      //         return
+      //       } else {
+      //         let moreData = vm.$options.methods.responseArray(response.data)
+      //         vm.deviceDetailData = vm.deviceDetailData.concat(moreData)
+      //         return
+      //       }
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error)
+      //     })
+      // },
+      handleCurrentChange (val) {      // 分页加载
+        console.log(val)
+        document.documentElement.scrollTop = 200
+        console.log(window.scrollTop)
         let vm = this
-        axios.get('/promo/authed/account/box/lists/' + vm.limit + '/5')
+        axios.get('/promo/authed/account/box/lists/' + val + '/10')
           .then(function (response) {
-            if (JSON.stringify(response.data) === '[]') {
-              vm.loading = false
-              vm.$message({
-                message: '没有更多设备了 ',
-                type: 'warning'
-              })
-              vm.loadMoreLimit = Number(vm.limit)
+              let moreData = vm.$options.methods.responseArray(response.data.list)
+              vm.deviceDetailData = moreData
               return
-            } else {
-              let moreData = vm.$options.methods.responseArray(response.data)
-              vm.deviceDetailData = vm.deviceDetailData.concat(moreData)
-              return
-            }
           })
           .catch(function (error) {
             console.log(error)
@@ -240,6 +257,18 @@
     .table1-container .el-loading-spinner {
       top:0!important;
       bottom: 20px!important;
+    }
+    .table1-container .el-pagination  {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .el-pager li {
+      min-width: 30px;
+    }
+    .el-pager li.active {
+      background: #108EE9;
+      border-radius: 4px;
+      color: #ffffff;
     }
   </style>
   <style scoped>

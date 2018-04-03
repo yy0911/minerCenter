@@ -16,6 +16,7 @@
     "axios": "^0.15.3",
     "lodash": "^4.17.4",
     "normalize.css": "^5.0.0",
+    "qrcode": "^1.2.0",
     "vee-validate": "^2.0.3",
     "vue": "^2.1.0",
     "vue-infinite-scroll": "^2.0.2",

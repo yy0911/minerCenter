@@ -45,7 +45,7 @@ export default {
 		background: #f2f2f2;
 	}
   .el-footer {
-    width: 1440px;
+    width: 100%;
     height: 200px !important;
     padding: 0;
   }
@@ -58,7 +58,7 @@ export default {
     padding: 0;
   }
   .el-container {
-    width: 1440px;
+    width: 100%;
     min-height: 2400px;
   }
 </style>

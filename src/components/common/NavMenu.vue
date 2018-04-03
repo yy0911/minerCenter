@@ -16,8 +16,11 @@
       </el-menu-item>
 
       <el-menu-item index="1_2">
-        <router-link to="/extractBmanage" class="nav-link">
-          提币管理
+        <!--<router-link to="/extractBmanage" class="nav-link">-->
+          <!--提币管理-->
+        <!--</router-link>-->
+        <router-link to="/userAssetCount" class="nav-link">
+          我的资产
         </router-link>
       </el-menu-item>
 

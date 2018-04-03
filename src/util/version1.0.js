@@ -1,6 +1,6 @@
 
 const versionController = function () {
-    const version = '1.0.0'
+    const version = '1.1.0'
     const links = document.getElementsByTagName('link')
     const scripts = document.getElementsByTagName('script')
     // es6可以换种语法针对domlist集合做处理

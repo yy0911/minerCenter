@@ -11,6 +11,12 @@
         已付款
       </el-menu-item>
       <el-menu-item index="4">
+        已发货
+      </el-menu-item>
+      <el-menu-item index="5">
+        已完成
+      </el-menu-item>
+      <el-menu-item index="6">
         交易关闭
       </el-menu-item>
     </el-menu>
@@ -83,11 +89,15 @@
       statusTitleComputed () {
         this.sellListStatus = 'all'
          if (this.menuIndex === 1) {
-            return this.sellListStatus = 'all'
+           return this.sellListStatus = 'all'
          } else if (this.menuIndex === 2) {
            return this.sellListStatus = 'waitPay'
          } else if (this.menuIndex === 3) {
            return this.sellListStatus = 'ok'
+         } else if (this.menuIndex === 4) {
+           return this.sellListStatus = 'sendout'
+         } else if (this.menuIndex === 5) {
+           return this.sellListStatus = 'finish'
          } else {
            return this.sellListStatus = 'cancleOrrefund'
          }

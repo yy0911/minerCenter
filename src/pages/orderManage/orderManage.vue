@@ -48,13 +48,20 @@
           <el-button class="order-dispose-btn fontcolor-opocity-38" @click="cancel()">取消订单</el-button>
         </div>
         <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'ok'">
-          <p class="fontcolor-opocity-38">已付款</p>
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
         </div>
         <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'refund'">
-          <p class="fontcolor-opocity-38">已退款</p>
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
+        </div>
+        <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'sendout'">
+          <p class="Logistics-name"> {{childOrderData.logisticsName}}</p>
+          <p class="fontcolor-opocity-54 Logistics-number">{{childOrderData.logisticsNumber}}</p>
+        </div>
+        <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'finish'">
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
         </div>
         <div class="transform-vertical-horizontal" v-else>
-          <p class="fontcolor-opocity-38">已取消</p>
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
         </div>
       </div>
 
@@ -239,5 +246,18 @@
   display: inline-block;
   padding: 0 20px;
   position: absolute;
+}
+.Logistics-name {
+  color:#F08802;
+  font-size: 12px;
+  line-height: 22px;
+}
+.Logistics-number {
+  font-size: 12px;
+  margin: 0 30px;
+  line-height: 22px;
+  word-wrap: break-word;
+  word-break: normal;
+  width: 120px;
 }
 </style>

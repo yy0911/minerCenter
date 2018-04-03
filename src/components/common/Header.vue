@@ -184,8 +184,7 @@
     padding: 8px 20px;
   }
   .header {
-    /*width: 100%;*/
-    width: 1440px!important;
+    width: 100%;
     height: 64px;
     position: fixed;
     z-index: 2001;
@@ -405,6 +404,9 @@
     }
     .aboutUs-btn {
       width: 90%!important;
+    }
+    .header ul li {
+      padding-left: 0;
     }
   }
 
