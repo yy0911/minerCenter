@@ -2,7 +2,6 @@
   <!--<div class="deviceMoint-container" >-->
     <!--<div class="trade-record-container">-->
       <!--<p class="font-weight-500">-->
-<<<<<<< HEAD
         <!--出幣統計-->
       <!--</p>-->
       <!--<ul class="record-titles flex fontSize-14 fontcolor-opocity-54 center text-center line-height-22">-->
@@ -17,22 +16,6 @@
         <!--</li>-->
         <!--<li class="flex-1">-->
           <!--累計出幣（個）-->
-=======
-        <!--出币统计-->
-      <!--</p>-->
-      <!--<ul class="record-titles flex fontSize-14 fontcolor-opocity-54 center text-center line-height-22">-->
-        <!--<li class="flex-1">-->
-          <!--在线设备/总设备数（台）-->
-        <!--</li>-->
-        <!--<li class="flex-1">-->
-          <!--今日出币（个）-->
-        <!--</li>-->
-        <!--<li class="flex-1">-->
-          <!--昨日出币（个）-->
-        <!--</li>-->
-        <!--<li class="flex-1">-->
-          <!--累计出币（个）-->
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         <!--</li>-->
       <!--</ul>-->
       <!--<ul class="record-numbers flex fontSize-38 theme-fontColor text-center line-height-46">-->
@@ -54,35 +37,22 @@
     <!--</div>-->
     <!--<div class="my-jewel-box-container">-->
       <!--<p class="me-box-title font-weight-500">-->
-<<<<<<< HEAD
+
         <!--我的寶盒-->
       <!--</p>-->
       <!--<div class="search-container">-->
         <!--<el-input class="fontcolor-opocity-54"-->
                   <!--placeholder="輸入S/N碼搜索設備"-->
-=======
-        <!--我的宝盒-->
-      <!--</p>-->
-      <!--<div class="search-container">-->
-        <!--<el-input class="fontcolor-opocity-54"-->
-                  <!--placeholder="输入S/N码搜索设备"-->
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
+
                   <!--v-model="SNSearchNumber" @input="SearchSNDevice">-->
           <!--<i slot="suffix" class="el-input__icon el-icon-search" @click="iconSearchClick"></i>-->
         <!--</el-input>-->
         <!--<div class="jewel-right-container flex">-->
           <!--<el-input class="fontcolor-opocity-54 console-mac-address-input"-->
-<<<<<<< HEAD
                     <!--placeholder="輸入S/N碼添加設備" v-model="SNAddNumber">-->
           <!--</el-input>-->
           <!--<el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="BindSNDevice">-->
             <!--添加設備-->
-=======
-                    <!--placeholder="输入S/N码添加设备" v-model="SNAddNumber">-->
-          <!--</el-input>-->
-          <!--<el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="BindSNDevice">-->
-            <!--添加设备-->
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
           <!--</el-button>-->
         <!--</div>-->
       <!--</div>-->
@@ -93,11 +63,7 @@
     <!--</div>-->
   <!--</div>-->
   <div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25);">
-<<<<<<< HEAD
     暫未開放
-=======
-    暂未开放
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
   </div>
 </template>
 
@@ -225,19 +191,11 @@
   position: relative;
   /*padding-right: 10px;*/
 }
-<<<<<<< HEAD
 /*.online-device:after {*/
   /*content: ' ';*/
   /*border-right: 2px solid rgba(0,0,0,0.15) ;*/
   /*position: absolute;*/
   /*right: 0;*/
-=======
-/*.online-device::after {*/
-  /*content: ' ';*/
-  /*border-right: 2px solid rgba(0,0,0,0.15) ;*/
-  /*position: absolute;*/
-  /*right: 0px;*/
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
   /*height: 20px;*/
   /*top: 30%;*/
 /*}*/
