@@ -1,5 +1,5 @@
 <template lang="html">
-  <el-menu  id="nav-menu" theme="orange"  :default-openeds="['2']">
+  <el-menu  id="nav-menu" theme="orange"  :default-openeds="['1']">
     <el-submenu index="1" >
       <template slot="title">
         <div @click="handleSelect">

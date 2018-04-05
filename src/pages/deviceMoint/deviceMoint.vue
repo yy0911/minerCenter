@@ -1,67 +1,68 @@
 <template>
-  <div class="deviceMoint-container" >
-    <div class="trade-record-container">
-      <p class="font-weight-500">
-        出币统计
-      </p>
-      <ul class="record-titles flex fontSize-14 fontcolor-opocity-54 center text-center line-height-22">
-        <li class="flex-1">
-          在线设备/总设备数（台）
-        </li>
-        <li class="flex-1">
-          今日出币（个）
-        </li>
-        <li class="flex-1">
-          昨日出币（个）
-        </li>
-        <li class="flex-1">
-          累计出币（个）
-        </li>
-      </ul>
-      <ul class="record-numbers flex fontSize-38 theme-fontColor text-center line-height-46">
-        <li class="flex-1 center">
-          <span class="online-device">{{ miningStatisticsData.onLineBox }}</span>
-          <span class="fontcolor-opocity-87">{{ miningStatisticsData.allBox }}</span>
-        </li>
-        <li class="flex-1">
-          <span>{{ miningStatisticsData.allTodayCoins }}</span>
-        </li>
-        <li class="flex-1">
-          <span>{{ miningStatisticsData.allYesterdayCoins }}</span>
-        </li>
-        <li class="flex-1">
-          <span>{{ miningStatisticsData.totalMiningCoin }}</span>
-        </li>
-      </ul>
-    </div>
-    <div class="my-jewel-box-container">
-      <p class="me-box-title font-weight-500">
-        我的宝盒
-      </p>
-      <div class="search-container">
-        <el-input class="fontcolor-opocity-54"
-                  placeholder="输入S/N码搜索设备"
-                  v-model="SNSearchNumber" @input="SearchSNDevice">
-          <i slot="suffix" class="el-input__icon el-icon-search" @click="iconSearchClick"></i>
-        </el-input>
-        <div class="jewel-right-container flex">
-          <el-input class="fontcolor-opocity-54 console-mac-address-input"
-                    placeholder="输入S/N码搜索设备" v-model="SNAddNumber">
-          </el-input>
-          <el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="BindSNDevice">
-            添加设备
-          </el-button>
-        </div>
-      </div>
-    </div>
+  <!--<div class="deviceMoint-container" >-->
+    <!--<div class="trade-record-container">-->
+      <!--<p class="font-weight-500">-->
+        <!--出币统计-->
+      <!--</p>-->
+      <!--<ul class="record-titles flex fontSize-14 fontcolor-opocity-54 center text-center line-height-22">-->
+        <!--<li class="flex-1">-->
+          <!--在线设备/总设备数（台）-->
+        <!--</li>-->
+        <!--<li class="flex-1">-->
+          <!--今日出币（个）-->
+        <!--</li>-->
+        <!--<li class="flex-1">-->
+          <!--昨日出币（个）-->
+        <!--</li>-->
+        <!--<li class="flex-1">-->
+          <!--累计出币（个）-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<ul class="record-numbers flex fontSize-38 theme-fontColor text-center line-height-46">-->
+        <!--<li class="flex-1 center">-->
+          <!--<span class="online-device">{{ miningStatisticsData.onLineBox }}</span>-->
+          <!--<span class="deveice-after-line"></span>-->
+          <!--<span class="fontcolor-opocity-87">{{ miningStatisticsData.allBox }}</span>-->
+        <!--</li>-->
+        <!--<li class="flex-1">-->
+          <!--<span>{{ miningStatisticsData.allTodayCoins }}</span>-->
+        <!--</li>-->
+        <!--<li class="flex-1">-->
+          <!--<span>{{ miningStatisticsData.allYesterdayCoins }}</span>-->
+        <!--</li>-->
+        <!--<li class="flex-1">-->
+          <!--<span>{{ miningStatisticsData.totalMiningCoin }}</span>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="my-jewel-box-container">-->
+      <!--<p class="me-box-title font-weight-500">-->
+        <!--我的宝盒-->
+      <!--</p>-->
+      <!--<div class="search-container">-->
+        <!--<el-input class="fontcolor-opocity-54"-->
+                  <!--placeholder="输入S/N码搜索设备"-->
+                  <!--v-model="SNSearchNumber" @input="SearchSNDevice">-->
+          <!--<i slot="suffix" class="el-input__icon el-icon-search" @click="iconSearchClick"></i>-->
+        <!--</el-input>-->
+        <!--<div class="jewel-right-container flex">-->
+          <!--<el-input class="fontcolor-opocity-54 console-mac-address-input"-->
+                    <!--placeholder="输入S/N码添加设备" v-model="SNAddNumber">-->
+          <!--</el-input>-->
+          <!--<el-button class="fontSize-14 fontcolor-opocity-54" :plain="true"  @click="BindSNDevice">-->
+            <!--添加设备-->
+          <!--</el-button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
 
-    <div class="jewel-table-container">
-      <jewel-table  :isSuccess='isSuccess' :searchDeviceData="searchDeviceData"></jewel-table>
-    </div>
-  </div>
-  <!--<div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25);">-->
-    <!--暂未开放-->
+    <!--<div class="jewel-table-container">-->
+      <!--<jewel-table  :isSuccess='isSuccess' :searchDeviceData="searchDeviceData" ref="jewelTable" @listenUnbindBox="listenUnbindBox"></jewel-table>-->
+    <!--</div>-->
   <!--</div>-->
+  <div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25);">
+    暂未开放
+  </div>
 </template>
 
 <script>
@@ -132,6 +133,7 @@
                   type: 'success',
                   customClass: 'messageLocation'
                 })
+                vm.GetMiningStatistics()
                 return
               }
               vm.$message({
@@ -147,8 +149,13 @@
         },
         iconSearchClick () {
           this.$options.methods.SearchSNDevice.bind(this)()
+        },
+        listenUnbindBox (msg) {
+          console.log(msg)
+          if (msg) {
+            this.GetMiningStatistics()
+          }
         }
-
       }
     }
 </script>
@@ -180,15 +187,20 @@
 }
 .online-device {
   position: relative;
-  padding-right: 10px;
+  /*padding-right: 10px;*/
 }
-.online-device:after {
-  content: ' ';
-  border-right: 2px solid rgba(0,0,0,0.15) ;
-  position: absolute;
-  left: 100%;
+/*.online-device::after {*/
+  /*content: ' ';*/
+  /*border-right: 2px solid rgba(0,0,0,0.15) ;*/
+  /*position: absolute;*/
+  /*right: 0px;*/
+  /*height: 20px;*/
+  /*top: 30%;*/
+/*}*/
+.deveice-after-line {
+  display: inline-block;
   height: 20px;
-  top: 30%;
+  border-right: 2px solid rgba(0,0,0,0.15) ;
 }
 .console-mac-address-input {
   margin-right: 10px;

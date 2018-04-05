@@ -1,121 +1,121 @@
 <template>
-  <div class="userAssetCount-container" v-cloak>
-    <div class="mining-statist-container">
-      <p>
-        我的资产
-      </p>
-      <!--<p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">-->
-        <!--当前-->
-        <!--<span class="theme-fontColor">{{remainMiningCoin}}</span>数量，-->
-        <!--锁定数量为-->
-        <!--<span>{{lockingCoins}}</span> CAN,-->
-        <!--每次提币固定收取手续费<span>{{fei}}-->
-        <!--</span>-->
+  <!--<div class="userAssetCount-container" v-cloak>-->
+    <!--<div class="mining-statist-container">-->
+      <!--<p>-->
+        <!--我的资产-->
       <!--</p>-->
-      <div class="kindsof-bi-wrapper">
-        <div class="canBi-Wrapper flex flex-align-center">
-          <div class="bi-left-wrapper flex  flex-align-center">
-            <img src="../../assets/images/Oval.png" alt="">
-            <p>CAN</p>
-          </div>
-          <div class="bi-center-wrapper">
-            <p class="font-size20">{{remainMiningCoin}}</p>
-            <div class="tip-article-biAccount flex flex-align-center">
-              <i class="el-icon-warning" v-if="!allTrue"></i>
-              <p v-if="allTrue">账户已绑定<span>{{allBoxSize}}</span>  台设备，设备正常运作需保持账户余额不低于  <span>{{allBoxNeedCoins}} </span>CAN</p>
-              <p v-else>余币不足以维持全部设备运作，<span>{{allBoxSize}}</span> 台设备所需运作币 <span>{{allBoxNeedCoins}} </span>CAN</p>
-            </div>
-          </div>
-          <div class="bi-right-wrapper">
-            <el-button class="recharge-account-btn" @click="rechargeMethod">充值</el-button>
-            <el-button class="getBi-btn" type="primary" @click="commitGetCan">提币</el-button>
-          </div>
-        </div>
-        <div class="wmBi-Wrapper flex flex-align-center">
-          <div class="bi-left-wrapper flex  flex-align-center">
-            <img src="../../assets/images/Oval_Copy.png" alt="">
-            <p>WMC</p>
-          </div>
-          <div class="bi-center-wrapper">
-            <p class="font-size20">{{totalWaiMaiCoin}}</p>
-            <div class="tip-article-biAccount flex flex-align-center">
-              <p>暂未开放，敬请期待！</p>
-            </div>
-          </div>
-        </div>
+      <!--&lt;!&ndash;<p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">&ndash;&gt;-->
+        <!--&lt;!&ndash;当前&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="theme-fontColor">{{remainMiningCoin}}</span>数量，&ndash;&gt;-->
+        <!--&lt;!&ndash;锁定数量为&ndash;&gt;-->
+        <!--&lt;!&ndash;<span>{{lockingCoins}}</span> CAN,&ndash;&gt;-->
+        <!--&lt;!&ndash;每次提币固定收取手续费<span>{{fei}}&ndash;&gt;-->
+        <!--&lt;!&ndash;</span>&ndash;&gt;-->
+      <!--&lt;!&ndash;</p>&ndash;&gt;-->
+      <!--<div class="kindsof-bi-wrapper">-->
+        <!--<div class="canBi-Wrapper flex flex-align-center">-->
+          <!--<div class="bi-left-wrapper flex  flex-align-center">-->
+            <!--<img src="../../assets/images/Oval.png" alt="">-->
+            <!--<p>CAN</p>-->
+          <!--</div>-->
+          <!--<div class="bi-center-wrapper">-->
+            <!--<p class="font-size20">{{remainMiningCoin}}</p>-->
+            <!--<div class="tip-article-biAccount flex flex-align-center">-->
+              <!--<i class="el-icon-warning" v-if="!allTrue"></i>-->
+              <!--<p v-if="allTrue">账户已绑定<span>{{allBoxSize}}</span>  台设备，设备正常运作需保持账户余额不低于  <span>{{allBoxNeedCoins}} </span>CAN</p>-->
+              <!--<p v-else>余币不足以维持全部设备运作，<span>{{allBoxSize}}</span> 台设备所需运作币 <span>{{allBoxNeedCoins}} </span>CAN</p>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="bi-right-wrapper">-->
+            <!--<el-button class="recharge-account-btn" @click="rechargeMethod">充值</el-button>-->
+            <!--<el-button class="getBi-btn" type="primary" @click="commitGetCan">提币</el-button>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="wmBi-Wrapper flex flex-align-center">-->
+          <!--<div class="bi-left-wrapper flex  flex-align-center">-->
+            <!--<img src="../../assets/images/Oval_Copy.png" alt="">-->
+            <!--<p>WMC</p>-->
+          <!--</div>-->
+          <!--<div class="bi-center-wrapper">-->
+            <!--<p class="font-size20">{{totalWaiMaiCoin}}</p>-->
+            <!--<div class="tip-article-biAccount flex flex-align-center">-->
+              <!--<p>暂未开放，敬请期待！</p>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
-      </div>
-    </div>
-    <div class="mining-record-container">
-      <p class="paddingTB-24">
-        收支记录
-      </p>
-      <div class="tableMiningRecord-container">
-        <table-mining-record></table-mining-record>
-      </div>
-    </div>
-    <el-dialog
-      :visible.sync="dialogVisible"
-      :close-on-click-modal="false"
-      class="getCandiaglog-container">
-      <template slot="title">
-                <span>
-                  CAN提币
-                </span>
-      </template>
-      <p class="fontSize-14 fontcolor-opocity-54">
-        收币地址：
-      </p>
-      <el-input class="address-input"
-                placeholder="输入收币地址" v-model="canReceiveAddress" @blur="isNullCanAdress">
-      </el-input>
-      <p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>
-      <p class="paddingT-8 fontSize-14 fontcolor-opocity-54">
-        提币金额：
-      </p>
-      <el-input class="mining-money-input" placeholder="输入数额" v-model.number="amount" @blur="isNullCanNumber"></el-input>
-      <span class="fontSize-14 fontcolor-opocity-54">CAN</span>
-      <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54">
-        当前可提
-        <span class="warn-fontColor">{{availableCoin}}</span> CAN，每次提币固定收取手续费<span class="warn-fontColor">{{fei}}</span> CAN
-      </p>
-      <p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>
-      <p class="paddingT-8 fontSize-14 fontcolor-opocity-54">
-        提币密码：
-      </p>
-      <el-input type="password" class="" v-model.trim="CanPassword" placeholder="输入提币密码"></el-input>
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="mining-record-container">-->
+      <!--<p class="paddingTB-24">-->
+        <!--收支记录-->
+      <!--</p>-->
+      <!--<div class="tableMiningRecord-container">-->
+        <!--<table-mining-record></table-mining-record>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<el-dialog-->
+      <!--:visible.sync="dialogVisible"-->
+      <!--:close-on-click-modal="false"-->
+      <!--class="getCandiaglog-container">-->
+      <!--<template slot="title">-->
+                <!--<span>-->
+                  <!--CAN提币-->
+                <!--</span>-->
+      <!--</template>-->
+      <!--<p class="fontSize-14 fontcolor-opocity-54">-->
+        <!--收币地址：-->
+      <!--</p>-->
+      <!--<el-input class="address-input"-->
+                <!--placeholder="输入收币地址" v-model="canReceiveAddress" @blur="isNullCanAdress">-->
+      <!--</el-input>-->
+      <!--<p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>-->
+      <!--<p class="paddingT-8 fontSize-14 fontcolor-opocity-54">-->
+        <!--提币金额：-->
+      <!--</p>-->
+      <!--<el-input class="mining-money-input" placeholder="输入数额" v-model.number="amount" @blur="isNullCanNumber"></el-input>-->
+      <!--<span class="fontSize-14 fontcolor-opocity-54">CAN</span>-->
+      <!--<p class="instruction-ing-present fontSize-14 fontcolor-opocity-54">-->
+        <!--当前可提-->
+        <!--<span class="warn-fontColor">{{availableCoin}}</span> CAN，每次提币固定收取手续费<span class="warn-fontColor">{{fei}}</span> CAN-->
+      <!--</p>-->
+      <!--<p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>-->
+      <!--<p class="paddingT-8 fontSize-14 fontcolor-opocity-54">-->
+        <!--提币密码：-->
+      <!--</p>-->
+      <!--<el-input type="password" class="" v-model.trim="CanPassword" placeholder="输入提币密码"></el-input>-->
 
-      <p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>
-      <el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endSureGetCanMethod">
-        确认
-      </el-button>
-    </el-dialog>
-    <el-dialog
-      :visible.sync="dialogVisible2"
-      :close-on-click-modal="false"
-      class="getCandiaglog-container">
-      <template slot="title">
-                <span>
-                  CAN充值
-                </span>
-      </template>
-      <p class="fontSize-14 fontcolor-opocity-54">
-        充值地址：
-      </p>
-      <p class="paddingT-8 fontSize-14 fontcolor-opocity-54">{{userAddress}}</p>
+      <!--<p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>-->
+      <!--<el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endSureGetCanMethod">-->
+        <!--确认-->
+      <!--</el-button>-->
+    <!--</el-dialog>-->
+    <!--<el-dialog-->
+      <!--:visible.sync="dialogVisible2"-->
+      <!--:close-on-click-modal="false"-->
+      <!--class="getCandiaglog-container">-->
+      <!--<template slot="title">-->
+                <!--<span>-->
+                  <!--CAN充值-->
+                <!--</span>-->
+      <!--</template>-->
+      <!--<p class="fontSize-14 fontcolor-opocity-54">-->
+        <!--充值地址：-->
+      <!--</p>-->
+      <!--<p class="paddingT-8 fontSize-14 fontcolor-opocity-54">{{userAddress}}</p>-->
 
-      <div class="qrCode-wrapper flex flex-align-center" id="qrcode">
-        <img :src="qrcodeImgUrl" alt="" id="QrcodeImg">
-      </div>
+      <!--<div class="qrCode-wrapper flex flex-align-center" id="qrcode">-->
+        <!--<img :src="qrcodeImgUrl" alt="" id="QrcodeImg">-->
+      <!--</div>-->
 
-      <el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endQrMethod">
-        确认
-      </el-button>
-    </el-dialog>
-  </div>
-  <!--<div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25)">-->
-    <!--暂未开放-->
+      <!--<el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endQrMethod">-->
+        <!--确认-->
+      <!--</el-button>-->
+    <!--</el-dialog>-->
   <!--</div>-->
+  <div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25)">
+    暂未开放
+  </div>
 </template>
 
 <script>
@@ -146,7 +146,8 @@
         allBoxNeedCoins: '',
         userAddress: '',
         qrcodeImgUrl: '',
-        availableCoin: ''
+        availableCoin: '',
+        addressStatus: ''
       }
     },
     components: {
@@ -201,7 +202,14 @@
         this.dialogVisible = true
       },
       rechargeMethod () {
-        this.dialogVisible2 = true
+        if (this.addressStatus) {
+          this.dialogVisible2 = true
+        } else {
+          this.$message({
+            message: '获取地址失败',
+            type: 'error'
+          })
+        }
       },
       //提取can的接口
       endSureGetCanMethod () {
@@ -231,7 +239,7 @@
               if (response.data.isSuccess) {
                 //提币申请提交成功
                 vm.$message({
-                  message: 'The application was submitted successfully.',
+                  message: '提币成功',
                   type: 'success'
                 })
                 vm.dialogVisible = false
@@ -251,10 +259,12 @@
         let vm = this
         axios.get('/promo/authed/account/generate/address')
           .then(function (response) {
-            console.log(response)
+            vm.addressStatus = response.data.isSuccess
             if (response.data.isSuccess) {
               vm.userAddress = response.data.address
               vm.qrcode(response.data.address)
+            } else {
+
             }
           })
           .catch(function (error) {

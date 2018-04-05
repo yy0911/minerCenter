@@ -185,6 +185,7 @@
   }
   .header {
     width: 100%;
+    min-width: 800px;
     height: 64px;
     position: fixed;
     z-index: 2001;

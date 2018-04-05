@@ -231,10 +231,11 @@
   min-height: 100vh;
   flex: 1 auto;
   //width: 968px;
-  //min-width: 968px;
+  min-width: 800px;
   padding:40px 20px 120px 20px;
   box-sizing: border-box;
   background-color: #fff;
+  //overflow: auto;
 }
 
 // 公共样式

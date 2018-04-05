@@ -12,7 +12,7 @@
       prop="status">
       <template slot-scope="scope">
         <span class="status-circle color-grey" v-if="scope.row.status == '未连接'"></span>
-        <span class="status-circle color-green" v-else-if="scope.row.status == '挖矿中'"></span>
+        <span class="status-circle color-green" v-else-if="scope.row.status == '工作中'"></span>
         <span class="status-circle color-orange" v-else-if="scope.row.status == '待机中'"></span>
         <span class="status-circle color-red" v-else></span>
         {{ scope.row.status }}
@@ -131,7 +131,7 @@
           if (item.status === 0) {
             item.status = '未连接'
           } else if (item.status === 1) {
-            item.status = '挖矿中'
+            item.status = '工作中'
           } else if (item.status === 2) {
             item.status = '待机中'
           } else if (item.status === 3) {
@@ -158,7 +158,11 @@
         axios.get('/promo/authed/account/box/lists/' + vm.limit + '/10')
           .then(function (response) {
             vm.deviceDetailData = vm.$options.methods.responseArray(response.data.list)
-            vm.countsNumber = Number(response.data.count)
+            if (Number(response.data.count) === 0) {
+              vm.countsNumber = 1
+            } else {
+              vm.countsNumber = Number(response.data.count)
+            }
             return vm.deviceDetailData
           })
           .catch(function (error) {
@@ -172,8 +176,8 @@
         axios.post('/promo/authed/account/box/disconnect',
           {boxSN: boxUnbindDeviceSN})
           .then(function (response) {
-            console.log(response.data.isSuccess)
             if (response.data.isSuccess) {
+              vm.$emit('listenUnbindBox', true)
               vm.GetDeviceList()
               scope.row.visible = false
             }

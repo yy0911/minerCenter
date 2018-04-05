@@ -40,6 +40,7 @@ export default {
 <style type="text/css">
 	.main-container {
     width: 100%;
+    min-width: 800px;
 		display: flex;
 		padding: 24px 150px;
 		background: #f2f2f2;
@@ -59,6 +60,7 @@ export default {
   }
   .el-container {
     width: 100%;
+    min-width: 1200px;
     min-height: 2400px;
   }
 </style>
