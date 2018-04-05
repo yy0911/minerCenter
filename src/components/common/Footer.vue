@@ -49,6 +49,7 @@
   }
 </script>
 <style>
+
   .footer {
     background: #f2f2f2;
     text-align: center;

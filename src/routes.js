@@ -15,6 +15,11 @@ export default [
     component: resolve => require(['./pages/extractBmanage/extractBmanage'], resolve)
   },
   {
+    // 我的资产
+    path: '/userAssetCount',
+    component: resolve => require(['./pages/userAssetCount/userAssetCount'], resolve)
+  },
+  {
     // 我的订单
     path: '/myOrder',
     component: resolve => require(['./pages/myOrder/myOrder'], resolve)

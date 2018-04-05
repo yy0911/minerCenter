@@ -1,31 +1,31 @@
 <template>
 <div class="fixPass-wrapper">
-<el-button  v-show="computedUserEmail" @click="dialogVisible = true" class="pos-abs-right set-common-btn" >设置</el-button>
+<el-button  v-show="computedUserEmail" @click="dialogVisible = true" class="pos-abs-right set-common-btn" >設置</el-button>
 
 <el-dialog
-  title="设置邮箱"
+  title="設置郵箱"
   :visible.sync="dialogVisible"
   class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose" style="margin-top: 0!important;">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
 
     <el-form-item prop="emailAdress">
-      <el-input type="email" v-model="ruleForm.emailAdress" auto-complete="off" placeholder="输入邮箱地址" ></el-input>
+      <el-input type="email" v-model="ruleForm.emailAdress" auto-complete="off" placeholder="輸入郵箱地址" ></el-input>
     </el-form-item>
 
     <el-form-item prop="emailNoteCode" class="phone-note-container commone-note-container">
       <div class="send-note-container">
-        <el-input type="tel" v-model="ruleForm.emailNoteCode" auto-complete="off" placeholder="输入邮箱验证码" class="print-note-input" style="width: 178px;float: left"></el-input>
+        <el-input type="tel" v-model="ruleForm.emailNoteCode" auto-complete="off" placeholder="輸入郵箱驗證碼" class="print-note-input" style="width: 178px;float: left"></el-input>
         <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
-          发送验证码
+          發送驗證碼
         </el-button>
         <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s</span>
       </div>
     </el-form-item>
 
     <el-form-item prop="accountPass">
-      <el-input type="password" v-model="ruleForm.accountPass" auto-complete="off" placeholder="输入账户密码" ></el-input>
+      <el-input type="password" v-model="ruleForm.accountPass" auto-complete="off" placeholder="輸入賬戶密碼" ></el-input>
     </el-form-item>
-    <el-button type="primary" @click="fixCanPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认</el-button>
+    <el-button type="primary" @click="fixCanPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">確認</el-button>
   </el-form>
 </el-dialog>
 </div>
@@ -52,9 +52,9 @@
       var validateEmailAdress = (rule, value, callback) => {
         let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
         if (value === '') {
-          return callback(new Error('请输入邮箱地址'))
+          return callback(new Error('請輸入郵箱地址'))
         } else if (!reg.test(this.ruleForm.emailAdress)) {
-          return callback(new Error('邮箱地址格式错误'))
+          return callback(new Error('郵箱地址格式錯誤'))
         } else {
           callback()
         }
@@ -62,7 +62,7 @@
       //邮箱验证码验证
       var validateEmailNoteCode = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入邮箱验证码'))
+          callback(new Error('請輸入郵箱驗證碼'))
         } else {
           callback()
         }
@@ -148,7 +148,7 @@
               })
               .catch(function (error) {
                 vm.$message({
-                  message: '确认失败',
+                  message: '確認失敗',
                   type: 'error'
                 })
                 console(error)
@@ -189,7 +189,7 @@
             .then(function (response) {
               if (response.data.isSuccess) {
                 vm.$message({
-                  message: '验证码发送成功',
+                  message: '驗證碼發送成功',
                   type: 'success'
                 })
                 vm.isCountDown = false

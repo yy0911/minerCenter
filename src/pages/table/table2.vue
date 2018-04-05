@@ -11,15 +11,18 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="收币地址"
+        label="收幣地址"
         prop="canReceiveAddress">
       </el-table-column>
       <el-table-column
-        label="提币数 (个)"
-        prop="amount">
+        label="金額 (CAN)">
+        <template slot-scope="scope">
+          <p class="inCanClass" v-if="scope.row.inOrOut === 'in'"><span>+</span>{{ scope.row.amount }}</p>
+          <p class="outCanClass" v-else><span>-</span>{{ scope.row.amount }}</p>
+        </template>
       </el-table-column>
       <el-table-column
-        label="状态">
+        label="狀態">
         <template slot-scope="scope">
           <p class="theme-fontColor">{{ scope.row.status | applyCanStatus }}</p>
         </template>
@@ -55,5 +58,16 @@
   }
 </script>
 <style scoped>
-
+  .inCanClass {
+    color:#52C41A
+  }
+  .outCanClass {
+    color:#F5222D
+  }
+  .inCanClass span {
+    margin-right: 4px;
+  }
+  .outCanClass span {
+    margin-right: 4px;
+  }
 </style>

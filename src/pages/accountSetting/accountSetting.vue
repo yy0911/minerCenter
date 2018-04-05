@@ -1,10 +1,10 @@
 <template>
 <div>
-  <p class="accout-set-title">账户设置</p>
+  <p class="accout-set-title">賬戶設置</p>
   <div class="account-main-container fontSize-14">
     <div class="account-setItem-container flex flex-align-center">
       <div class="flex">
-        <p>账户密码：</p>
+        <p>賬戶密碼：</p>
           <fix-password-diaglog></fix-password-diaglog>
       </div>
 
@@ -12,8 +12,8 @@
     <div class="account-setItem-container flex flex-align-center" style="display: none">
       <div>
         <div class="" style="float: left;">
-          <p>安全手机</p>
-          <p class="theme-fontColor">未绑定</p>
+          <p>安全手機</p>
+          <p class="theme-fontColor">未綁定</p>
         </div>
          <binding-phone-diaglog></binding-phone-diaglog>
       </div>
@@ -21,21 +21,21 @@
     <div class="account-setItem-container flex flex-align-center">
       <div>
         <div class="" style="float: left;">
-          <p>提币密码</p>
-          <p class="theme-fontColor">{{ isHaveCapitalPass ? '已设置' : '未设置'}}</p>
+          <p>提幣密碼</p>
+          <p class="theme-fontColor">{{ isHaveCapitalPass ? '已設置' : '未設置'}}</p>
         </div>
         <set-canpass-diaglog :isHaveCapitalPass="isHaveCapitalPass" @listenFixPassSuccess="listenFixPassSuccess"></set-canpass-diaglog>
       </div>
     </div>
-    <div class="account-setItem-container flex flex-align-center">
-      <div>
-        <div class="" style="float: left;">
-          <p>邮箱账号</p>
-          <p class="theme-fontColor">{{ userEmail !== null ? userEmail : '未设置'}}</p>
-        </div>
-        <fix-email-diaglog :userEmail="userEmail" @listenFixPassSuccess="listenFixPassSuccess"></fix-email-diaglog>
-      </div>
-    </div>
+    <!--<div class="account-setItem-container flex flex-align-center">-->
+      <!--<div>-->
+        <!--<div class="" style="float: left;">-->
+          <!--<p>邮箱账号</p>-->
+          <!--<p class="theme-fontColor">{{ userEmail !== null ? userEmail : '未设置'}}</p>-->
+        <!--</div>-->
+        <!--<fix-email-diaglog :userEmail="userEmail" @listenFixPassSuccess="listenFixPassSuccess"></fix-email-diaglog>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
 </div>
@@ -57,7 +57,7 @@
       },
       computedUserEmail () {
         if (this.userEmail === '' || this.userEmail === null) {
-          return this.userEmail = '未设置'
+          return this.userEmail = '未設置'
         } else {
           return this.userEmail
         }

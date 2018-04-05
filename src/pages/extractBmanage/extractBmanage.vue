@@ -1,76 +1,79 @@
 <template>
-  <div class="extractBmanage-container" v-cloak>
-    <div class="mining-statist-container">
-      <p>
-        CAN提币
-      </p>
-      <p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">
-        当前
-        <span class="theme-fontColor">{{remainMiningCoin}}</span>数量，
-        锁定数量为
-        <span>{{lockingCoins}}</span> CAN,
-        每次提币固定收取手续费<span>{{fei}}
-        </span>
-      </p>
-      <div class="receiver-container">
-        <div class="address-container flex">
-          <p class="fontSize-14 fontcolor-opocity-54">
-            收币地址：
-          </p>
-          <el-input class="address-input"
-                    placeholder="输入收币地址" v-model="canReceiveAddress" @blur="isNullCanAdress">
-          </el-input>
+  <!--<div class="extractBmanage-container" v-cloak>-->
+    <!--<div class="mining-statist-container">-->
+      <!--<p>-->
+        <!--CAN提幣-->
+      <!--</p>-->
+      <!--<p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">-->
+        <!--當前-->
+        <!--<span class="theme-fontColor">{{remainMiningCoin}}</span>數量，-->
+        <!--鎖定數量爲-->
+        <!--<span>{{lockingCoins}}</span> CAN,-->
+        <!--每次提幣固定收取手續費<span>{{fei}}-->
+        <!--</span>-->
+      <!--</p>-->
+      <!--<div class="receiver-container">-->
+        <!--<div class="address-container flex">-->
+          <!--<p class="fontSize-14 fontcolor-opocity-54">-->
+            <!--收幣地址：-->
+          <!--</p>-->
+          <!--<el-input class="address-input"-->
+                    <!--placeholder="輸入收幣地址" v-model="canReceiveAddress" @blur="isNullCanAdress">-->
+          <!--</el-input>-->
 
-        </div>
-        <p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>
-        <div class="mining-money-container flex">
-          <p class="fontSize-14 fontcolor-opocity-54">
-            提币数额：
-          </p>
-          <el-input class="mining-money-input" placeholder="输入数额" v-model.number="amount" @blur="isNullCanNumber"></el-input>
-          <span class="fontSize-14 fontcolor-opocity-54">CAN</span>
-        </div>
-        <p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>
+        <!--</div>-->
+        <!--<p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>-->
+        <!--<div class="mining-money-container flex">-->
+          <!--<p class="fontSize-14 fontcolor-opocity-54">-->
+            <!--提幣數額：-->
+          <!--</p>-->
+          <!--<el-input class="mining-money-input" placeholder="輸入數額" v-model.number="amount" @blur="isNullCanNumber"></el-input>-->
+          <!--<span class="fontSize-14 fontcolor-opocity-54">CAN</span>-->
+        <!--</div>-->
+        <!--<p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>-->
 
 
-        <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >
-          立即提币
-        </el-button>
-        <el-dialog
-          :visible.sync="dialogVisible"
-          :close-on-click-modal="false"
-          class="getCandiaglog-container">
-          <template slot="title">
-                <span>
-                  输入提币密码
-                </span>
-          </template>
-          <p class="fontSize-14 fontcolor-opocity-54">
-            收币地址：
-          </p>
-          <p>{{canReceiveAddress}}</p>
-          <p class="paddingT-8 fontSize-14 fontcolor-opocity-54">
-            提币金额：
-          </p>
-          <p><span class="color-red fontSize-16">{{amount}}</span> <span class="fontSize-12 fontcolor-opocity-54">CAN</span></p>
-          <el-input type="password" class="paddingT-16" v-model.trim="CanPassword"></el-input>
-          <p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>
-          <el-button type="primary" class="margin-top-16" @click="endSureGetCanMethod">
-            确认
-          </el-button>
-        </el-dialog>
-        <!--<sure-getb-diag :canReceiveAddress="canReceiveAddress" :amount="amount"></sure-getb-diag>-->
-      </div>
-    </div>
-    <div class="mining-record-container">
-      <p class="paddingTB-24">
-        提币记录
-      </p>
-      <div class="tableMiningRecord-container">
-        <table-mining-record></table-mining-record>
-      </div>
-    </div>
+        <!--<el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >-->
+          <!--立即提幣-->
+        <!--</el-button>-->
+        <!--<el-dialog-->
+          <!--:visible.sync="dialogVisible"-->
+          <!--:close-on-click-modal="false"-->
+          <!--class="getCandiaglog-container">-->
+          <!--<template slot="title">-->
+                <!--<span>-->
+                  <!--輸入提幣密碼-->
+                <!--</span>-->
+          <!--</template>-->
+          <!--<p class="fontSize-14 fontcolor-opocity-54">-->
+            <!--收幣地址：-->
+          <!--</p>-->
+          <!--<p>{{canReceiveAddress}}</p>-->
+          <!--<p class="paddingT-8 fontSize-14 fontcolor-opocity-54">-->
+            <!--提幣金額：-->
+          <!--</p>-->
+          <!--<p><span class="color-red fontSize-16">{{amount}}</span> <span class="fontSize-12 fontcolor-opocity-54">CAN</span></p>-->
+          <!--<el-input type="password" class="paddingT-16" v-model.trim="CanPassword"></el-input>-->
+          <!--<p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>-->
+          <!--<el-button type="primary" class="margin-top-16" @click="endSureGetCanMethod">-->
+            <!--確認-->
+          <!--</el-button>-->
+        <!--</el-dialog>-->
+        <!--&lt;!&ndash;<sure-getb-diag :canReceiveAddress="canReceiveAddress" :amount="amount"></sure-getb-diag>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="mining-record-container">-->
+      <!--<p class="paddingTB-24">-->
+        <!--提幣記錄-->
+      <!--</p>-->
+      <!--<div class="tableMiningRecord-container">-->
+        <!--<table-mining-record></table-mining-record>-->
+      <!--</div>-->
+    <!--</div>-->
 
+  <!--</div>-->
+  <div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25)">
+    暫未開放
   </div>
 </template>
 
@@ -87,8 +90,8 @@
         errorAddressTip: false,
         errorAmountTip: false,
         errorCanPasswordTip: false,
-        errorAmountContent: '提币数额不能为空',
-        errorAddressContent: '收币地址不能为空',
+        errorAmountContent: '提幣數額不能爲空',
+        errorAddressContent: '收幣地址不能爲空',
         errorCanPasswordContent: '',
         remainMiningCoin: '',
         lockingCoins: '',
@@ -136,19 +139,19 @@
           return false
         } else if (this.canReceiveAddress.substr(0, 2) !== '0x' || this.canReceiveAddress.length !== 42) {
           this.errorAddressTip = true
-          this.errorAddressContent = '输入错误，地址为一串0x开头的42位字符'
+          this.errorAddressContent = '輸入錯誤，地址爲一串0x開頭的42位字符'
           return false
         } else if (isNaN(this.amount)) {
           this.errorAmountTip = true
-          this.errorAmountContent = '金额必须为数字'
+            this.errorAmountContent = '金額必須爲數字'
           return false
         } else if (Number(this.amount) < regeMinNumber) {
           this.errorAmountTip = true
-          this.errorAmountContent = '金额必须大于' + regeMinNumber
+          this.errorAmountContent = '金額必須大于' + regeMinNumber
           return false
         } else if (Number(this.amount) > Number(this.remainMiningCoin)) {
           this.errorAmountTip = true
-          this.errorAmountContent = '提币金额超出范围'
+          this.errorAmountContent = '提幣金額超出範圍'
           return false
         } else {
           this.dialogVisible = true
@@ -160,11 +163,11 @@
         let isNullValidate = new RegExp("\\s")
         if (this.CanPassword === '') {
           this.errorCanPasswordTip = true
-          this.errorCanPasswordContent = '密码不能为空'
+          this.errorCanPasswordContent = '密碼不能爲空'
           return false
         } else if (isNullValidate.test(this.CanPassword) === true) {
           this.errorCanPasswordTip = true
-          this.errorCanPasswordContent = '密码不能包含空格'
+          this.errorCanPasswordContent = '密碼不能包含空格'
           return false
         } else {
           this.errorCanPasswordTip = false

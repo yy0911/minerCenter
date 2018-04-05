@@ -2,7 +2,7 @@
   <div id="myOrderWrapper">
     <el-menu :default-active="activeIndex" class="nav-orderlist-container" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">
-        全部订单
+        全部訂單
       </el-menu-item>
       <el-menu-item index="2">
         待付款
@@ -11,23 +11,37 @@
         已付款
       </el-menu-item>
       <el-menu-item index="4">
-        交易关闭
+        已發貨
+      </el-menu-item>
+      <el-menu-item index="5">
+        已完成
+      </el-menu-item>
+      <el-menu-item index="6">
+        交易關閉
       </el-menu-item>
     </el-menu>
+    <!--v-infinite-scroll="loadMore"-->
+    <!--infinite-scroll-disabled="busy"-->
+    <!--infinite-scroll-distance="10"-->
+    <!--v-loading="loading"-->
+    <!--element-loading-text="拼命加载中"-->
+    <!--element-loading-spinner="el-icon-loading"-->
+    <!--element-loading-background="rgba(0, 0, 0, 0.8)"-->
     <div class="all-order-container"
-         ref="myOrderWrapper"
-         v-infinite-scroll="loadMore"
-         infinite-scroll-disabled="busy"
-         infinite-scroll-distance="10"
-         v-loading="loading"
-         element-loading-text="拼命加载中"
-         element-loading-spinner="el-icon-loading"
-         element-loading-background="rgba(0, 0, 0, 0.8)">
+         ref="myOrderWrapper">
       <order-manage v-for="item in sellRecordList" :childOrderData="item"  @listenCancelOrderUser="listenCancelOrderUser"></order-manage>
     </div>
     <div class="text-center fontSize-14 fontcolor-opocity-38" v-show="sellRecordList == '' || sellRecordList.length<=0 " style="margin-top: 100px"><p>
-      暂无订单
+      暫無訂單
     </p></div>
+    <div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreOrder" v-show="moreOrder && secondLoad">
+      點擊加載更多
+      <br/>
+      <i class="el-icon-arrow-down"></i>
+    </div>
+    <div class="more_btn fontcolor-opocity-54 text-center" v-show="secondLoad === false" style="cursor: default">
+      沒有更多訂單了
+    </div>
   </div>
 </template>
 
@@ -35,6 +49,7 @@
   import axios from 'axios'
   import orderManage from '../orderManage/orderManage.vue'
   import infiniteScroll from 'vue-infinite-scroll'
+  import {UTIL} from '../../util/util'
   export default {
     components: {
       orderManage
@@ -45,8 +60,8 @@
     data () {
       return {
         busy: false,
-        loading: false,
-        flag: false,
+        // loading: false,
+        // flag: false,
         receiveChildCancelOrder: false,
         activeIndex: '1',
         menuIndex: 1,
@@ -55,7 +70,8 @@
         sellRecordList: '',
         sellListStatus: 'all',//默认未全部订单
         limit: 1 ,//点击加载更多,
-        moreOrder: true
+        moreOrder: false,
+        secondLoad: true
       }
     },
     watch: {
@@ -70,16 +86,6 @@
       }
     },
     computed: {
-      waitPayOrdersComputed () {
-        return this.items.filter(item => {
-          return item.status !== 1
-        })
-      },
-      endPayOrderComputed () {
-        return this.items.filter(function (item) {
-          return item.status === 1
-        })
-      },
       statusTitleComputed () {
         this.sellListStatus = 'all'
          if (this.menuIndex === 1) {
@@ -88,29 +94,70 @@
            return this.sellListStatus = 'waitPay'
          } else if (this.menuIndex === 3) {
            return this.sellListStatus = 'ok'
+         } else if (this.menuIndex === 4) {
+           return this.sellListStatus = 'sendout'
+         } else if (this.menuIndex === 5) {
+           return this.sellListStatus = 'finish'
          } else {
            return this.sellListStatus = 'cancleOrrefund'
          }
       }
     },
     mounted () {
-      // this.getSellRecordList()
+      this.getSellRecordList()
     },
     methods: {
       handleSelect (key, keyPath) {
-        this.limit = 1
+        // console.log(key)
         this.menuIndex = Number(key)
-        this.flag = false
-        this.moreOrder = true
+        // switch (Number(key)) {
+        //   case 1:
+        //     if (UTIL.GetCookie('all') === '') {
+        //       this.curPage = 1
+        //     } else {
+        //       this.curPage = UTIL.GetCookie('all')
+        //     }
+        //     break
+        //   case 2:
+        //     if (UTIL.GetCookie('waitPay') === '') {
+        //       this.curPage = 1
+        //     } else {
+        //       this.curPage = UTIL.GetCookie('waitPay')
+        //     }
+        //     break
+        //   case 3:
+        //     if (UTIL.GetCookie('ok') === '') {
+        //       this.curPage = 1
+        //     } else {
+        //       this.curPage = UTIL.GetCookie('ok')
+        //     }
+        //     break
+        //   default:
+        //     if (UTIL.GetCookie('cancleOrrefund') === '') {
+        //       this.curPage = 1
+        //     } else {
+        //       this.curPage = UTIL.GetCookie('cancleOrrefund')
+        //     }
+        //     break
+        // }
       },
       getSellRecordList () {
+        console.log(this.curPage)
         let vm = this
         axios.post('/promo/authed/account/get/selllist/bystatus',
           {
             status: vm.statusTitleComputed,
-            curPage: vm.curPage
+            curPage: 1
           })
           .then(function (response) {
+            if (JSON.stringify(response.data.data) === '[]') {
+              vm.moreOrder = false
+              vm.secondLoad = true
+            } else {
+              vm.moreOrder = true
+              vm.secondLoad = false
+              vm.readySecondLoadList()
+            }
             vm.sellRecordList = response.data.data
           })
           .catch(function (error) {
@@ -118,7 +165,7 @@
           })
       },
       loadMoreOrder () {
-        // this.limit ++
+        this.limit ++
         let vm = this
         axios.post('/promo/authed/account/get/selllist/bystatus',
           {
@@ -127,22 +174,38 @@
           })
           .then(function (response) {
             vm.loading = false
-            if (vm.flag) {
-              if (JSON.stringify(response.data.data) === '[]') {
-                vm.loading = false
-                vm.$message({
-                  message: '没有更多订单了',
-                  type: 'warning'
-                })
-                vm.moreOrder = false
-                return false
-              } else {
-                vm.sellRecordList = vm.sellRecordList.concat(response.data.data)
-              }
+            if (JSON.stringify(response.data.data) === '[]') {
+              vm.loading = false
+              vm.$message({
+                message: '沒有更多訂單了',
+                type: 'warning'
+              })
+              vm.secondLoad = false
+              return false
             } else {
-              vm.sellRecordList = response.data.data
-              vm.busy = false
-              vm.flag = true
+              vm.secondLoad = true
+              UTIL.SetCookie(vm.statusTitleComputed, vm.limit, 600)
+              vm.sellRecordList = vm.sellRecordList.concat(response.data.data)
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      // 刚开始也请求第二页，判断是否还有数据，没有数据给用户提示
+      readySecondLoadList () {
+        let vm = this
+        axios.post('/promo/authed/account/get/selllist/bystatus',
+          {
+            status: vm.statusTitleComputed,
+            curPage: 2
+          })
+          .then(function (response) {
+            vm.loading = false
+            if (JSON.stringify(response.data.data) === '[]') {
+              vm.secondLoad = false
+            } else {
+              vm.secondLoad = true
             }
           })
           .catch(function (error) {
@@ -151,22 +214,6 @@
       },
       listenCancelOrderUser (msg) {
         this.receiveChildCancelOrder = msg
-      },
-      loadMore () {
-        if (this.sellRecordList === '' || this.sellRecordList.length <= 0) {
-          return false
-        } else if (!this.moreOrder) {
-          return false
-        }
-        // 多次加载数据
-        this.busy = false
-        setTimeout(() => {
-          if (this.flag) {
-            this.loading = true
-            this.limit ++
-          }
-          this.loadMoreOrder()
-        }, 1000)
       }
     }
   }

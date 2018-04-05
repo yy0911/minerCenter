@@ -2,7 +2,8 @@ import axios from 'axios'
 import {UTIL} from './util'
 
 // const ACCESS_TOKEN = new Promise(function (resolve, reject) {
-//   let formParams = 'username=18810083327&password=123456789&grant_type=password'
+//   // 13012345678 pass:12
+//   let formParams = 'username=18810083326&password=654321&grant_type=password'
 //   axios({
 //     url: '/promo/token',
 //     method: 'POST',
@@ -41,14 +42,14 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 
 axios.interceptors.response.use(
   response => {
-  //response.status===401是我和后台约定的权限丢失或者权限不够返回的状态码，这个可以自己和后台约定，约定返回某个自定义字段也是可以的
-    if (response.status === 401 || response.status === 404) {
+    //response.status===401是我和后台约定的权限丢失或者权限不够返回的状态码，这个可以自己和后台约定，约定返回某个自定义字段也是可以的
+    if (response.status === 401 || response.status === 404 || response.status === 400) {
       window.location.href = '/pages/login.html'
     }
     return response
   },
   error => {
-    if (error.response.status === 401 || error.response.status === 404) {
+    if (error.response.status === 401 || error.response.status === 404 || error.status === 400) {
       window.location.href = '/pages/login.html'
     }
     return Promise.reject(error.response.data)

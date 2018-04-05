@@ -4,7 +4,7 @@
     <div class="flex flex-pack-justify order-header-container paddingLR-24">
       <div class="flex">
         <p class="order-item-time">{{ childOrderData.createdAt }}</p>
-        <p>订单号：
+        <p>訂單號：
           <span class="fontcolor-opocity-54">{{ childOrderData.tradeNumber }}</span>
         </p>
       </div>
@@ -13,24 +13,24 @@
     <div class="order-main-container flex">
       <div class="left-shop-introduce-container flex paddingTB-30">
         <div class="img-container">
-          <img src="../../assets/images/pic_device.png" alt="">
+          <img src="../../assets/images/Rectangle16.png" alt="">
         </div>
         <div class="shop-content-container fontSize-12">
           <p class="fontSize-14 goods-container">
-            <span class="fontcolor-opocity-87" style="padding-right: 16px">CAN星际宝盒</span>
+            <span class="fontcolor-opocity-87" style="padding-right: 16px">CAN星際寶盒</span>
             <span class="theme-fontColor">x<span>{{ childOrderData.buyAmount }}</span></span>
           </p>
           <div class="specific-info-container">
             <p>
-              <span>收货人：</span>
+              <span>收貨人：</span>
               <span>{{ childOrderData.userName }}</span>
             </p>
             <p>
-              <span>联系电话：</span>
+              <span>聯系電話：</span>
               <span>{{ childOrderData.userTel }}</span>
             </p>
             <p class="address-recevier-content">
-              <span>收货地址：</span>
+              <span>收貨地址：</span>
               <span>{{ childOrderData.receivingAddress }}</span>
             </p>
           </div>
@@ -39,22 +39,29 @@
       <div class="center-price-container paddingTB-30  text-center">
         <div class="transform-vertical-horizontal">
           <p class="fontcolor-opocity-87 total-price-desc">{{ childOrderData.totalRmb | currency}}</p>
-          <p class="fontSize-12 freight-desc">含运费 <span>¥25.0</span></p>
+          <p class="fontSize-12 freight-desc">含運費 <span>¥25.0</span></p>
         </div>
       </div>
       <div class="right-pay-container paddingTB-30 text-center">
         <div class="transform-vertical-horizontal" v-if="childOrderData.status === 'wait'">
           <el-button type="primary" class="order-dispose-btn payMon-btn" @click="payagain(childOrderData)">去付款</el-button>
-          <el-button class="order-dispose-btn fontcolor-opocity-38" @click="cancel()">取消订单</el-button>
+          <el-button class="order-dispose-btn fontcolor-opocity-38" @click="cancel()">取消訂單</el-button>
         </div>
         <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'ok'">
-          <p class="fontcolor-opocity-38">已付款</p>
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
         </div>
         <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'refund'">
-          <p class="fontcolor-opocity-38">已退款</p>
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
+        </div>
+        <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'sendout'">
+          <p class="Logistics-name"> {{childOrderData.logisticsName}}</p>
+          <p class="fontcolor-opocity-54 Logistics-number">{{childOrderData.logisticsNumber}}</p>
+        </div>
+        <div class="transform-vertical-horizontal" v-else-if="childOrderData.status === 'finish'">
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
         </div>
         <div class="transform-vertical-horizontal" v-else>
-          <p class="fontcolor-opocity-38">已取消</p>
+          <p class="fontcolor-opocity-38">{{ childOrderData.status_ }}</p>
         </div>
       </div>
 
@@ -64,12 +71,12 @@
       >
         <template slot="title">
           <i class="el-icon-question" style="color: #e6a23c"></i>
-          <span  class="fontcolor-opocity-87">确认要取消订单？</span>
+          <span  class="fontcolor-opocity-87">確認要取消訂單？</span>
         </template>
-        <span class="fontSize-14 fontcolor-opocity-54" style="margin-left: 16px">取消订单后不可撤回，请再次确认您的操作。</span>
+        <span class="fontSize-14 fontcolor-opocity-54" style="margin-left: 16px">取消訂單後不可撤回，請再次確認您的操作。</span>
         <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="sureCancelOrder(childOrderData)">确 定</el-button>
+    <el-button type="primary" @click="sureCancelOrder(childOrderData)">確 定</el-button>
   </span>
       </el-dialog>
     </div>
@@ -239,5 +246,18 @@
   display: inline-block;
   padding: 0 20px;
   position: absolute;
+}
+.Logistics-name {
+  color:#F08802;
+  font-size: 12px;
+  line-height: 22px;
+}
+.Logistics-number {
+  font-size: 12px;
+  margin: 0 30px;
+  line-height: 22px;
+  word-wrap: break-word;
+  word-break: normal;
+  width: 120px;
 }
 </style>

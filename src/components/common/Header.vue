@@ -4,47 +4,47 @@
       <div style="display: flex;justify-content: left" class="web-head-container">
         <div class="header">
           <ul class="logo">
-            <a href="/index.html">
+            <a href="/ftzn/index.html">
               <img src="../../assets/css/icon/logo_white.svg" height="32px;">
             </a>
           </ul>
-          <ul class="head_l">
-            <li class="mainPape"><a href="/index.html">
-              主页
+          <ul class="head_l flex flex-pack-center">
+            <li class="mainPape"><a href="/ftzn/index.html">
+              主頁
             </a></li>
             <li><a href="/whitepaper.pdf">
-              白皮书
+              白皮書
             </a></li>
             <li class="productPage" @mouseover="isProDISPLAY = true" @mouseout="isProDISPLAY = false">
               <div class="nav-pro-mouse flex flex-align-center" :class="isProDISPLAY ? 'proColorMouse87' : 'proColorMouse54'">
-                产品
+                產品
                 <span class="trink-icon" :class="isProDISPLAY ? 'trinkIconRotate180' : 'trinkIconRotate0e'"></span>
               </div>
               <div class="product-over-downContainer" :class="isProDISPLAY ? 'height206' : 'height0'">
                 <div class="product-content flex">
                   <div class="product-img-list text-center" style="width: 72px">
-                    <a href="/pages/product.html"  class="pro-a-item" :class="isProDISPLAY ? 'boxLeftMouse0' : 'boxLeftMouse80'">
+                    <a href="/ftzn/product.html"  class="pro-a-item" :class="isProDISPLAY ? 'boxLeftMouse0' : 'boxLeftMouse80'">
                       <p class="product-img">
                         <img src="../../assets/images/pic_device.png" alt="">
                       </p>
                       <p class="margin-top16">
-                        星际宝盒
+                        星際寶盒
                       </p>
                     </a>
                   </div>
                 </div>
               </div>
             </li>
-            <li class="news-page"><a href="/pages/info.html">
-              资讯
+            <li class="news-page"><a href="/ftzn/info.html">
+              資訊
             </a></li>
-            <li class="aboutUs-page"><a href="/pages/aboutUs.html">
-              关于
+            <li class="aboutUs-page"><a href="/ftzn/aboutUs.html">
+              關于
             </a></li>
           </ul>
           <ul class="head_r">
             <li><a id="userCenter" href="#">
-              个人中心
+              個人中心
             </a></li>
             <li @click="dialogVisible = true"><a>
               退出
@@ -61,7 +61,7 @@
     <div class="m-header-container" style="display: none">
       <div class="header flex flex-pack-justify flex-align-center">
         <ul class="logo">
-          <a href="/index.html">
+          <a href="/ftzn/index.html">
             <img src="../../assets/css/icon/logo_white.svg" height="32px;">
           </a>
         </ul>
@@ -73,24 +73,24 @@
       <div class="select-headerdown" v-show="downVisble">
         <ul class="header_select_list">
           <li class="mainPape"><a href="/index.html">
-            主页
+            主頁
           </a></li>
           <li><a href="/whitepaper.pdf">
-            白皮书
+            白皮書
           </a></li>
           <li class="productPage m-productPage">
-            <a href="/pages/product.html">
-              星际宝盒
+            <a href="/ftzn/product.html">
+              星際寶盒
             </a>
           </li>
-          <li class="news-page"><a href="/pages/info.html">
-            资讯
+          <li class="news-page"><a href="/ftzn/info.html">
+            資訊
           </a></li>
-          <li class="aboutUs-page"><a href="/pages/aboutUs.html">
-            关于
+          <li class="aboutUs-page"><a href="/ftzn/aboutUs.html">
+            關于
           </a></li>
           <li><a id="userCenter" href="#">
-            个人中心
+            個人中心
           </a></li>
           <li @click="dialogVisible = true"><a>
             退出
@@ -109,12 +109,12 @@
       :close-on-click-modal="false"
     >
       <template slot="title">
-        <i class="el-icon-warning theme-fontColor"></i>
-        <span>确认要退出登录吗？</span>
+        <i class="el-icon-question" style="color: #e6a23c"></i>
+        <span>確認要退出登錄嗎？</span>
       </template>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="warning" @click="sureLoginout">确 定</el-button>
+    <el-button type="primary" @click="sureLoginout">確 定</el-button>
   </span>
     </el-dialog>
   </div>
@@ -138,13 +138,13 @@
         axios.get('/promo/token/logout')
           .then(function (response) {
             if (response.data.isSuccess) {
-              window.location.href = '/pages/login.html'
+              window.location.href = '/ftzn/login.html'
             }
           })
           .catch(function (error) {
             console.log(error)
             if (error.status === 401) {
-              window.location.href = '/pages/login.html'
+              window.location.href = '/ftzn/login.html'
             }
           })
       },
@@ -154,7 +154,7 @@
           .then(function (response) {
           })
           .catch(function (error) {
-            window.location.href = '/pages/login.html'
+            window.location.href = '/ftzn/login.html'
           })
       },
       mRightBtnMethod () {
@@ -179,15 +179,20 @@
     position: fixed;
     left:50%!important;
     top:40%!important;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-40%);
+    -webkit-transform: translate(-50%,-40%);
     width:392px;
     box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
     border-radius: 4px;
+    font-size: 14px;
+    margin-top: 0!important;
+  }
+  #header  .el-dialog .el-button {
+    padding: 8px 20px;
   }
   .header {
     width: 100%;
-    /*width: 1168px!important;*/
+    /*width: 1440px!important;*/
     height: 64px;
     position: fixed;
     z-index: 2001;
@@ -276,7 +281,7 @@
     transition:height 0.5s ease-in-out;
     height: 0px;
     background: rgba(24,24,24,1);
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0%;
     width: 100%;
@@ -286,7 +291,7 @@
   }
   .product-content {
     position: absolute;
-    left: 30.5%;
+    left: 47%;
     height: 100%;
   }
   .product-img-list {

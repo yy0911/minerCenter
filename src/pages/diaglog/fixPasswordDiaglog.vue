@@ -3,34 +3,34 @@
 <el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">修改</el-button>
 
 <el-dialog
-  title="修改账户密码"
+  title="修改賬戶密碼"
   :visible.sync="dialogVisible"
   class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
     <el-form-item prop="oldPass">
-      <el-input type="password" v-model="ruleForm.oldPass" auto-complete="off" placeholder="输入原密码"></el-input>
+      <el-input type="password" v-model="ruleForm.oldPass" auto-complete="off" placeholder="輸入原密碼"></el-input>
     </el-form-item>
 
     <el-form-item prop="pass">
-      <el-input type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="输入新密码" ></el-input>
+      <el-input type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="輸入新密碼" ></el-input>
     </el-form-item>
 
     <el-form-item prop="newPass">
-      <el-input type="password" v-model="ruleForm.newPass" auto-complete="off" placeholder="再次输入新密码" ></el-input>
+      <el-input type="password" v-model="ruleForm.newPass" auto-complete="off" placeholder="再次輸入新密碼" ></el-input>
     </el-form-item>
 
     <el-form-item prop="identNoteCode" class="commone-note-container">
       <div class="send-note-container">
-        <el-input type="tel" v-model="ruleForm.identNoteCode" auto-complete="off" placeholder="短信验证码" class="print-note-input" style="width: 178px;float: left"></el-input>
+        <el-input type="tel" v-model="ruleForm.identNoteCode" auto-complete="off" placeholder="短信驗證碼" class="print-note-input" style="width: 178px;float: left"></el-input>
         <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
-          发送验证码
+          發送驗證碼
         </el-button>
         <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s</span>
       </div>
     </el-form-item>
 
 
-    <el-button type="primary" @click="fixPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认修改</el-button>
+    <el-button type="primary" @click="fixPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">確認修改</el-button>
   </el-form>
 </el-dialog>
 </div>
@@ -47,7 +47,7 @@
       var isNullValidate = new RegExp("\\s")
       var validateOldPass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入原密码'))
+          callback(new Error('請輸入原密碼'))
         } else {
           callback()
         }
@@ -55,9 +55,9 @@
       //新密码验证
       var validatePass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入新密码'))
+          callback(new Error('請輸入新密碼'))
         } else if (value.length < 6 || value.length > 20 || isNullValidate.test(value) === true) {
-          callback(new Error('密码长度必须是6到20位的字符，并且不能包含空格'))
+          callback(new Error('密碼長度必須是6到20位的字符，並且不能包含空格'))
         } else {
           if (this.ruleForm.newPass !== '') {
             this.$refs.ruleForm.validateField('newPass')
@@ -68,9 +68,9 @@
       //新密码一致性验证
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请再次输入新密码'))
+          callback(new Error('請再次輸入新密碼'))
         } else if (value !== this.ruleForm.pass) {
-          callback(new Error('两次输入密码不一致!'))
+          callback(new Error('兩次輸入密碼不一致!'))
         } else {
           callback()
         }
@@ -78,7 +78,7 @@
       //验证码验证
       var validateIdentNoteCode = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入验证码'))
+          callback(new Error('請輸入驗證碼'))
         } else {
           callback()
         }
@@ -131,16 +131,27 @@
               })
               .then(function (response) {
                 if (response.data.isSuccess) {
+                  let successMessage = '賬戶密碼修改成功'
                   vm.$message({
-                    message: response.data.message,
+                    message: successMessage,
                     type: 'success'
                   })
                   vm.dialogVisible = false
                   vm.isCountDown = true
                   vm.$refs[ 'ruleForm' ].resetFields()
                 } else {
+                  let errorMessage
+                  if (response.data.code === 11000) {
+                    errorMessage = '請輸入有效賬戶信息'
+                  } else if (response.data.code === 11002) {
+                    errorMessage = '密碼格式錯誤'
+                  } else if (response.data.code === 11002) {
+                    errorMessage = '請求出錯,稍候重試'
+                  } else {
+                    errorMessage = '驗證碼錯誤或已失效'
+                  }
                   vm.$message({
-                    message: response.data.message,
+                    message: errorMessage,
                     type: 'error'
                   })
                   return false
@@ -172,13 +183,25 @@
             console.log(response.data)
             if (response.data.isSuccess) {
               vm.$message({
-                message: '验证码发送成功',
+                message: '驗證碼發送成功',
                 type: 'success'
               })
               vm.isCountDown = false
             } else {
+              let errorMessage
+              if (response.data.code === 11001) {
+                errorMessage = '密碼格式錯誤(6-20位)'
+              } else if (response.data.code === 11002) {
+                errorMessage = '賬戶密碼錯誤'
+              } else if (response.data.code === 11003) {
+                errorMessage = '短信發送頻率超出限制'
+              } else if (response.data.code === 11004) {
+                errorMessage = '請求出錯,稍候重試'
+              } else {
+                errorMessage = '短信發送失敗,稍候重試'
+              }
               vm.$message({
-                message: response.data.message,
+                message: errorMessage,
                 type: 'error'
               })
               vm.isCountDown = true

@@ -1,18 +1,18 @@
 <template>
 <div>
-  <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >立即提币</el-button>
+  <el-button type="primary" class="mining-btn marginLeft-85 fontSize-16" @click="commitGetCan" >立即提幣</el-button>
   <el-dialog
   :visible.sync="dialogVisible"
   :close-on-click-modal="false"
   >
     <template slot="title">
       <i class="el-icon-warning theme-fontColor"></i>
-      <span>确认要提币到该地址？</span>
+      <span>確認要提幣到該地址？</span>
     </template>
-  <span class="fontSize-14 fontcolor-opocity-54">提币操作无法撤回，请再次确认您所填写的收币地址及提币金额正确无误。</span>
+  <span class="fontSize-14 fontcolor-opocity-54">提幣操作無法撤回，請再次確認您所填寫的收幣地址及提幣金額正確無誤。</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="warning" @click="sureGetCANBI">确 定</el-button>
+    <el-button type="warning" @click="sureGetCANBI">確 定</el-button>
   </span>
 </el-dialog>
 </div>
@@ -53,7 +53,7 @@
           .then(function (response) {
             if (response.data.isSuccess) {
               vm.$message({
-                message: '提币成功',
+                message: '提幣成功',
                 type: 'success'
               })
               vm.dialogVisible = false

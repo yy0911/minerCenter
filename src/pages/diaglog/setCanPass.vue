@@ -1,35 +1,35 @@
 <template>
 <div class="fixPass-wrapper">
-<el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">{{ isHaveCapitalPass ? '修改' : '设置'}}</el-button>
+<el-button  @click="dialogVisible = true" class="pos-abs-right set-common-btn">{{ isHaveCapitalPass ? '修改' : '設置'}}</el-button>
 
 <el-dialog
-  :title="isHaveCapitalPass ? '修改提币密码' : '设置提币密码'"
+  :title="isHaveCapitalPass ? '修改提幣密碼' : '設置提幣密碼'"
   :visible.sync="dialogVisible"
   class="commoneStyle-container fixPass-Container" :close-on-click-modal="false" :before-close="handleClose" style="margin-top: 0!important;">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm"  class="">
 
     <el-form-item prop="canPass">
-      <el-input type="password" v-model="ruleForm.canPass" auto-complete="off" placeholder="输入提币密码" ></el-input>
+      <el-input type="password" v-model="ruleForm.canPass" auto-complete="off" placeholder="輸入提幣密碼" ></el-input>
     </el-form-item>
 
     <el-form-item prop="canRepaPass">
-      <el-input type="password" v-model="ruleForm.canRepaPass" auto-complete="off" placeholder="确认提币密码" ></el-input>
+      <el-input type="password" v-model="ruleForm.canRepaPass" auto-complete="off" placeholder="確認提幣密碼" ></el-input>
     </el-form-item>
 
     <el-form-item prop="phoneNoteCode" class="phone-note-container commone-note-container" :inline="true">
       <div class="send-note-container">
-        <el-input type="tel" v-model="ruleForm.phoneNoteCode" auto-complete="off" placeholder="短信验证码" class="print-note-input" style="width: 178px;float: left"></el-input>
+        <el-input type="tel" v-model="ruleForm.phoneNoteCode" auto-complete="off" placeholder="短信驗證碼" class="print-note-input" style="width: 178px;float: left"></el-input>
         <el-button type="text" style="width: calc(100% - 178px);" class="send-note-btn"  v-show="isCountDown" @click="countDownMethod">
-          发送验证码
+          發送驗證碼
         </el-button>
         <span style="width:calc(100% - 178px);" v-show="!isCountDown" class="countdownstyle "> {{ countTotal }}s</span>
       </div>
     </el-form-item>
 
     <el-form-item prop="accountPass">
-      <el-input type="password" v-model="ruleForm.accountPass" auto-complete="off" placeholder="输入账户密码" ></el-input>
+      <el-input type="password" v-model="ruleForm.accountPass" auto-complete="off" placeholder="輸入賬戶密碼" ></el-input>
     </el-form-item>
-    <el-button type="primary" @click="fixCanPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">确认</el-button>
+    <el-button type="primary" @click="fixCanPassSubmitForm('ruleForm')"  class="sure-fixpassword-btn">確認</el-button>
   </el-form>
 </el-dialog>
 </div>
@@ -47,9 +47,9 @@
       var isNullValidate = new RegExp("\\s")
       var validateCanPass = (rule, value, callback) => {
         if (value === '') {
-          return callback(new Error('请输入提币密码'))
+          return callback(new Error('請輸入提幣密碼'))
         } else if (value.length < 6 || value.length > 20 || isNullValidate.test(value) === true) {
-          return callback(new Error('密码长度必须是6到20位的字符，并且不能包含空格'))
+          return callback(new Error('密碼長度必須是6到20位的字符，並且不能包含空格'))
         } else {
           if (this.ruleForm.canRepaPass !== '') {
             this.$refs.ruleForm.validateField('canRepaPass')
@@ -60,9 +60,9 @@
       //提币新密码验证
       var validateCanRepaPass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请再次输入提币密码'))
+          callback(new Error('請再次輸入提幣密碼'))
         } else if (value !== this.ruleForm.canPass) {
-          callback(new Error('两次输入提币密码不一致!'))
+          callback(new Error('兩次輸入提幣密碼不一致!'))
         } else {
           callback()
         }
@@ -70,7 +70,7 @@
       //手机验证码验证
       var validatePhoneNoteCode = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入手机验证码'))
+          callback(new Error('請輸入手機驗證碼'))
         } else {
           callback()
         }
@@ -78,7 +78,7 @@
       //账户密码验证
       var validateAccountPass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入账户密码'))
+          callback(new Error('請輸入賬戶密碼'))
         } else {
           callback()
         }
@@ -138,10 +138,10 @@
                 accountpassword: vm.ruleForm.accountPass
               })
               .then(function (response) {
-                console.log(response)
+                let successMessage = '提幣密碼修改成功'
                 if (response.data.isSuccess) {
                   vm.$message({
-                    message: response.data.message,
+                    message: successMessage,
                     type: 'success'
                   })
                   vm.dialogVisible = false
@@ -150,8 +150,18 @@
                   vm.$emit('listenFixPassSuccess', vm.isFixSuccess)
                   vm.$refs[ 'ruleForm' ].resetFields()
                 } else {
+                  let errorMessage
+                  if (response.data.code === 11000) {
+                    errorMessage = '請輸入有效賬戶信息'
+                  } else if (response.data.code === 11001) {
+                    errorMessage = '驗證碼格式錯誤'
+                  } else if (response.data.code === 11002) {
+                    errorMessage = '驗證碼錯誤或已失效'
+                  } else {
+                    errorMessage = '請求出錯,稍候重試'
+                  }
                   vm.$message({
-                    message: response.data.message,
+                    message: errorMessage,
                     type: 'error'
                   })
                   return false
@@ -159,7 +169,7 @@
               })
               .catch(function (error) {
                 vm.$message({
-                  message: '确认失败',
+                  message: '確認失敗',
                   type: 'error'
                 })
                 console.log(error)
@@ -199,13 +209,23 @@
           .then(function (response) {
             if (response.data.isSuccess) {
               vm.$message({
-                message: '验证码发送成功',
+                message: '驗證碼發送成功',
                 type: 'success'
               })
               vm.isCountDown = false
             } else {
+              let errorMessage
+              if (response.data.code === 11001) {
+                errorMessage = '無效驗證碼'
+              } else if (response.data.code === 11002) {
+                errorMessage = '短信發送頻率超出限制'
+              } else if (response.data.code === 11003) {
+                errorMessage = '請求出錯,稍候重試'
+              } else {
+                errorMessage = '短信發送失敗,稍候重試'
+              }
               vm.$message({
-                message: response.data.message,
+                message: errorMessage,
                 type: 'error'
               })
               vm.isCountDown = true

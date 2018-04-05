@@ -11,6 +11,7 @@ import routes from './routes'
 import { store } from './store/store'
 import { UTIL } from './util/util'
 import { http } from './util/http'
+import {versionController, ieBrowserVersion} from './util/version1.0'
 Vue.use(Element)
 Vue.use(VueRouter)
 
@@ -48,6 +49,8 @@ Vue.filter('nullValueOfArr', function (arr) {
   })
   return arr
 })
+versionController()
+ieBrowserVersion()
 /* eslint-disable no-new */
 new Vue({
   store,

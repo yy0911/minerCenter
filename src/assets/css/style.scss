@@ -224,17 +224,18 @@
   color: rgba(0,0,0,0.65);
 }
 .el-container {
-  min-width: 1440px;
+  //min-width: 1440px;
 }
 // 内容区域样式
 #container {
   min-height: 100vh;
   flex: 1 auto;
   //width: 968px;
-  //min-width: 968px;
-  padding:40px 40px 120px 40px;
+  min-width: 800px;
+  padding:40px 20px 120px 20px;
   box-sizing: border-box;
   background-color: #fff;
+  overflow: auto;
 }
 
 // 公共样式
