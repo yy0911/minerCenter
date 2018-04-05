@@ -15,11 +15,7 @@
         prop="canReceiveAddress">
       </el-table-column>
       <el-table-column
-<<<<<<< HEAD
         label="金額 (CAN)">
-=======
-        label="金额 (CAN)">
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         <template slot-scope="scope">
           <p class="inCanClass" v-if="scope.row.inOrOut === 'in'"><span>+</span>{{ scope.row.amount }}</p>
           <p class="outCanClass" v-else><span>-</span>{{ scope.row.amount }}</p>
@@ -62,7 +58,6 @@
   }
 </script>
 <style scoped>
-<<<<<<< HEAD
   .inCanClass {
     color:#52C41A
   }
@@ -75,18 +70,4 @@
   .outCanClass span {
     margin-right: 4px;
   }
-=======
-.inCanClass {
-  color:#52C41A
-}
-.outCanClass {
-  color:#F5222D
-}
-.inCanClass span {
-  margin-right: 4px;
-}
-.outCanClass span {
-  margin-right: 4px;
-}
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
 </style>

@@ -22,16 +22,8 @@
       <!--</el-menu-item>-->
 
       <el-menu-item index="1_2">
-<<<<<<< HEAD
         <router-link to="/userAssetCount" class="nav-link">
           我的資産
-=======
-        <!--<router-link to="/extractBmanage" class="nav-link">-->
-          <!--提币管理-->
-        <!--</router-link>-->
-        <router-link to="/userAssetCount" class="nav-link">
-          我的资产
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         </router-link>
       </el-menu-item>
     </el-submenu>

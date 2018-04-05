@@ -9,13 +9,8 @@
             </a>
           </ul>
           <ul class="head_l flex flex-pack-center">
-<<<<<<< HEAD
             <li class="mainPape"><a href="/ftzn/index.html">
               主頁
-=======
-            <li class="mainPape"><a href="/index.html">
-              主页
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
             </a></li>
             <li><a href="/whitepaper.pdf">
               白皮書
@@ -109,19 +104,11 @@
     >
       <template slot="title">
         <i class="el-icon-question" style="color: #e6a23c"></i>
-<<<<<<< HEAD
         <span>確認要退出登錄嗎？</span>
       </template>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="sureLoginout">確 定</el-button>
-=======
-        <span>确认要退出登录吗？</span>
-      </template>
-      <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="sureLoginout">确 定</el-button>
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
   </span>
     </el-dialog>
   </div>
@@ -191,10 +178,7 @@
     width:392px;
     box-shadow: 0 4px 12px 0 rgba(0,0,0,0.20);
     border-radius: 4px;
-<<<<<<< HEAD
     font-size: 14px;
-=======
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
     margin-top: 0!important;
   }
   #header  .el-dialog .el-button {
@@ -202,11 +186,7 @@
   }
   .header {
     width: 100%;
-<<<<<<< HEAD
-    /*width: 1440px!important;*/
-=======
     min-width: 800px;
->>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
     height: 64px;
     position: fixed;
     z-index: 2001;
