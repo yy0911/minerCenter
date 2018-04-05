@@ -2,7 +2,11 @@
   <!--<div class="userAssetCount-container" v-cloak>-->
     <!--<div class="mining-statist-container">-->
       <!--<p>-->
+<<<<<<< HEAD
         <!--我的資産-->
+=======
+        <!--我的资产-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       <!--</p>-->
       <!--&lt;!&ndash;<p class="instruction-ing-present fontSize-14 fontcolor-opocity-54 marginLeft-85">&ndash;&gt;-->
         <!--&lt;!&ndash;当前&ndash;&gt;-->
@@ -22,13 +26,22 @@
             <!--<p class="font-size20">{{remainMiningCoin}}</p>-->
             <!--<div class="tip-article-biAccount flex flex-align-center">-->
               <!--<i class="el-icon-warning" v-if="!allTrue"></i>-->
+<<<<<<< HEAD
               <!--<p v-if="allTrue">賬戶已綁定<span>{{allBoxSize}}</span>  台設備，設備正常運作需保持賬戶余額不低于  <span>{{allBoxNeedCoins}} </span>CAN</p>-->
               <!--<p v-else>余幣不足以維持全部設備運作，<span>{{allBoxSize}}</span> 台設備所需運作幣 <span>{{allBoxNeedCoins}} </span>CAN</p>-->
+=======
+              <!--<p v-if="allTrue">账户已绑定<span>{{allBoxSize}}</span>  台设备，设备正常运作需保持账户余额不低于  <span>{{allBoxNeedCoins}} </span>CAN</p>-->
+              <!--<p v-else>余币不足以维持全部设备运作，<span>{{allBoxSize}}</span> 台设备所需运作币 <span>{{allBoxNeedCoins}} </span>CAN</p>-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
             <!--</div>-->
           <!--</div>-->
           <!--<div class="bi-right-wrapper">-->
             <!--<el-button class="recharge-account-btn" @click="rechargeMethod">充值</el-button>-->
+<<<<<<< HEAD
             <!--<el-button class="getBi-btn" type="primary" @click="commitGetCan">提幣</el-button>-->
+=======
+            <!--<el-button class="getBi-btn" type="primary" @click="commitGetCan">提币</el-button>-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
           <!--</div>-->
         <!--</div>-->
         <!--<div class="wmBi-Wrapper flex flex-align-center">-->
@@ -39,7 +52,11 @@
           <!--<div class="bi-center-wrapper">-->
             <!--<p class="font-size20">{{totalWaiMaiCoin}}</p>-->
             <!--<div class="tip-article-biAccount flex flex-align-center">-->
+<<<<<<< HEAD
               <!--<p>暫未開放，敬請期待！</p>-->
+=======
+              <!--<p>暂未开放，敬请期待！</p>-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
             <!--</div>-->
           <!--</div>-->
         <!--</div>-->
@@ -48,7 +65,11 @@
     <!--</div>-->
     <!--<div class="mining-record-container">-->
       <!--<p class="paddingTB-24">-->
+<<<<<<< HEAD
         <!--收支記錄-->
+=======
+        <!--收支记录-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       <!--</p>-->
       <!--<div class="tableMiningRecord-container">-->
         <!--<table-mining-record></table-mining-record>-->
@@ -60,6 +81,7 @@
       <!--class="getCandiaglog-container">-->
       <!--<template slot="title">-->
                 <!--<span>-->
+<<<<<<< HEAD
                   <!--CAN提幣-->
                 <!--</span>-->
       <!--</template>-->
@@ -88,6 +110,36 @@
       <!--<p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>-->
       <!--<el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endSureGetCanMethod">-->
         <!--確認-->
+=======
+                  <!--CAN提币-->
+                <!--</span>-->
+      <!--</template>-->
+      <!--<p class="fontSize-14 fontcolor-opocity-54">-->
+        <!--收币地址：-->
+      <!--</p>-->
+      <!--<el-input class="address-input"-->
+                <!--placeholder="输入收币地址" v-model="canReceiveAddress" @blur="isNullCanAdress">-->
+      <!--</el-input>-->
+      <!--<p v-if="errorAddressTip" class="error_warn">{{errorAddressContent}}</p>-->
+      <!--<p class="paddingT-8 fontSize-14 fontcolor-opocity-54">-->
+        <!--提币金额：-->
+      <!--</p>-->
+      <!--<el-input class="mining-money-input" placeholder="输入数额" v-model.number="amount" @blur="isNullCanNumber"></el-input>-->
+      <!--<span class="fontSize-14 fontcolor-opocity-54">CAN</span>-->
+      <!--<p class="instruction-ing-present fontSize-14 fontcolor-opocity-54">-->
+        <!--当前可提-->
+        <!--<span class="warn-fontColor">{{availableCoin}}</span> CAN，每次提币固定收取手续费<span class="warn-fontColor">{{fei}}</span> CAN-->
+      <!--</p>-->
+      <!--<p v-if="errorAmountTip" class="error_warn">{{errorAmountContent}}</p>-->
+      <!--<p class="paddingT-8 fontSize-14 fontcolor-opocity-54">-->
+        <!--提币密码：-->
+      <!--</p>-->
+      <!--<el-input type="password" class="" v-model.trim="CanPassword" placeholder="输入提币密码"></el-input>-->
+
+      <!--<p v-if="errorCanPasswordTip" class="error_warn_pass">{{errorCanPasswordContent}}</p>-->
+      <!--<el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endSureGetCanMethod">-->
+        <!--确认-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       <!--</el-button>-->
     <!--</el-dialog>-->
     <!--<el-dialog-->
@@ -109,12 +161,20 @@
       <!--</div>-->
 
       <!--<el-button type="primary" class="margin-top-16 tibi-btn-dialog" @click="endQrMethod">-->
+<<<<<<< HEAD
         <!--確認-->
+=======
+        <!--确认-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       <!--</el-button>-->
     <!--</el-dialog>-->
   <!--</div>-->
   <div class="" style="text-align: center;margin-top: 200px;color: rgba(0,0,0,0.25)">
+<<<<<<< HEAD
     暫未開放
+=======
+    暂未开放
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
   </div>
 </template>
 
@@ -133,8 +193,13 @@
         errorAddressTip: false,
         errorAmountTip: false,
         errorCanPasswordTip: false,
+<<<<<<< HEAD
         errorAmountContent: '提幣數額不能爲空',
         errorAddressContent: '收幣地址不能爲空',
+=======
+        errorAmountContent: '提币数额不能为空',
+        errorAddressContent: '收币地址不能为空',
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         errorCanPasswordContent: '',
         remainMiningCoin: '',
         totalWaiMaiCoin: '',
@@ -174,7 +239,11 @@
           this.errorAddressTip = true
         } else if (this.canReceiveAddress.substr(0, 2) !== '0x' || this.canReceiveAddress.length !== 42) {
           this.errorAddressTip = true
+<<<<<<< HEAD
           this.errorAddressContent = '輸入錯誤，地址爲一串0x開頭的42位字符'
+=======
+          this.errorAddressContent = '输入错误，地址为一串0x开头的42位字符'
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
           return false
         } else {
           this.errorAddressTip = false
@@ -206,7 +275,11 @@
           this.dialogVisible2 = true
         } else {
           this.$message({
+<<<<<<< HEAD
             message: '獲取地址失敗',
+=======
+            message: '获取地址失败',
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
             type: 'error'
           })
         }
@@ -216,6 +289,7 @@
         let vm = this
         let isNullValidate = new RegExp("\\s")
         if (this.isNullCanAdress() && this.isNullCanNumber()) {
+<<<<<<< HEAD
           if (this.CanPassword === '') {
             this.errorCanPasswordTip = true
             this.errorCanPasswordContent = '密碼不能爲空'
@@ -223,6 +297,16 @@
           } else if (isNullValidate.test(this.CanPassword) === true) {
             this.errorCanPasswordTip = true
             this.errorCanPasswordContent = '密碼不能包含空格'
+=======
+          console.log(111)
+          if (this.CanPassword === '') {
+            this.errorCanPasswordTip = true
+            this.errorCanPasswordContent = '密码不能为空'
+            return false
+          } else if (isNullValidate.test(this.CanPassword) === true) {
+            this.errorCanPasswordTip = true
+            this.errorCanPasswordContent = '密码不能包含空格'
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
             return false
           } else {
             this.errorCanPasswordTip = false
@@ -238,7 +322,11 @@
               if (response.data.isSuccess) {
                 //提币申请提交成功
                 vm.$message({
+<<<<<<< HEAD
                   message: '提幣成功',
+=======
+                  message: '提币成功',
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
                   type: 'success'
                 })
                 vm.dialogVisible = false
@@ -262,6 +350,11 @@
             if (response.data.isSuccess) {
               vm.userAddress = response.data.address
               vm.qrcode(response.data.address)
+<<<<<<< HEAD
+=======
+            } else {
+
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
             }
           })
           .catch(function (error) {

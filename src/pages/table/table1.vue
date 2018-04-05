@@ -1,7 +1,11 @@
   <template>
     <div class="table1-container">
        <el-table
+<<<<<<< HEAD
     :data="deviceDetailData" empty-text="暫無數據"
+=======
+    :data="deviceDetailData" empty-text="暂无数据"
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
     style="width:100%">
     <el-table-column
       label="S/N碼"
@@ -11,9 +15,15 @@
       label="狀態"
       prop="status">
       <template slot-scope="scope">
+<<<<<<< HEAD
         <span class="status-circle color-grey" v-if="scope.row.status == '未連接'"></span>
         <span class="status-circle color-green" v-else-if="scope.row.status == '工作中'"></span>
         <span class="status-circle color-orange" v-else-if="scope.row.status == '待機中'"></span>
+=======
+        <span class="status-circle color-grey" v-if="scope.row.status == '未连接'"></span>
+        <span class="status-circle color-green" v-else-if="scope.row.status == '工作中'"></span>
+        <span class="status-circle color-orange" v-else-if="scope.row.status == '待机中'"></span>
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         <span class="status-circle color-red" v-else></span>
         {{ scope.row.status }}
       </template>
@@ -65,18 +75,31 @@
       </template>
     </el-table-column>
   </el-table>
+<<<<<<< HEAD
       <!--<div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreDevices">-->
         <!--點擊加載更多-->
         <!--<br/>-->
         <!--<i class="el-icon-arrow-down"></i>-->
       <!--</div>-->
+=======
+      <!--<div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreDevices" v-show="deviceDetailData.length>0 ">-->
+        <!--点击加载更多-->
+        <!--<br/>-->
+        <!--<i class="el-icon-arrow-down"></i>-->
+      <!--</div>-->
+      <!--==============/分页==============-->
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       <div class="pagination-wrapper">
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           layout="prev, pager, next, jumper"
           :total="countsNumber"
+<<<<<<< HEAD
         >
+=======
+          >
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         </el-pagination>
       </div>
     </div>
@@ -84,18 +107,18 @@
 
 <script>
   import axios from 'axios'
-  import infiniteScroll from 'vue-infinite-scroll'
   export default {
     props: ['isSuccess', 'searchDeviceData'],
-    directives: {
-      infiniteScroll
-    },
     data () {
       return {
+        countsNumber: 1,
         deviceDetailData: [],
         limit: '1',
         loadMoreLimit: '',
+<<<<<<< HEAD
         countsNumber: 1,
+=======
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
         currentPage: 1
       }
     },
@@ -179,7 +202,6 @@
         axios.post('/promo/authed/account/box/disconnect',
           {boxSN: boxUnbindDeviceSN})
           .then(function (response) {
-            console.log(response.data.isSuccess)
             if (response.data.isSuccess) {
               vm.$emit('listenUnbindBox', true)
               vm.GetDeviceList()
@@ -219,6 +241,7 @@
       // 点击加载更多
       // loadMoreDevices () {
       //   this.limit ++
+<<<<<<< HEAD
       //   if (this.loadMoreLimit > 4) {
       //     this.$message({
       //       message: '提示次數上限 ',
@@ -226,13 +249,19 @@
       //     })
       //     return false
       //   }
+=======
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       //   let vm = this
       //   axios.get('/promo/authed/account/box/lists/' + vm.limit + '/5')
       //     .then(function (response) {
       //       if (JSON.stringify(response.data) === '[]') {
       //         vm.loading = false
       //         vm.$message({
+<<<<<<< HEAD
       //           message: '沒有更多設備了 ',
+=======
+      //           message: '没有更多设备了 ',
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       //           type: 'warning'
       //         })
       //         vm.loadMoreLimit = Number(vm.limit)
@@ -246,7 +275,11 @@
       //     .catch(function (error) {
       //       console.log(error)
       //     })
+<<<<<<< HEAD
       // }
+=======
+      // },
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       handleCurrentChange (val) {      // 分页加载
         console.log(val)
         document.documentElement.scrollTop = 200
@@ -254,9 +287,15 @@
         let vm = this
         axios.get('/promo/authed/account/box/lists/' + val + '/10')
           .then(function (response) {
+<<<<<<< HEAD
             let moreData = vm.$options.methods.responseArray(response.data.list)
             vm.deviceDetailData = moreData
             return
+=======
+              let moreData = vm.$options.methods.responseArray(response.data.list)
+              vm.deviceDetailData = moreData
+              return
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
           })
           .catch(function (error) {
             console.log(error)

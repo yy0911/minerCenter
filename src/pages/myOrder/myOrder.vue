@@ -11,13 +11,21 @@
         已付款
       </el-menu-item>
       <el-menu-item index="4">
+<<<<<<< HEAD
         已發貨
+=======
+        已发货
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       </el-menu-item>
       <el-menu-item index="5">
         已完成
       </el-menu-item>
       <el-menu-item index="6">
+<<<<<<< HEAD
         交易關閉
+=======
+        交易关闭
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       </el-menu-item>
     </el-menu>
     <!--v-infinite-scroll="loadMore"-->
@@ -35,12 +43,20 @@
       暫無訂單
     </p></div>
     <div class="more_btn fontcolor-opocity-54 text-center" @click="loadMoreOrder" v-show="moreOrder && secondLoad">
+<<<<<<< HEAD
       點擊加載更多
+=======
+      点击加载更多
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
       <br/>
       <i class="el-icon-arrow-down"></i>
     </div>
     <div class="more_btn fontcolor-opocity-54 text-center" v-show="secondLoad === false" style="cursor: default">
+<<<<<<< HEAD
       沒有更多訂單了
+=======
+      没有更多订单了
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
     </div>
   </div>
 </template>
@@ -89,7 +105,7 @@
       statusTitleComputed () {
         this.sellListStatus = 'all'
          if (this.menuIndex === 1) {
-            return this.sellListStatus = 'all'
+           return this.sellListStatus = 'all'
          } else if (this.menuIndex === 2) {
            return this.sellListStatus = 'waitPay'
          } else if (this.menuIndex === 3) {
@@ -177,7 +193,11 @@
             if (JSON.stringify(response.data.data) === '[]') {
               vm.loading = false
               vm.$message({
+<<<<<<< HEAD
                 message: '沒有更多訂單了',
+=======
+                message: '没有更多订单了',
+>>>>>>> 7aa1edb3a421b1fcc925a3cdb29ec1edc04a9562
                 type: 'warning'
               })
               vm.secondLoad = false
